@@ -1,0 +1,675 @@
+﻿@model DükkanBulutSitesi.Models.ProductDetailsVm
+@{
+    ViewData["Title"] = Model.ItemName;
+    Layout = "_StorefrontLayout";
+}
+
+<link rel="stylesheet" href="~/css/product-details.css" />
+
+<style>
+
+    .tooltip.pd-tip .tooltip-inner {
+        max-width: 500px;
+        background-color: #0056d6;
+        color: #fff;
+        text-align: left;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .tooltip.pd-tip.bs-tooltip-top .tooltip-arrow::before {
+        border-top-color: #0056d6;
+    }
+
+    .tooltip.pd-tip.bs-tooltip-bottom .tooltip-arrow::before {
+        border-bottom-color: #0056d6;
+    }
+
+    .tooltip.pd-tip.bs-tooltip-start .tooltip-arrow::before {
+        border-left-color: #0056d6;
+    }
+
+    .tooltip.pd-tip.bs-tooltip-end .tooltip-arrow::before {
+        border-right-color: #0056d6;
+    }
+
+    .pd-related {
+        display: flex;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .pd-rel-card {
+        display: block;
+        flex: 0 0 190px;
+        max-width: 190px;
+        min-width: 0;
+        background: #fff;
+        border: 1px solid #e6eefc;
+        border-radius: 12px;
+        padding: 8px;
+        text-decoration: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+</style>
+
+<div class="product-shell">
+    @await Html.PartialAsync("_Sidebar")
+    <main class="product-main">
+
+        <div class="pd-header">
+            <div class="pd-stars">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <span class="star @(i <= Math.Round(Model.AverageStars) ? "filled" : "")">★</span>
+                }
+                <span class="pd-reviewcount">(@Model.ReviewCount) değerlendirme</span>
+            </div>
+            <div class="pd-price">
+                @if (Model.HasCampaignPrice)
+                {
+                    <span class="text-muted text-decoration-line-through me-2">
+                        @Model.OriginalPrice.ToString("C")
+                    </span>
+                    <span class="fw-bold text-success">
+                        @Model.Price.ToString("C")
+                    </span>
+                }
+                else
+                {
+                    @Model.Price.ToString("C")
+                }
+            </div>
+        </div>
+
+        <!-- hero -->
+        <section class="pd-hero">
+            <div class="pd-image">
+                <img src="@(string.IsNullOrWhiteSpace(Model.PictureLink) ? "/img/placeholder.png" : Model.PictureLink)"
+                     alt="@Model.ItemName"
+                     onerror="this.src='/img/placeholder.png';" />
+            </div>
+            <div class="pd-cta">
+                <form asp-controller="Cart" asp-action="Add" method="post" class="mb-3">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="itemId" value="@Model.ItemID" />
+                    <input type="hidden" name="returnUrl" value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        Sepete Ekle
+                    </button>
+                </form>
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+
+                    <form asp-controller="Product"
+                          asp-action="ToggleFavourite"
+                          method="post"
+                          class="mb-2">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="itemId" value="@Model.ItemID" />
+                        <input type="hidden"
+                               name="returnUrl"
+                               value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+
+                        <button type="submit" class="btn btn-outline-secondary w-100">
+                            @if (Model.IsFavourite)
+                            {
+                                <i class="bi bi-heart-fill text-danger"></i>
+                                <span class="ms-1">Favorilerden Çıkar</span>
+                            }
+                            else
+                            {
+                                <i class="bi bi-heart"></i>
+                                <span class="ms-1">Favorilere Ekle</span>
+                            }
+                        </button>
+                    </form>
+
+                    @if (Model.CanManageThisStore)
+                    {
+                        <form asp-controller="Product" asp-action="DeleteItem" method="post" class="mb-2"
+                              onsubmit="return confirm('Bu ürünü silmek istediğinize emin misiniz?');">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="itemId" value="@Model.ItemID" />
+                            <input type="hidden" name="returnUrl" value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="bi bi-trash"></i> Ürünü Sil
+                            </button>
+                        </form>
+                    }
+
+
+                    <button type="button"
+                            class="btn btn-outline-danger btn-sm complaint-btn mb-2"
+                            data-item-id="@Model.ItemID"
+                            data-comment-id=""
+                            data-target-name="Ürün: @Model.ItemName"
+                            data-return-url="@(Context.Request.Path + Context.Request.QueryString.Value)">
+                        <i class="bi bi-flag"></i> Ürün Hakkında Şikayet Oluştur
+                    </button>
+                }
+                <div class="pd-desc">
+                    <div class="pd-desc-title">Ürün Açıklaması</div>
+                    <div class="pd-desc-text">
+                        @if (!string.IsNullOrWhiteSpace(Model.Description))
+                        {
+                            @Model.Description
+                        }
+                        else
+                        {
+                            <text>
+                                Bu ürün için açıklama henüz eklenmedi. Kısa süre içinde güncellenecektir.
+                            </text>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @if (Model.Featured.Any())
+        {
+            <section class="pd-block">
+                <div class="pd-block-title">Öne Çıkan Yorumlar</div>
+                @foreach (var r in Model.Featured)
+                {
+                    <div class="pd-reviewcard">
+                        <div class="pd-review-head">
+                            <div class="pd-review-name">@r.OwnerName</div>
+                            <div class="pd-stars">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <span class="star @(i <= r.Stars ? "filled" : "")">★</span>
+                                }
+                            </div>
+                        </div>
+
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            <button type="button"
+                                    class="btn btn-link p-0 text-danger complaint-btn"
+                                    data-item-id="@Model.ItemID"
+                                    data-comment-id="@r.ReviewID"
+                                    data-target-name="Yorum: @(r.Text.Length > 30 ? r.Text.Substring(0, 30) + "..." : r.Text)"
+                                    data-return-url="@(Context.Request.Path + Context.Request.QueryString.Value)">
+                                <i class="bi bi-flag"></i>
+                            </button>
+                        }
+
+                        @if (Model.CanManageThisStore)
+                        {
+                            <form asp-controller="Product" asp-action="DeleteComment" method="post" class="d-inline"
+                                  onsubmit="return confirm('Bu yorumu silmek istediğinize emin misiniz?');">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="commentId" value="@r.ReviewID" />
+                                <input type="hidden" name="itemId" value="@Model.ItemID" />
+                                <input type="hidden" name="returnUrl" value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+                                <button type="submit" class="btn btn-link p-0 text-danger ms-2">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        }
+
+
+                        <div class="pd-review-text">@r.Text</div>
+                        <div class="text-muted small mt-1">@r.CreatedAt.ToLocalTime().ToString("g")</div>
+                    </div>
+                }
+                <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#allCommentsModal">
+                    Tüm Yorumlar
+                </button>
+            </section>
+        }
+
+        <!-- Adding comment area -->
+        <section class="pd-block">
+            <div class="pd-block-title">Yorum Yaz</div>
+
+            @if (TempData["CommentOk"] as bool? == true)
+            {
+                <div class="alert alert-success">Yorumunuz alındı. Teşekkürler!</div>
+            }
+
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <form action="/product/add-comment" method="post" class="pd-reviewcard mt-3">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="ItemID" value="@Model.ItemID" />
+
+                    <div class="mb-2">
+                        <label class="form-label">Puan</label>
+                        <select name="Stars" class="form-select">
+                            <option value="5">5 - Mükemmel</option>
+                            <option value="4">4 - İyi</option>
+                            <option value="3">3 - Orta</option>
+                            <option value="2">2 - Zayıf</option>
+                            <option value="1">1 - Kötü</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Yorum</label>
+                        <textarea name="Text" class="form-control" rows="3" maxlength="1000"></textarea>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-info mt-3">
+                    Yorum yapmak için giriş yapmalısınız.
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Giriş Yap</a>
+                </div>
+            }
+        </section>
+
+        <!-- related items (carousel) -->
+        <section class="pd-block">
+            <div class="pd-block-title">Benzer Ürünler</div>
+
+            @if (Model.Related.Any())
+            {
+                <div class="pd-rel-shell d-flex align-items-center" data-group="related">
+                    <button type="button"
+                            class="btn btn-outline-secondary btn-sm pd-rel-arrow"
+                            data-group="related"
+                            data-dir="-1">
+                        ‹
+                    </button>
+
+                    <div class="pd-rel-window flex-grow-1 mx-2">
+                        <div class="pd-related">
+                            @foreach (var i in Model.Related)
+                            {
+                                <a class="pd-rel-card"
+                                   asp-controller="Product" asp-action="Details" asp-route-id="@i.ItemID">
+                                    <img src="@(string.IsNullOrWhiteSpace(i.PictureLink) ? "/img/placeholder.png" : i.PictureLink)"
+                                         alt="@i.ItemName"
+                                         onerror="this.src='/img/placeholder.png';" />
+                                    <div class="pd-rel-name">@i.ItemName</div>
+                                    <div class="pd-rel-price">
+                                        @if (i.HasCampaignPrice)
+                                        {
+                                            <span class="text-muted text-decoration-line-through me-1">
+                                                @i.OriginalPrice.ToString("C")
+                                            </span>
+                                            <span class="fw-bold text-success">
+                                                @i.Price.ToString("C")
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            @i.Price.ToString("C")
+                                        }
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+
+                    <button type="button"
+                            class="btn btn-outline-secondary btn-sm pd-rel-arrow"
+                            data-group="related"
+                            data-dir="1">
+                        ›
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="text-muted small">Bu ürün için benzer ürün bulunamadı.</div>
+            }
+        </section>
+
+        @if (Model.ViewedSuggestions.Any())
+        {
+            <section class="pd-block">
+                @{
+                    var hasCats = Model.ViewedSuggestionCategories != null && Model.ViewedSuggestionCategories.Any();
+                    var hasKeys = Model.ViewedSuggestionKeywords != null && Model.ViewedSuggestionKeywords.Any();
+
+                    var tooltipHtml = "Bu öneriler son 30 günde en çok baktığınız ";
+
+                    if (hasCats)
+                    {
+                        tooltipHtml += "kategorilere (<strong>"
+                        + string.Join(", ", Model.ViewedSuggestionCategories)
+                        + "</strong>)";
+                    }
+
+                    if (hasCats && hasKeys)
+                    {
+                        tooltipHtml += " ve ";
+                    }
+
+                    if (hasKeys)
+                    {
+                        tooltipHtml += "anahtar kelimelere (<strong>"
+                        + string.Join(", ", Model.ViewedSuggestionKeywords)
+                        + "</strong>)";
+                    }
+
+                    tooltipHtml += " göre oluşturulmuştur.";
+
+                    // ---- per-item breakdown ----
+                    tooltipHtml += "<br/><br/>";
+
+                    foreach (var item in Model.ViewedSuggestions)
+                    {
+                        var itemCats = item.MatchedCategories ?? new List<string>();
+                        var itemKeys = item.MatchedKeywords ?? new List<string>();
+
+                        tooltipHtml += "<strong>Ürünün Adı:</strong> "
+                        + item.ItemName + "<br/>";
+
+                        tooltipHtml += "<strong>Paylaşılan Kategoriler:</strong> "
+                        + itemCats.Count
+                        + (itemCats.Count > 0 ? " (" + string.Join(", ", itemCats) + ")" : "")
+                        + "<br/>";
+
+                        tooltipHtml += "<strong>Paylaşılan Anahtar Kelimeler:</strong> "
+                        + itemKeys.Count
+                        + (itemKeys.Count > 0 ? " (" + string.Join(", ", itemKeys) + ")" : "")
+                        + "<br/><br/>";
+                    }
+                }
+
+                <div class="pd-block-title d-flex align-items-center">
+                    <span>Baktığınız Ürünlere Göre Hoşunuza Gidebilecek Ürünler</span>
+
+                    @if (hasCats || hasKeys)
+                    {
+                        <i class="bi bi-info-circle ms-2 text-muted"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="top"
+                           data-bs-html="true"
+                           data-bs-custom-class="pd-tip"
+                           title="@Html.Raw(tooltipHtml)"></i>
+                    }
+                </div>
+
+                <div class="pd-rel-shell d-flex align-items-center" data-group="viewed">
+                    <button type="button"
+                            class="btn btn-outline-secondary btn-sm pd-rel-arrow"
+                            data-group="viewed"
+                            data-dir="-1">
+                        ‹
+                    </button>
+
+                    <div class="pd-rel-window flex-grow-1 mx-2">
+                        <div class="pd-related">
+                            @foreach (var i in Model.ViewedSuggestions)
+                            {
+                                <a class="pd-rel-card"
+                                   asp-controller="Product" asp-action="Details" asp-route-id="@i.ItemID">
+                                    <img src="@(string.IsNullOrWhiteSpace(i.PictureLink) ? "/img/placeholder.png" : i.PictureLink)"
+                                         alt="@i.ItemName"
+                                         onerror="this.src='/img/placeholder.png';" />
+                                    <div class="pd-rel-name">@i.ItemName</div>
+                                    <div class="pd-rel-price">
+                                        @if (i.HasCampaignPrice)
+                                        {
+                                            <span class="text-muted text-decoration-line-through me-1">
+                                                @i.OriginalPrice.ToString("C")
+                                            </span>
+                                            <span class="fw-bold text-success">
+                                                @i.Price.ToString("C")
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            @i.Price.ToString("C")
+                                        }
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+
+                    <button type="button"
+                            class="btn btn-outline-secondary btn-sm pd-rel-arrow"
+                            data-group="viewed"
+                            data-dir="1">
+                        ›
+                    </button>
+                </div>
+            </section>
+        }
+        <div class="modal fade" id="allCommentsModal" tabindex="-1" aria-labelledby="allCommentsLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="allCommentsLabel">Tüm Yorumlar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex align-items-center mb-3 border-bottom pb-2">
+                            <img src="@Model.PictureLink" alt="@Model.ItemName" style="width:70px;height:70px;object-fit:cover;border-radius:8px;margin-right:10px;">
+                            <div>
+                                <strong>@Model.ItemName</strong><br />
+                                <span class="text-muted">@Model.Price.ToString("C")</span>
+                            </div>
+                            <div class="ms-auto text-center">
+                                <div class="text-warning fs-5">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <span>@(i <= Math.Round(Model.AverageStars) ? "★" : "☆")</span>
+                                    }
+                                </div>
+                                <small>@Model.AverageStars.ToString("0.0") / 5 Yıldız</small><br />
+                                <small>Yorum Sayısı: @Model.ReviewCount</small>
+                            </div>
+                        </div>
+
+                        <!-- Comments list -->
+                        @if (Model.Comments.Any())
+                        {
+                            @foreach (var c in Model.Comments)
+                            {
+                                <div class="border rounded p-2 mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>@c.OwnerName</strong>
+                                            <div class="text-muted small">@c.CreatedAt.ToLocalTime().ToString("g")</div>
+                                        </div>
+
+                                        <div class="d-flex align-items-center">
+                                            <div class="text-warning me-2">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    <span>@(i <= c.Stars ? "★" : "☆")</span>
+                                                }
+                                            </div>
+
+                                            @if (User.Identity?.IsAuthenticated ?? false)
+                                            {
+                                                <button type="button"
+                                                        class="btn btn-link p-0 text-danger complaint-btn"
+                                                        data-item-id="@Model.ItemID"
+                                                        data-comment-id="@c.ReviewID"
+                                                        data-target-name="Yorum: @(c.Text.Length > 30 ? c.Text.Substring(0, 30) + "..." : c.Text)"
+                                                        data-return-url="@(Context.Request.Path + Context.Request.QueryString.Value)">
+                                                    <i class="bi bi-flag"></i>
+                                                </button>
+                                            }
+
+                                            @if (Model.CanManageThisStore)
+                                            {
+                                                <form asp-controller="Product" asp-action="DeleteComment" method="post" class="d-inline"
+                                                      onsubmit="return confirm('Bu yorumu silmek istediğinize emin misiniz?');">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="commentId" value="@c.ReviewID" />
+                                                    <input type="hidden" name="itemId" value="@Model.ItemID" />
+                                                    <input type="hidden" name="returnUrl" value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+                                                    <button type="submit" class="btn btn-link p-0 text-danger ms-2">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <p class="mt-1 mb-0">@c.Text</p>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-muted text-center">Henüz yorum yok.</div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // ----- complaint modal logic -----
+            const complaintModalEl = document.getElementById('complaintModal');
+            let complaintModal = null;
+            let allCommentsModal = null;
+
+            const allCommentsEl = document.getElementById('allCommentsModal');
+            if (allCommentsEl) {
+                allCommentsModal = bootstrap.Modal.getOrCreateInstance(allCommentsEl);
+            }
+
+            if (complaintModalEl) {
+                complaintModal = new bootstrap.Modal(complaintModalEl);
+
+                document.querySelectorAll('.complaint-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const itemId = this.dataset.itemId || "";
+                        const commentId = this.dataset.commentId || "";
+                        const name = this.dataset.targetName || "";
+                        const returnUrl = this.dataset.returnUrl
+                            || (window.location.pathname + window.location.search);
+
+                        if (allCommentsModal) {
+                            allCommentsModal.hide();
+                        }
+
+                        complaintModalEl.querySelector('input[name="ItemID"]').value = itemId;
+                        complaintModalEl.querySelector('input[name="CommentID"]').value = commentId;
+                        complaintModalEl.querySelector('input[name="ReturnUrl"]').value = returnUrl;
+
+                        const label = complaintModalEl.querySelector('#complaintTargetName');
+                        if (label) label.value = name;
+
+                        complaintModal.show();
+                    });
+                });
+
+                const openOnError = '@(TempData["OpenComplaintModal"] ?? "")';
+                if (openOnError === '1' && complaintModal) {
+                    complaintModal.show();
+                }
+            }
+
+            // ----- generic carousel initializer for related/viewed sections -----
+            function initCarousel(groupName, visibleCount) {
+                const shell = document.querySelector('.pd-rel-shell[data-group="' + groupName + '"]');
+                if (!shell) return;
+
+                const cards = shell.querySelectorAll('.pd-rel-card');
+                if (!cards.length) return;
+
+                const arrows = shell.querySelectorAll('.pd-rel-arrow[data-group="' + groupName + '"]');
+
+                let startIndex = 0;
+                const maxStart = Math.max(0, cards.length - visibleCount);
+
+                function applySlice() {
+                    cards.forEach((card, idx) => {
+                        if (idx >= startIndex && idx < startIndex + visibleCount) {
+                            card.classList.remove('d-none');
+                        } else {
+                            card.classList.add('d-none');
+                        }
+                    });
+                }
+
+                if (cards.length <= visibleCount) {
+                    // nothing to slide, hide arrows but still normalize layout
+                    arrows.forEach(a => a.style.display = 'none');
+                    applySlice();
+                    return;
+                }
+
+                arrows.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const dir = parseInt(this.dataset.dir || '1', 10);
+                        startIndex += dir;
+                        if (startIndex < 0) startIndex = 0;
+                        if (startIndex > maxStart) startIndex = maxStart;
+                        applySlice();
+                    });
+                });
+
+                applySlice();
+            }
+
+            // show 4 at a time
+            initCarousel('related', 4);
+            initCarousel('viewed', 4);
+
+            // ----- Bootstrap tooltips for info icon -----
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}
+

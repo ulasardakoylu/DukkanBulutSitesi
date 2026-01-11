@@ -1,0 +1,28 @@
+08-12-2025 17:08:14	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+08-12-2025 17:16:59	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+08-12-2025 17:17:02	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+08-12-2025 17:20:42	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+08-12-2025 17:21:21	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+08-12-2025 17:40:35	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+08-12-2025 17:40:39	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+08-12-2025 17:41:25	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel number generated. RoleID=2, StoreID=1, Code=M0342595
+08-12-2025 17:45:40	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+08-12-2025 17:45:44	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+08-12-2025 17:55:30	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+08-12-2025 17:55:34	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+08-12-2025 17:55:45	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Role updated. RoleID=2, StoreID=1, Name=Manager, IsSystem=True
+08-12-2025 18:05:03	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+08-12-2025 18:05:07	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+08-12-2025 18:09:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+08-12-2025 18:09:31	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+08-12-2025 18:09:57	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel number generated. RoleID=2, StoreID=1, Code=M9029679
+08-12-2025 18:14:05	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+08-12-2025 18:14:10	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+08-12-2025 20:05:54	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+08-12-2025 20:06:58	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+08-12-2025 20:07:03	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+08-12-2025 20:34:37	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+08-12-2025 20:34:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+08-12-2025 21:53:04	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+08-12-2025 21:53:08	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+08-12-2025 22:06:55	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

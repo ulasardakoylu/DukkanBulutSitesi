@@ -1,0 +1,335 @@
+﻿@model DükkanBulutSitesi.Models.Personnel.SecurityWorkPanelVm
+@{
+    ViewData["Title"] = "Güvenlik Hızlı İş Paneli";
+    Layout = "~/Views/Shared/_PersonnelLayout.cshtml";
+}
+
+<div class="personnel-shell">
+
+    <div class="personnel-topbar d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <div class="text-uppercase small text-muted">PERSONEL PANELİ (GÜVENLİK)</div>
+            <h3 class="mb-0">Hızlı İş Paneli</h3>
+            <div class="small text-muted">Tarih: @Model.Day.ToString("dd.MM.yyyy")</div>
+        </div>
+    </div>
+
+    @if (TempData["SecSaved"] is string ok && !string.IsNullOrWhiteSpace(ok))
+    {
+        <div class="alert alert-success">@ok</div>
+    }
+    @if (TempData["SecError"] is string err && !string.IsNullOrWhiteSpace(err))
+    {
+        <div class="alert alert-danger">@err</div>
+    }
+
+    <div class="row g-3">
+        <!-- 1) CHECKLIST -->
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="mb-2">Açılış Rutini Checklist</h5>
+                    <p class="small text-muted mb-3">Günlük işleri tamamladıkça işaretleyin.</p>
+
+                    @if (Model.Checklist != null && Model.Checklist.Any())
+                    {
+                        <div class="list-group">
+                            @foreach (var t in Model.Checklist)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="me-2">@t.Text</div>
+
+                                    <form asp-action="ToggleSecurityChecklist" asp-controller="Personnel" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="taskKey" value="@t.Key" />
+                                        <input type="hidden" name="done" value="@(t.Done ? "false" : "true")" />
+
+                                        @if (t.Done)
+                                        {
+                                            <button class="btn btn-sm btn-success" type="submit" title="Geri al">
+                                                <i class="bi bi-check2-circle"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-sm btn-outline-secondary" type="submit" title="Tamamla">
+                                                <i class="bi bi-circle"></i>
+                                            </button>
+                                        }
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-light border mb-0">Checklist bulunamadı.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- 2) REPORT CREATION -->
+        <div class="col-lg-8">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="mb-2">Rapor Oluşturma</h5>
+                    <p class="small text-muted mb-3">Güvenlik olayı raporu oluşturun.</p>
+
+                    <form asp-action="CreateSecurityReport" asp-controller="Personnel" method="post" class="row g-3">
+                        @Html.AntiForgeryToken()
+
+                        <div class="col-md-8">
+                            <label class="form-label">Rapor Edilen Yer</label>
+                            <input class="form-control" name="ReportedPlace" value="@Model.ReportedPlace" placeholder="Örn: Giriş kapısı / Depo / Kasa önü" />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Yaralı Sayısı</label>
+                            <input class="form-control" type="number" min="0" name="InjuredCount" value="@Model.InjuredCount" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Olay Başlangıç</label>
+                            <input class="form-control" type="datetime-local" name="ActivityDateStart"
+                                   value="@Model.ActivityDateStart.ToString("yyyy-MM-ddTHH:mm")" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Olay Bitiş (opsiyonel)</label>
+                            <input class="form-control" type="datetime-local" name="ActivityDateEnd"
+                                   value="@(Model.ActivityDateEnd.HasValue? Model.ActivityDateEnd.Value.ToString("yyyy-MM-ddTHH:mm") : "")" />
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Açıklama</label>
+                            <textarea class="form-control" name="Description" rows="4" placeholder="Detayları yazın...">@Model.Description</textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Problemler (opsiyonel) — her satıra 1 problem</label>
+                            <textarea class="form-control" name="ProblemsText" rows="3" placeholder="Örn: Raflar devrildi&#10;Cam kırıldı&#10;Tartışma yaşandı">@Model.ProblemsText</textarea>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-end">
+                            <button class="btn btn-primary" type="submit">Rapor Oluştur</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recent reports -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="mb-2">Son Raporlar</h5>
+
+                    @if (Model.RecentReports != null && Model.RecentReports.Any())
+                    {
+                        <div class="list-group">
+                            @foreach (var r in Model.RecentReports)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="fw-semibold">@r.ReportedPlace</div>
+                                    </div>
+                                    <div class="small text-muted">
+                                        @r.ActivityDateStart.ToString("dd.MM.yyyy HH:mm")
+                                        @if (r.ActivityDateEnd.HasValue)
+                                        {
+                                            <span> - @r.ActivityDateEnd.Value.ToString("dd.MM.yyyy HH:mm")</span>
+                                        }
+                                        <span> • Yaralı: @r.InjuredCount</span>
+                                    </div>
+                                    <div class="mt-2">@r.Description</div>
+
+                                    @if (r.Problems != null && r.Problems.Any())
+                                    {
+                                        <div class="mt-2">
+                                            <div class="small text-muted mb-1">Problemler:</div>
+                                            <ul class="mb-0">
+                                                @foreach (var p in r.Problems)
+                                                {
+                                                    <li>@p</li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-light border mb-0">Henüz rapor yok.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- 3) BANNED PEOPLE LIST -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="mb-0">Yasaklı Olan Kişiler ve Bilgileri</h5>
+
+                        <!-- NEW: Add button opens modal -->
+                        <button type="button"
+                                class="btn btn-sm btn-outline-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#addBannedPersonModal">
+                            <i class="bi bi-plus"></i> Yeni Kayıt
+                        </button>
+                    </div>
+
+                    @if (Model.BannedPeople != null && Model.BannedPeople.Any())
+                    {
+                        <div class="row g-3">
+                            @foreach (var b in Model.BannedPeople)
+                            {
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="d-flex gap-3">
+                                            <div style="width:72px;height:72px;flex:0 0 auto;">
+                                                <img src="@(string.IsNullOrWhiteSpace(b.PictureLink) ? Url.Content("~/img/placeholder.png") : b.PictureLink)"
+                                                     style="width:72px;height:72px;object-fit:cover;border-radius:12px;"
+                                                     alt="Kişi" />
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="fw-semibold">Kayıt #@b.SPeopleID</div>
+                                                <div class="small text-muted">Eklenme: @b.CreatedAt.ToString("dd.MM.yyyy HH:mm")</div>
+
+                                                <div class="mt-2">
+                                                    <span class="badge @(b.Temporary ? "bg-warning text-dark" : "bg-danger")">
+                                                        @(b.Temporary ? "Geçici" : "Kalıcı")
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr />
+
+                                        <div class="small text-muted mb-1">Sebep</div>
+                                        <div>@b.Reason</div>
+
+                                        <div class="small text-muted mt-2 mb-1">Açıklama</div>
+                                        <div>@b.Description</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-light border mb-0">Kayıtlı yasaklı kişi yok.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NEW: ADD BANNED PERSON MODAL -->
+<div class="modal fade" id="addBannedPersonModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <form asp-action="AddBannedPerson" asp-controller="Personnel" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Yasaklı Kişi Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="alert alert-info small">
+                        Bu kayıt sadece <strong>aynı dükkan</strong> içinde görüntülenir.
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Sebep</label>
+                        <input type="text"
+                               class="form-control"
+                               name="reason"
+                               maxlength="200"
+                               placeholder="Örn: Kavgaya karıştı / Hırsızlık şüphesi / Tehdit" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Açıklama</label>
+                        <textarea class="form-control"
+                                  name="description"
+                                  rows="4"
+                                  maxlength="1000"
+                                  placeholder="Örn: Erkek, 30-35 yaş, siyah mont, agresif davranış..."></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="col-md-6 d-flex align-items-end">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="temporary" value="true" id="tmpSwitch" />
+                                <label class="form-check-label" for="tmpSwitch">Geçici kayıt</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        İptal
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Kaydı Ekle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                // IMPORTANT: do not auto-submit when modal is open (prevents accidental submits)
+                const modalOpen = document.querySelector('.modal.show');
+                if (modalOpen) return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

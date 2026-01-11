@@ -1,0 +1,22 @@
+16-12-2025 04:33:59	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+16-12-2025 04:35:01	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel picture set for the first time. UserID=8, New=/img/personnel/9cef1fc3-b75c-4ebd-a743-baeb94ea94a7.jpg
+16-12-2025 04:35:02	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=4, Name=Derya Şahin Test
+16-12-2025 04:35:45	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Education created. PersonelID=4, EducationID=12, School=Ticaret Meslek Lisesi
+16-12-2025 04:36:14	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Work history created. PersonelID=4, HistoryID=13, Title=Kasiyer
+16-12-2025 04:37:19	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=11, Name=Ayşe Demir
+16-12-2025 04:38:32	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=4, Name=Derya Şahin
+16-12-2025 08:29:17	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+16-12-2025 08:29:19	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+16-12-2025 09:35:33	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+16-12-2025 10:08:26	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+16-12-2025 19:31:25	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+16-12-2025 19:52:21	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+16-12-2025 19:52:27	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+16-12-2025 19:53:20	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+16-12-2025 19:59:23	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+16-12-2025 19:59:32	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+16-12-2025 20:04:51	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+16-12-2025 20:05:03	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+16-12-2025 20:05:10	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+16-12-2025 20:05:24	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+16-12-2025 20:05:35	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=2, Name=Murat Çetin

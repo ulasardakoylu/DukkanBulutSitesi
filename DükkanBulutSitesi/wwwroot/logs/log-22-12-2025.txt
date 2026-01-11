@@ -1,0 +1,83 @@
+22-12-2025 10:57:09	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 11:16:04	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 11:16:08	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 11:16:19	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=2, ItemName="Ekmek"
+22-12-2025 11:16:23	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=2, ItemName="Ekmek"
+22-12-2025 11:16:27	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 11:16:30	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 11:33:01	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 11:33:06	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 11:33:30	User=Admin123	UserId=2	IP=127.0.0.1	ApprovePendingComment, commentId=18, commentPreview="nice"
+22-12-2025 11:33:45	User=Admin123	UserId=2	IP=127.0.0.1	RejectPendingComment, commentId=19, commentPreview="not nice"
+22-12-2025 11:33:48	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 11:33:51	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 12:26:04	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 12:26:07	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 12:26:44	User=Admin123	UserId=2	IP=127.0.0.1	commentId=20, commentPreview="nice"
+22-12-2025 12:26:45	User=Admin123	UserId=2	IP=127.0.0.1	commentId=21, commentPreview="not nice"
+22-12-2025 12:26:48	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 12:26:51	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 12:49:53	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 12:49:57	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 12:50:30	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 12:50:34	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 13:00:22	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 13:00:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 13:00:45	User=Admin123	UserId=2	IP=127.0.0.1	commentId=24, commentPreview="yes"
+22-12-2025 13:00:53	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 13:00:57	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 14:35:30	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 14:45:59	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 14:46:02	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 14:46:35	User=Admin123	UserId=2	IP=127.0.0.1	RejectPendingComment, commentId=27, commentPreview="hi"
+22-12-2025 14:46:38	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 14:46:41	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 14:47:30	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:04:19	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:04:24	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:04:35	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:04:47	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 15:04:51	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+22-12-2025 15:06:00	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+22-12-2025 15:06:05	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 15:06:17	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 15:06:21	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+22-12-2025 15:27:06	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+22-12-2025 15:27:11	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 15:56:35	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 15:56:38	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 15:56:58	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:57:03	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:57:06	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:57:13	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 15:57:15	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 15:57:28	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:57:33	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:57:36	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:58:41	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 15:58:44	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 15:58:56	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 15:59:03	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 15:59:06	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 15:59:14	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 15:59:17	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 16:08:56	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+22-12-2025 22:03:08	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 22:03:13	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 22:06:28	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Role created. RoleID=8, StoreID=1, Name=.
+22-12-2025 22:06:38	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Role deleted. RoleID=8, StoreID=1, Name=.
+22-12-2025 22:07:42	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 22:07:45	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+22-12-2025 22:09:01	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=2, ItemName="Ekmek"
+22-12-2025 22:09:06	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=2, ItemName="Ekmek"
+22-12-2025 22:11:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+22-12-2025 22:11:46	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+22-12-2025 22:13:01	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+22-12-2025 22:13:17	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+22-12-2025 22:13:41	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+22-12-2025 22:20:41	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+22-12-2025 22:49:18	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+22-12-2025 22:49:22	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+23-12-2025 00:55:18	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+23-12-2025 01:11:21	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+23-12-2025 01:11:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local

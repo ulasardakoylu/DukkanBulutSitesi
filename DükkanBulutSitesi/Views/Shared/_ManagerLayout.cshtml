@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - Yönetici Paneli</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/manager.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        .mgr-store-logo {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+        }
+
+    </style>
+
+    <script>
+        // Block Shift+Enter everywhere EXCEPT textarea
+        (function () {
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter' || !e.shiftKey) return;
+
+                const el = e.target;
+                if (!el) return;
+
+                // allow Shift+Enter inside textarea (newline)
+                if (el.tagName === 'TEXTAREA') return;
+
+                // also allow any contenteditable
+                if (el.isContentEditable) return;
+
+                e.preventDefault();
+                e.stopPropagation();
+            }, true); // <-- capture mode is important
+        })();
+    </script>
+</head>
+<body class="manager-body">
+    <div class="manager-wrapper">
+
+        <!-- SIDEBAR -->
+        <aside class="manager-sidebar">
+            <div class="mgr-sidebar-header d-flex align-items-center px-3 pt-3">
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="btn btn-link p-0 me-3 mgr-back-btn">
+                    <i class="bi bi-arrow-left-circle" style="font-size:1.6rem;"></i>
+                </a>
+
+                <div class="mgr-logo-box d-flex align-items-center justify-content-center">
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.StoreLogo as string))
+                    {
+                        <img src="@(ViewBag.StoreLogo)"
+                             alt="Dükkan Logo"
+                             class="mgr-store-logo" />
+                    }
+                    else
+                    {
+                        <div class="mgr-logo-ph"></div>
+                    }
+                </div>
+
+            </div>
+
+            <div class="mgr-sidebar-title">YÖNETİM PANELİ</div>
+
+            <nav class="manager-nav">
+                <a asp-controller="Manager" asp-action="Dashboard" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active" : "")">Gösterge Paneli</a>
+                <a asp-controller="Manager" asp-action="PendingComments" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "PendingComments" ? "active" : "")">Yorum Yönetimi</a>
+                <a asp-controller="Manager" asp-action="Shifts" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Shifts" ? "active" : "")">Vardiya Yönetimi</a>
+                <a asp-controller="Manager" asp-action="Complaints" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Complaints" ? "active" : "")">Şikayetler</a>
+                <a asp-controller="Manager" asp-action="Personnel" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Personnel" ? "active" : "")">Personeller</a>
+                <a asp-controller="Manager" asp-action="Roles" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Roles" ? "active" : "")">Rol Yönetimi</a>
+                <a asp-controller="Manager" asp-action="Items" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Items" ? "active" : "")">Ürünler</a>
+                <a asp-controller="Manager" asp-action="SpecialOffers" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "SpecialOffers" ? "active" : "")">Kampanyalar</a>
+                <a asp-controller="Manager" asp-action="Conversations" class="mgr-nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Conversations" ? "active" : "")">Konuşmalar</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="manager-content">
+            @RenderBody()
+        </main>
+
+    </div>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/daypilot/dist/daypilot-all.min.js"></script>
+</body>
+</html>

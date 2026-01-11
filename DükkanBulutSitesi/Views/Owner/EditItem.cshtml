@@ -1,0 +1,166 @@
+﻿@model DükkanBulutSitesi.Models.Manager.ManagerItemEditVm
+@{
+    var isNew = !Model.ItemID.HasValue;
+    ViewData["Title"] = isNew ? "Yeni Ürün" : "Ürün Düzenle";
+    Layout = "~/Views/Owner/_StoreLayout.cshtml";
+}
+
+<div class="mgr-main">
+    <h2 class="mb-3">@ViewData["Title"]</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <form asp-action="@(isNew ? "CreateItem" : "EditItem")"
+                  method="post"
+                  enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+
+                @if (!isNew)
+                {
+                    <input type="hidden" asp-for="ItemID" />
+                }
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="mb-3">
+                            <label asp-for="ItemName" class="form-label"></label>
+                            <input asp-for="ItemName" class="form-control" required />
+                            <span asp-validation-for="ItemName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" rows="3" class="form-control" required></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="ItemPrice" class="form-label"></label>
+                                <div class="input-group">
+                                    <input asp-for="ItemPrice"
+                                           class="form-control"
+                                           required
+                                           min="0.01"
+                                           step="0.01" />
+                                    <span class="input-group-text">₺</span>
+                                </div>
+                                <span asp-validation-for="ItemPrice" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="OnHand" class="form-label"></label>
+                                <input asp-for="OnHand"
+                                       class="form-control"
+                                       required
+                                       min="1"
+                                       step="1" />
+                                <span asp-validation-for="OnHand" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-4 mb-3 d-flex align-items-center">
+                                <div class="form-check mt-4">
+                                    <input asp-for="IsActive" class="form-check-input" />
+                                    <label asp-for="IsActive" class="form-check-label"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CategoriesCsv" class="form-label"></label>
+                            <input asp-for="CategoriesCsv" class="form-control" required />
+                            <span asp-validation-for="CategoriesCsv" class="text-danger"></span>
+                            <small class="text-muted">Örn: Süt, Temel Gıda</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="KeywordsCsv" class="form-label"></label>
+                            <input asp-for="KeywordsCsv" class="form-control" required />
+                            <span asp-validation-for="KeywordsCsv" class="text-danger"></span>
+                            <small class="text-muted">Örn: laktozsuz, günlük, indirim</small>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="form-label">Mevcut Resim</label>
+                            <div class="border rounded d-flex align-items-center justify-content-center"
+                                 style="height:180px; background:#f3f4ff;">
+                                @if (!string.IsNullOrEmpty(Model.ExistingPictureLink))
+                                {
+                                    <img src="@Model.ExistingPictureLink"
+                                         alt="Ürün resmi"
+                                         class="img-fluid"
+                                         style="max-height:170px;" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">Henüz resim yok</span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PictureFile" class="form-label"></label>
+                            <input asp-for="PictureFile" type="file" class="form-control" />
+                            <span asp-validation-for="PictureFile" class="text-danger"></span>
+                            <small class="text-muted">JPG / PNG, makul bir boyut tercih edin.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-3">
+                    <a asp-action="StoreItems" class="btn btn-outline-secondary">Geri</a>
+                    <button type="submit" class="btn btn-primary">
+                        @(isNew ? "Ürünü Oluştur" : "Değişiklikleri Kaydet")
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

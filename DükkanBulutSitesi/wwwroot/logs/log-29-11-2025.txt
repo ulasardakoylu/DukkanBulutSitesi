@@ -1,0 +1,14 @@
+29-11-2025 12:17:34	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+29-11-2025 13:44:56	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+29-11-2025 13:51:33	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+29-11-2025 15:16:07	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+29-11-2025 16:41:12	User=OwnerTest	UserId=9	IP=127.0.0.1	User registered. UserID=9, Email=owner@test.com
+29-11-2025 16:41:12	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in immediately after registration. UserID=9, Email=owner@test.com
+29-11-2025 16:44:48	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+29-11-2025 16:44:52	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+29-11-2025 20:32:02	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+29-11-2025 20:38:48	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+29-11-2025 20:42:05	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+29-11-2025 20:42:10	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+29-11-2025 21:02:48	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+29-11-2025 21:38:00	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

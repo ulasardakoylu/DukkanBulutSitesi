@@ -1,0 +1,322 @@
+﻿@{
+    Layout = null; 
+    var storeId = ViewBag.StoreId as int? ?? 0;
+    var storeName = ViewBag.StoreName as string ?? "Dükkan";
+    var storeDescription = ViewBag.StoreDescription as string ?? "";
+    string currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - DükkanBulut</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background-color: #f5f7fb;
+        }
+
+        .owner-shell {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .owner-sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, #0d6efd, #003ea8);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 1.25rem;
+        }
+
+            .owner-sidebar .brand {
+                font-weight: 700;
+                font-size: 1.3rem;
+                margin-bottom: .25rem;
+            }
+
+            .owner-sidebar .panel-label {
+                font-size: .85rem;
+                opacity: .8;
+            }
+
+            .owner-sidebar .active-store-label {
+                font-size: .8rem;
+                text-transform: uppercase;
+                opacity: .75;
+                margin-top: 1.25rem;
+                margin-bottom: .25rem;
+            }
+
+            .owner-sidebar .active-store-name {
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+
+        .owner-nav {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+            .owner-nav li a {
+                display: flex;
+                align-items: center;
+                gap: .6rem;
+                padding: .55rem .7rem;
+                border-radius: 999px;
+                color: #e5ecff;
+                font-size: .95rem;
+                text-decoration: none;
+                margin-bottom: .2rem;
+            }
+
+                .owner-nav li a i {
+                    font-size: 1.05rem;
+                }
+
+                .owner-nav li a:hover {
+                    background: rgba(255, 255, 255, 0.12);
+                    color: #ffffff;
+                }
+
+                .owner-nav li a.active {
+                    background: #ffffff;
+                    color: #0d6efd;
+                    font-weight: 600;
+                }
+
+        .owner-main {
+            flex: 1;
+            padding: 1.5rem 2rem;
+        }
+
+        .owner-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+            .owner-topbar .owner-user {
+                display: flex;
+                align-items: center;
+                gap: .75rem;
+            }
+
+            .owner-topbar .owner-user-name {
+                font-weight: 600;
+                font-size: .95rem;
+            }
+
+            .owner-topbar .owner-user-role {
+                font-size: .8rem;
+                color: #6c757d;
+            }
+
+        .emoji-toggle-btn {
+            border-radius: 999px;
+            padding-inline: 0.75rem;
+        }
+
+        .emoji-picker {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            transform: translateY(-4px);
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.75rem;
+            padding: 0.35rem 0.5rem;
+            z-index: 20;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            max-width: 340px;
+        }
+
+            .emoji-picker .emoji-item {
+                border: none;
+                background: transparent;
+                padding: 0.15rem 0.25rem;
+                font-size: 1.25rem;
+                line-height: 1;
+                cursor: pointer;
+                border-radius: 0.35rem;
+            }
+
+                .emoji-picker .emoji-item:hover {
+                    background-color: #f1f3f5;
+                    transform: translateY(-1px);
+                }
+
+                .emoji-picker .emoji-item:focus {
+                    outline: none;
+                    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.3);
+                }
+    </style>
+
+    <script>
+        // Block Shift+Enter everywhere EXCEPT textarea
+        (function () {
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter' || !e.shiftKey) return;
+
+                const el = e.target;
+                if (!el) return;
+
+                // allow Shift+Enter inside textarea (newline)
+                if (el.tagName === 'TEXTAREA') return;
+
+                if (el.isContentEditable) return;
+
+                e.preventDefault();
+                e.stopPropagation();
+            }, true); // <-- capture mode is important
+        })();
+    </script>
+</head>
+<body>
+    <div class="owner-shell">
+
+        <!-- SIDEBAR -->
+        <aside class="owner-sidebar">
+            <div>
+                <div class="brand">DükkanBulut</div>
+                <div class="panel-label">Sahip Paneli</div>
+            </div>
+
+            <div class="mt-3">
+                <div class="active-store-label">Aktif Dükkan</div>
+
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <div class="active-store-name mb-0">@storeName</div>
+
+                    <!-- go back to owner dashboard / store selection -->
+                    <a href="@Url.Action("Dashboard", "Owner")"
+                       class="btn btn-outline-light btn-sm px-2 py-0"
+                       style="font-size:.8rem;">
+                        Değiştir
+                    </a>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(storeDescription))
+                {
+                    <div style="font-size: .85rem; opacity:.85;">@storeDescription</div>
+                }
+            </div>
+
+            <ul class="owner-nav mt-4">
+                <li>
+                    <a class="@(currentAction == "StoreDashboard" ? "active" : "")"
+                       href="@Url.Action("StoreDashboard", "Owner", new { storeId })">
+                        <i class="bi bi-speedometer2"></i> Genel Bakış
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StorePersonnel" ? "active" : "")"
+                       href="@Url.Action("StorePersonnel", "Owner", new { storeId })">
+                        <i class="bi bi-people"></i> Personel
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreComplaints" ? "active" : "")"
+                       href="@Url.Action("StoreComplaints", "Owner", new { storeId })">
+                        <i class="bi bi-exclamation-circle"></i> Şikayetler
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreCommentManagement" ? "active" : "")"
+                       href="@Url.Action("StoreCommentManagement", "Owner", new { storeId })">
+                        <i class="bi bi-chat-left-text"></i> Yorum Yönetimi
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreShifts" ? "active" : "")"
+                       href="@Url.Action("StoreShifts", "Owner", new { storeId })">
+                        <i class="bi bi-calendar"></i> Vardiya Yönetimi
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreItems" ? "active" : "")"
+                       href="@Url.Action("StoreItems", "Owner", new { storeId })">
+                        <i class="bi bi-box-seam"></i> Ürünler
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreSpecialOffers" ? "active" : "")"
+                       href="@Url.Action("StoreSpecialOffers", "Owner", new { storeId })">
+                        <i class="bi bi-megaphone"></i> Kampanyalar
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreRoles" ? "active" : "")"
+                       href="@Url.Action("StoreRoles", "Owner", new { storeId })">
+                        <i class="bi bi-diagram-3"></i> Roller
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreManagerActivityLog" ? "active" : "")"
+                       href="@Url.Action("StoreManagerActivityLog", "Owner", new { storeId })">
+                        <i class="bi bi-journal-text"></i> Yönetici Logları
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreConversations" ? "active" : "")"
+                       href="@Url.Action("StoreConversations", "Owner", new { storeId })">
+                        <i class="bi bi-chat-dots"></i> Konuşmalar
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentAction == "StoreSettings" ? "active" : "")"
+                       href="@Url.Action("StoreSettings", "Owner", new { storeId })">
+                        <i class="bi bi-gear"></i> Dükkan Ayarları
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="owner-main">
+            <div class="owner-topbar">
+                <div>
+                    <h3 class="mb-0">@ViewData["Title"]</h3>
+                </div>
+
+                <div class="owner-user">
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       asp-route-storeId="@storeId"
+                       class="btn btn-outline-primary btn-sm me-3">
+                        Vitrine Git
+                    </a>
+
+                    <div>
+                        <div class="owner-user-name">@User.Identity?.Name</div>
+                        <div class="owner-user-role">Dükkan Sahibi</div>
+                    </div>
+
+                    <form method="post" asp-controller="Auth" asp-action="Logout" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-outline-secondary btn-sm">Çıkış Yap</button>
+                    </form>
+                </div>
+            </div>
+
+            @RenderBody()
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/daypilot/dist/daypilot-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,146 @@
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.deps.json
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.runtimeconfig.json
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.AssemblyReference.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfoInputs.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfo.cs
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.CoreCompileInputs.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\refint\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.genruntimeconfig.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\Entity\obj\Debug\net8.0\ref\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.deps.json
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.runtimeconfig.json
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.AssemblyReference.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfoInputs.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfo.cs
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.CoreCompileInputs.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\refint\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.genruntimeconfig.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\ref\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Black.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-BlackItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Bold.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-BoldItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraBold.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraBoldItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraLight.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraLightItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Italic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Light.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-LightItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Medium.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-MediumItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Regular.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-SemiBold.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-SemiBoldItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Thin.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ThinItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\OFL.txt
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Black.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-BlackItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Bold.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-BoldItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraBold.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraBoldItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraLight.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraLightItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Italic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Light.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-LightItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Medium.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-MediumItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Regular.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-SemiBold.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-SemiBoldItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Thin.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ThinItalic.ttf
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\OFL.txt
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.deps.json
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.runtimeconfig.json
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.AssemblyReference.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfoInputs.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfo.cs
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.CoreCompileInputs.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\refint\Entity.dll
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.genruntimeconfig.cache
+C:\Users\ulasa\source\repos\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\ref\Entity.dll
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Black.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-BlackItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Bold.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-BoldItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraBold.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraBoldItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraLight.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraLightItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Italic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Light.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-LightItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Medium.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-MediumItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Regular.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-SemiBold.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-SemiBoldItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Thin.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ThinItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\OFL.txt
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.deps.json
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.runtimeconfig.json
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.dll
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.AssemblyReference.cache
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfoInputs.cache
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfo.cs
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.CoreCompileInputs.cache
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.dll
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\refint\Entity.dll
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.genruntimeconfig.cache
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\ref\Entity.dll
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Black.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-BlackItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Bold.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-BoldItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraBold.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraBoldItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraLight.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ExtraLightItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Italic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Light.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-LightItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Medium.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-MediumItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Regular.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-SemiBold.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-SemiBoldItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-Thin.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\Lato-ThinItalic.ttf
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\LatoFont\OFL.txt
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.deps.json
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.runtimeconfig.json
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.dll
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\bin\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.AssemblyReference.cache
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfoInputs.cache
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.AssemblyInfo.cs
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.csproj.CoreCompileInputs.cache
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.dll
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\refint\Entity.dll
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.pdb
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\Entity.genruntimeconfig.cache
+C:\Users\ulasa\Downloads\241613023_UlaşArdaKöylü 1\241613023_UlaşArdaKöylü\DükkanBulutSitesi\DükkanBulutSitesi\DükkanBulutSitesi\Entity\obj\Debug\net8.0\ref\Entity.dll

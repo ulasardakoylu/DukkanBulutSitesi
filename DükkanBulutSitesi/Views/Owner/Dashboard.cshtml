@@ -1,0 +1,206 @@
+﻿@model DükkanBulutSitesi.Models.Owner.OwnerDashboardVm
+
+@{
+    ViewData["Title"] = "Dükkan Sahibi Paneli";
+    Layout = "_StorefrontLayout";
+}
+
+<link rel="stylesheet" href="~/css/store.css" />
+
+<!-- TOP NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="@Url.Action("Welcome", "Home")">
+            DükkanBulut
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ownerNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="ownerNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <span class="nav-link active">Sahip Paneli</span>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center">
+                <span class="navbar-text me-3">
+                    @Model.OwnerName
+                </span>
+                <form method="post" asp-controller="Auth" asp-action="Logout" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">Çıkış Yap</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Intro -->
+    <section class="mb-4">
+        <h1 class="mb-3">Dükkan Sahibi Paneli</h1>
+        <p class="text-muted">
+            Bu panelden size bağlı mağazaları görebilir, her mağaza için vitrine veya
+            yönetim paneline hızlıca gidebilirsiniz.
+        </p>
+    </section>
+
+    <!-- Store cards -->
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Dükkanlarınız</h4>
+
+            <a class="btn btn-success btn-sm"
+               href="@Url.Action("CreateStore", "Owner")">
+                + Yeni Dükkan Ekle
+            </a>
+        </div>
+
+        @if (Model.Stores != null && Model.Stores.Any())
+        {
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                @foreach (var s in Model.Stores)
+                {
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">@s.StoreName</h5>
+
+                                @if (!string.IsNullOrWhiteSpace(s.StoreDescription))
+                                {
+                                    <p class="card-text text-muted">@s.StoreDescription</p>
+                                }
+                                else
+                                {
+                                    <p class="card-text text-muted">
+                                        Bu mağaza için açıklama eklenmemiş.
+                                    </p>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(s.StoreAddress))
+                                {
+                                    <p class="small text-muted mb-2">
+                                        Adres: @s.StoreAddress
+                                    </p>
+                                }
+
+                                <p class="small mb-3">
+                                    Yönetici:
+                                    @if (s.ManagerCount > 0)
+                                    {
+                                        <span class="text-success fw-semibold"
+                                              data-bs-toggle="tooltip"
+                                              data-bs-placement="top"
+                                              title="@string.Join(", ", s.ManagerNames)">
+                                            @s.ManagerCount yönetici
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Atanmış yönetici yok</span>
+                                    }
+                                </p>
+
+                                <div class="mt-auto">
+                                    <div class="d-flex flex-wrap gap-2 justify-content-between mb-2">
+                                        <a class="btn btn-outline-primary btn-sm"
+                                           href="@Url.Action("Index", "Home", new { storeId = s.StoreID })">
+                                            Vitrine Git
+                                        </a>
+
+                                        <a class="btn btn-primary btn-sm"
+                                           href="@Url.Action("StoreDashboard", "Owner", new { storeId = s.StoreID })">
+                                            Ürün / Personel Yönetimi
+                                        </a>
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 justify-content-end">
+                                        <a class="btn btn-outline-secondary btn-sm"
+                                           href="@Url.Action("EditStore", "Owner", new { id = s.StoreID })">
+                                            Düzenle
+                                        </a>
+
+                                        <form asp-controller="Owner"
+                                              asp-action="DeleteStore"
+                                              asp-route-id="@s.StoreID"
+                                              method="post"
+                                              class="d-inline"
+                                              onsubmit="return confirm('Bu mağazayı silmek istediğinize emin misiniz?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                Sil
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                Bu hesaba bağlı bir mağaza bulunamadı.
+            </div>
+        }
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(
+                document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            );
+            tooltipTriggerList.forEach(function (el) {
+                new bootstrap.Tooltip(el);
+            });
+        });
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

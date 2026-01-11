@@ -1,0 +1,284 @@
+﻿@model DükkanBulutSitesi.Models.Owner.OwnerStoreDashboardVm
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = Model.StoreName;
+    Layout = "_StoreLayout";
+
+    ViewBag.StoreId = Model.StoreID;
+    ViewBag.StoreName = Model.StoreName;
+    ViewBag.StoreDescription = Model.StoreDescription;
+}
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+        <h5 class="card-title mb-2">Dükkan Özeti</h5>
+        @if (!string.IsNullOrWhiteSpace(Model.StoreDescription))
+        {
+            <p class="text-muted mb-1">@Model.StoreDescription</p>
+        }
+        <p class="mb-1"><strong>Adres:</strong> @Model.StoreAddress</p>
+        <p class="mb-0 text-muted">
+            Soldaki menüden personel, ürünler, konuşmalar veya dükkan ayarlarına geçiş yapabilirsiniz.
+        </p>
+    </div>
+</div>
+
+<!-- Top row: two small charts -->
+<div class="row mb-4">
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Satışların Kategori Dağılımı (Son 30 Gün)</h5>
+                <canvas id="categoryPieChart" height="95"></canvas>
+                @if (!Model.CategoryBreakdown.Any())
+                {
+                    <p class="text-muted small mt-2 mb-0">
+                        Son 30 gün içinde bu dükkanda satış kaydı bulunamadı.
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title mb-3">En Çok Satılan Ürünler (Son 30 Gün)</h5>
+                <canvas id="topItemsPieChart" height="95"></canvas>
+                @if (!Model.TopItemsBreakdown.Any())
+                {
+                    <p class="text-muted small mt-2 mb-0">
+                        Son 30 gün içinde bu dükkanda satış kaydı bulunamadı.
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Big line chart -->
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="card-title mb-0">Satış Grafiği</h5>
+
+            <div class="btn-group btn-group-sm" role="group" aria-label="Zaman aralığı">
+                <button type="button" class="btn btn-outline-primary active" data-range="day">Gün</button>
+                <button type="button" class="btn btn-outline-primary" data-range="week">Hafta</button>
+                <button type="button" class="btn btn-outline-primary" data-range="month">Ay</button>
+            </div>
+        </div>
+
+        <p class="text-muted small">
+            Toplam satış tutarı sadece bu dükkanda satılan ürünler (envanterde bulunanlar) dikkate alınarak hesaplanır.
+        </p>
+
+        <canvas id="salesLineChart" height="150"></canvas>
+
+        @if (!Model.DaySales.Any() && !Model.WeekSales.Any() && !Model.MonthSales.Any())
+        {
+            <p class="text-muted small mt-3 mb-0">
+                Seçilen zaman aralıkları için satış kaydı bulunamadı.
+            </p>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const dayLabels   = @Html.Raw(JsonSerializer.Serialize(Model.DaySales.Select(p => p.Label)));
+            const dayValues   = @Html.Raw(JsonSerializer.Serialize(Model.DaySales.Select(p => p.Value)));
+            const weekLabels  = @Html.Raw(JsonSerializer.Serialize(Model.WeekSales.Select(p => p.Label)));
+            const weekValues  = @Html.Raw(JsonSerializer.Serialize(Model.WeekSales.Select(p => p.Value)));
+            const monthLabels = @Html.Raw(JsonSerializer.Serialize(Model.MonthSales.Select(p => p.Label)));
+            const monthValues = @Html.Raw(JsonSerializer.Serialize(Model.MonthSales.Select(p => p.Value)));
+
+            const categoryLabels = @Html.Raw(JsonSerializer.Serialize(Model.CategoryBreakdown.Select(p => p.Label)));
+            const categoryValues = @Html.Raw(JsonSerializer.Serialize(Model.CategoryBreakdown.Select(p => p.Value)));
+
+            const itemLabels = @Html.Raw(JsonSerializer.Serialize(Model.TopItemsBreakdown.Select(p => p.Label)));
+            const itemValues = @Html.Raw(JsonSerializer.Serialize(Model.TopItemsBreakdown.Select(p => p.Value)));
+
+            // ----- PIE CHARTS -----
+            if (typeof Chart !== "undefined") {
+                const categoryCtx = document.getElementById("categoryPieChart");
+                if (categoryCtx && categoryLabels.length > 0) {
+                    new Chart(categoryCtx, {
+                        type: "doughnut",
+                        data: {
+                            labels: categoryLabels,
+                            datasets: [{
+                                data: categoryValues
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { position: "bottom" },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (ctx) {
+                                            const label = ctx.label || "";
+                                            const value = ctx.parsed || 0;
+                                            return `${label}: ₺${value.toFixed(2)}`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                const itemsCtx = document.getElementById("topItemsPieChart");
+                if (itemsCtx && itemLabels.length > 0) {
+                    new Chart(itemsCtx, {
+                        type: "doughnut",
+                        data: {
+                            labels: itemLabels,
+                            datasets: [{
+                                data: itemValues
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { position: "bottom" },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (ctx) {
+                                            const label = ctx.label || "";
+                                            const value = ctx.parsed || 0;
+                                            return `${label}: ₺${value.toFixed(2)}`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // ----- LINE CHART WITH RANGE TOGGLE -----
+            const ctx = document.getElementById("salesLineChart");
+            if (!ctx || typeof Chart === "undefined") {
+                return;
+            }
+
+            let salesChart = null;
+
+            function renderSales(range) {
+                let labels = [];
+                let values = [];
+
+                if (range === "day") {
+                    labels = dayLabels;
+                    values = dayValues;
+                } else if (range === "week") {
+                    labels = weekLabels;
+                    values = weekValues;
+                } else {
+                    labels = monthLabels;
+                    values = monthValues;
+                }
+
+                if (salesChart) {
+                    salesChart.destroy();
+                }
+
+                salesChart = new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: "Toplam Satış (₺)",
+                            data: values,
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function (value) {
+                                        return "₺" + value;
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: true },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (ctx) {
+                                        const v = ctx.parsed.y || 0;
+                                        return "₺" + v.toFixed(2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // initial range = day
+            renderSales("day");
+
+            // toggle buttons
+            const rangeButtons = document.querySelectorAll('[data-range]');
+            rangeButtons.forEach(btn => {
+                btn.addEventListener("click", function () {
+                    rangeButtons.forEach(b => b.classList.remove("active"));
+                    this.classList.add("active");
+                    renderSales(this.dataset.range);
+                });
+            });
+        });
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

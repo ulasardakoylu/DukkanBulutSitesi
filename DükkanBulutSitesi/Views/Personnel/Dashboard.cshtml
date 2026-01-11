@@ -1,0 +1,304 @@
+﻿@model DükkanBulutSitesi.Models.PersonnelDashboardVm
+@{
+    ViewData["Title"] = "Personel Paneli";
+    Layout = "~/Views/Shared/_PersonnelLayout.cshtml";
+}
+
+<div class="personnel-shell">
+    <div class="personnel-topbar d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <div class="text-uppercase small text-muted">PERSONEL PANELİ</div>
+            <h3 class="mb-0">
+                Hoşgeldin, @Model.DisplayName
+                @if (!string.IsNullOrWhiteSpace(Model.RoleName))
+                {
+                    <span class="text-muted small">(@Model.RoleName)</span>
+                }
+            </h3>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+            <div class="text-end">
+                <div class="small text-muted"
+                     id="personnelClockDate"
+                     data-server-now="@Model.Now.ToUniversalTime().ToString("o")">
+                    @Model.Now.ToString("dd.MM.yyyy")
+                </div>
+                <div class="fw-semibold fs-5" id="personnelClockTime">
+                    @Model.Now.ToString("HH:mm")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-lg-6 mb-3">
+            <div class="card h-100">
+                <div class="card-header">
+                    Bildirimler
+                </div>
+                <div class="card-body">
+                    @if (Model.Notifications.Any())
+                    {
+                        @foreach (var n in Model.Notifications)
+                        {
+                            var icon = n.Type switch
+                            {
+                                "success" => "bi-check-circle-fill text-success",
+                                "warning" => "bi-exclamation-triangle-fill text-warning",
+                                "danger" => "bi-exclamation-octagon-fill text-danger",
+                                _ => "bi-info-circle-fill text-primary"
+                            };
+
+                            <div class="d-flex mb-3">
+                                <div class="me-3 mt-1">
+                                    <i class="bi @icon fs-4"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">@n.Title</div>
+                                    <div class="text-muted small">@n.Text</div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-muted">Şu anda bildiriniz bulunmuyor.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-3">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between">
+                    <span>Mesai Bilgileri</span>
+                </div>
+                <div class="card-body">
+
+                    @if (TempData["Err"] is string e && !string.IsNullOrWhiteSpace(e))
+                    {
+                        <div class="alert alert-danger mb-3">@e</div>
+                    }
+                    @if (TempData["Ok"] is string ok && !string.IsNullOrWhiteSpace(ok))
+                    {
+                        <div class="alert alert-success mb-3">@ok</div>
+                    }
+
+                    @if (Model.Shifts == null || !Model.Shifts.Any())
+                    {
+                        <div class="alert alert-warning mt-3 mb-0">
+                            Bugün vardiyanız bulunmuyor.
+                        </div>
+                    }
+                    else
+                    {
+                        <style>
+                            .status-dot {
+                                width: 14px;
+                                height: 14px;
+                                border-radius: 50%;
+                                display: inline-block;
+                                border: 1px solid rgba(0,0,0,.2);
+                                vertical-align: middle;
+                                margin-right: 6px;
+                            }
+
+                            .dot-gray {
+                                background: #bdbdbd;
+                            }
+
+                            .dot-yellow {
+                                background: #ffc107;
+                            }
+
+                            .dot-red {
+                                background: #dc3545;
+                            }
+
+                            .dot-green {
+                                background: #198754;
+                            }
+
+                            .shift-row {
+                                padding: 10px 0;
+                                border-bottom: 1px solid rgba(0,0,0,.08);
+                            }
+
+                                .shift-row:last-child {
+                                    border-bottom: none;
+                                }
+
+                            .shift-time {
+                                font-weight: 600;
+                            }
+
+                            .shift-label {
+                                font-size: .85rem;
+                                color: #6c757d;
+                            }
+                        </style>
+
+                        @foreach (var s in Model.Shifts)
+                        {
+                            <div class="shift-row">
+                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                                    <div>
+                                        <div class="shift-label">Vardiya</div>
+                                        <div class="shift-time">@s.Start.ToString("HH:mm") - @s.End.ToString("HH:mm")</div>
+                                    </div>
+
+                                    <div class="d-flex gap-4 align-items-center flex-wrap">
+                                        <div>
+                                            <div class="shift-label">Giriş</div>
+                                            <span class="status-dot dot-@s.InColor" title="@s.InTooltip"></span>
+                                            <span class="small text-muted">@(s.IsClockedIn ? "Giriş var" : "Giriş yok")</span>
+                                        </div>
+
+                                        <div>
+                                            <div class="shift-label">Çıkış</div>
+                                            <span class="status-dot dot-@s.OutColor" title="@s.OutTooltip"></span>
+                                            <span class="small text-muted">@(s.IsClockedOut ? "Çıkış var" : "Çıkış yok")</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2 mt-2">
+                                    <form asp-action="ClockIn" method="post" class="flex-fill">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="shiftId" value="@s.ShiftID" />
+                                        <button type="submit" class="btn btn-primary w-100">İşe Başladım</button>
+                                    </form>
+
+                                    <form asp-action="ClockOut" method="post" class="flex-fill">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="shiftId" value="@s.ShiftID" />
+                                        <button type="submit" class="btn btn-outline-primary w-100">İşten Çıktım</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            Sorun Mesajı Gönder
+        </div>
+        <div class="card-body">
+            @if (TempData["IssueError"] is string ie && !string.IsNullOrEmpty(ie))
+            {
+                <div class="alert alert-danger">@ie</div>
+            }
+
+            <form asp-action="SendIssueRequest" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label class="form-label">Kime</label>
+                    <select class="form-select" name="managerUserId" required>
+                        <option value="">Seçiniz…</option>
+                        @foreach (var t in Model.IssueTargets)
+                        {
+                            <option value="@t.ManagerUserID">@t.DisplayName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Mesaj</label>
+                    <textarea class="form-control" name="message" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sorun Mesajı Gönder</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const dateEl = document.getElementById('personnelClockDate');
+            const timeEl = document.getElementById('personnelClockTime');
+            if (!dateEl || !timeEl) return;
+
+            const serverIso = dateEl.getAttribute('data-server-now');
+            if (!serverIso) return;
+
+            const serverAtRenderMs = Date.parse(serverIso);
+            const clientAtRenderMs = Date.now();
+            const offsetMs = serverAtRenderMs - clientAtRenderMs;
+
+            function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+            function tick() {
+                const serverNow = new Date(Date.now() + offsetMs);
+
+                const dd = pad2(serverNow.getDate());
+                const mm = pad2(serverNow.getMonth() + 1);
+                const yyyy = serverNow.getFullYear();
+                const HH = pad2(serverNow.getHours());
+                const MM = pad2(serverNow.getMinutes());
+
+                dateEl.textContent = `${dd}.${mm}.${yyyy}`;
+                timeEl.textContent = `${HH}:${MM}`;
+            }
+
+            tick();
+
+            const delay = 1000 - (Date.now() % 1000);
+            setTimeout(() => {
+                tick();
+                setInterval(tick, 1000);
+            }, delay);
+        })();
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url',
+                'button'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

@@ -1,0 +1,13 @@
+02-12-2025 17:31:10	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+02-12-2025 17:31:45	User=Admin123	UserId=2	IP=127.0.0.1	Conversation soft-deleted by user. ConversationID=6, UserID=2
+02-12-2025 18:16:41	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+02-12-2025 18:17:46	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+02-12-2025 18:26:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+02-12-2025 18:26:30	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+02-12-2025 18:26:44	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+02-12-2025 18:26:48	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+02-12-2025 18:32:14	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+02-12-2025 18:32:19	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+02-12-2025 18:33:08	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+02-12-2025 18:33:13	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+02-12-2025 18:40:12	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.

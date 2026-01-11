@@ -1,0 +1,48 @@
+19-12-2025 16:45:26	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 17:20:41	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 17:20:46	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+19-12-2025 17:22:04	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=18, Name=twst2
+19-12-2025 17:22:13	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+19-12-2025 17:22:15	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 17:22:27	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 17:22:30	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+19-12-2025 17:29:11	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+19-12-2025 17:29:14	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 17:54:38	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 17:55:13	User=Fatma	UserId=13	IP=127.0.0.1	Employee registered. UserID=13, PersonelID=13, Email=fatma@gmail.com, PersonnelNumber=39950165, StoreID=1
+19-12-2025 17:55:13	User=Fatma	UserId=13	IP=127.0.0.1	Employee logged in after registration. UserID=13, PersonelID=13
+19-12-2025 17:55:23	User=Fatma	UserId=13	IP=127.0.0.1	User logged out.
+19-12-2025 17:55:29	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 17:55:59	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel assigned to another store. SourcePersonelID=13, UserID=13, TargetStoreID=6, RoleID=7, NewPersonelID=14, Code=60423733
+19-12-2025 17:56:43	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 17:56:58	User=Anonymous	UserId=-	IP=127.0.0.1	Failed personnel registration. EmployeeNumber=02960973, Email=owner@test.com, Reason=Email in use
+19-12-2025 17:57:45	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 17:57:54	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel assigned to another store. SourcePersonelID=14, UserID=13, TargetStoreID=1, RoleID=5, NewPersonelID=15, Code=06545443
+19-12-2025 18:07:49	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel assigned to another store. SourcePersonelID=15, UserID=13, TargetStoreID=6, RoleID=7, NewPersonelID=16, Code=78797285
+19-12-2025 18:08:43	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 18:09:14	User=Fatma	UserId=14	IP=127.0.0.1	Employee registered. UserID=14, PersonelID=17, Email=fatma2@gmail.com, PersonnelNumber=02960973, StoreID=1
+19-12-2025 18:09:14	User=Fatma	UserId=14	IP=127.0.0.1	Employee logged in after registration. UserID=14, PersonelID=17
+19-12-2025 18:09:40	User=Fatma	UserId=14	IP=127.0.0.1	User logged out.
+19-12-2025 18:09:43	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 18:09:56	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel assigned to another store. SourcePersonelID=17, UserID=14, TargetStoreID=6, RoleID=7, NewPersonelID=18, Code=68727202
+19-12-2025 19:35:48	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 19:35:53	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+19-12-2025 19:36:05	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+19-12-2025 19:36:08	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 19:49:21	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+19-12-2025 19:49:29	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+19-12-2025 19:49:32	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 19:49:39	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 19:50:27	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 21:34:09	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 21:34:12	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+19-12-2025 21:34:23	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+19-12-2025 21:34:26	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 21:34:57	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 21:34:59	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+19-12-2025 21:47:06	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+19-12-2025 21:47:12	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+19-12-2025 21:47:21	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+19-12-2025 21:47:25	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+19-12-2025 21:48:06	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+19-12-2025 21:48:09	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

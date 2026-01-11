@@ -1,0 +1,61 @@
+12-12-2025 09:18:11	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+12-12-2025 09:18:29	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+12-12-2025 09:18:37	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+12-12-2025 09:18:52	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale;
+12-12-2025 09:19:16	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=975
+12-12-2025 09:20:15	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+12-12-2025 09:20:18	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+12-12-2025 11:40:08	User=Dükkan2	UserId=11	IP=127.0.0.1	User logged in. UserID=11, Email=admin2@school.local
+12-12-2025 11:40:17	User=Dükkan2	UserId=11	IP=127.0.0.1	User logged out.
+12-12-2025 11:40:24	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged in. UserID=12, Email=admin3@school.local
+12-12-2025 13:49:06	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged in. UserID=12, Email=admin3@school.local
+12-12-2025 13:49:22	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged out.
+12-12-2025 14:07:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+12-12-2025 14:08:13	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+12-12-2025 14:10:05	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+12-12-2025 14:10:16	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+12-12-2025 14:10:19	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+12-12-2025 14:10:28	User=Admin123	UserId=2	IP=127.0.0.1	Work history created. PersonelID=3, HistoryID=9, Title=
+12-12-2025 14:12:59	User=Admin123	UserId=2	IP=127.0.0.1	Role updated. RoleID=5, StoreID=1, Name=Güvenlik
+12-12-2025 14:13:02	User=Admin123	UserId=2	IP=127.0.0.1	Role updated. RoleID=5, StoreID=1, Name=Güvenlik
+12-12-2025 14:13:06	User=Admin123	UserId=2	IP=127.0.0.1	Role updated. RoleID=5, StoreID=1, Name=Güvenlik
+12-12-2025 14:21:47	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=2, Name=Ekmek
+12-12-2025 14:21:53	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=2, Name=Ekmek
+12-12-2025 14:21:55	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=2, Name=Ekmek
+12-12-2025 14:30:28	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale;
+12-12-2025 14:30:32	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale
+12-12-2025 14:30:51	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale
+12-12-2025 14:30:54	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale
+12-12-2025 14:31:04	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale
+12-12-2025 14:33:21	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale
+12-12-2025 18:44:20	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+12-12-2025 18:44:46	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+12-12-2025 18:45:39	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+12-12-2025 19:52:27	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel assigned to another store. SourcePersonelID=5, UserID=2, TargetStoreID=6, RoleID=6, NewPersonelID=10, Code=M4747472
+12-12-2025 19:52:57	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+12-12-2025 19:53:00	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+12-12-2025 20:05:32	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+12-12-2025 20:05:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+12-12-2025 20:10:56	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+12-12-2025 20:11:00	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged in. UserID=12, Email=admin3@school.local
+12-12-2025 20:11:10	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged out.
+12-12-2025 20:11:36	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+12-12-2025 22:00:09	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=8, Name=Dükkan3 
+12-12-2025 22:00:19	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=8, Name=Dükkan3 
+12-12-2025 22:00:22	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=4, Name=Ayşe222 Test
+12-12-2025 22:00:24	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=8, Name=Dükkan3 
+12-12-2025 22:03:27	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=8, Name=Dükkan3 
+12-12-2025 22:10:35	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+12-12-2025 22:10:38	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged in. UserID=12, Email=admin3@school.local
+12-12-2025 22:10:51	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged out.
+12-12-2025 22:10:55	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+12-12-2025 22:11:37	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+12-12-2025 22:11:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+12-12-2025 22:12:07	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+12-12-2025 22:12:10	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+12-12-2025 22:17:07	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+12-12-2025 22:17:10	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+12-12-2025 22:17:19	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+12-12-2025 22:17:23	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+12-12-2025 22:17:36	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+12-12-2025 22:31:40	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.

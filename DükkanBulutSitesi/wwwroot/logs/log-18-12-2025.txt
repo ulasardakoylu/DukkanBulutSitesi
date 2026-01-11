@@ -1,0 +1,33 @@
+18-12-2025 13:04:28	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+18-12-2025 13:05:09	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+18-12-2025 13:05:12	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+18-12-2025 13:05:53	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+18-12-2025 13:05:57	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+18-12-2025 13:06:33	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel assigned to another store. SourcePersonelID=3, UserID=7, TargetStoreID=6, RoleID=6, NewPersonelID=12, Code=M8910374
+18-12-2025 13:06:41	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+18-12-2025 13:06:44	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+18-12-2025 13:06:57	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+18-12-2025 13:07:00	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+18-12-2025 13:12:59	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Role updated. RoleID=4, StoreID=1, Name=Kasiyer, IsSystem=False
+18-12-2025 13:13:09	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+18-12-2025 13:13:11	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+18-12-2025 13:13:50	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+18-12-2025 13:13:55	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+18-12-2025 13:14:49	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=17, PersonelID=0, Length=42
+18-12-2025 13:14:56	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+18-12-2025 13:15:00	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+18-12-2025 13:15:10	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+18-12-2025 13:15:14	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+18-12-2025 13:15:50	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+18-12-2025 13:15:53	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+18-12-2025 13:16:24	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+18-12-2025 13:16:28	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+18-12-2025 13:17:06	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+18-12-2025 13:17:09	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+18-12-2025 13:19:39	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+18-12-2025 13:19:42	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+18-12-2025 13:19:54	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=17, PersonelID=0, Length=25
+18-12-2025 13:19:58	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+18-12-2025 13:20:02	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+18-12-2025 13:29:59	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+18-12-2025 13:30:02	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

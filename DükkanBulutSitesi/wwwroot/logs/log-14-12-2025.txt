@@ -1,0 +1,124 @@
+14-12-2025 13:03:59	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 13:20:00	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 13:20:04	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+14-12-2025 13:21:11	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+14-12-2025 13:21:14	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 14:14:24	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 14:14:28	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 14:18:33	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 14:18:38	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 14:36:22	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 14:36:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 14:36:47	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 14:36:50	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+14-12-2025 14:45:34	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+14-12-2025 14:45:38	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 14:46:43	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 14:46:46	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+14-12-2025 14:47:19	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Conversation soft-deleted. ConversationID=10, UserID=9
+14-12-2025 14:48:07	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Conversation soft-deleted. ConversationID=13, UserID=9
+14-12-2025 14:48:19	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+14-12-2025 14:48:23	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 14:48:32	User=Admin123	UserId=2	IP=127.0.0.1	Conversation soft-deleted by user. ConversationID=13, UserID=2
+14-12-2025 14:48:36	User=Admin123	UserId=2	IP=127.0.0.1	Conversation soft-deleted by user. ConversationID=14, UserID=2
+14-12-2025 14:48:44	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused (active only). ConversationID=15, TargetPersonelID=8, FirstMessageLength=2
+14-12-2025 14:48:50	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 14:48:54	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged in. UserID=12, Email=admin3@school.local
+14-12-2025 14:49:02	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged out.
+14-12-2025 14:49:09	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 14:49:36	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 14:49:40	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+14-12-2025 14:50:30	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+14-12-2025 14:50:33	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged in. UserID=12, Email=admin3@school.local
+14-12-2025 14:52:56	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged out.
+14-12-2025 14:53:00	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+14-12-2025 14:57:10	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+14-12-2025 14:57:17	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged in. UserID=12, Email=admin3@school.local
+14-12-2025 14:57:26	User=Dükkan3	UserId=12	IP=127.0.0.1	Conversation soft-deleted by user. ConversationID=15, UserID=12
+14-12-2025 14:57:35	User=Dükkan3	UserId=12	IP=127.0.0.1	Conversation started or reused (active only). ConversationID=16, TargetPersonelID=5, FirstMessageLength=2
+14-12-2025 14:57:42	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged out.
+14-12-2025 14:57:58	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 15:13:27	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 15:13:33	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 15:22:00	User=Admin123	UserId=2	IP=127.0.0.1	Manager->Owner conversation started/reused. ConversationID=17, TargetOwnerUserId=9
+14-12-2025 16:47:47	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 16:47:51	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 16:48:30	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 16:48:33	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 16:48:51	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=18, PersonelID=4, Length=5
+14-12-2025 16:49:02	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 16:49:06	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 16:49:39	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 16:49:42	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 19:03:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 19:04:15	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 19:04:18	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 19:05:01	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 19:05:07	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 19:05:21	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=19, PersonelID=4, Length=2
+14-12-2025 19:06:05	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 19:06:08	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 19:14:07	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 19:14:12	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 19:14:43	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=20, PersonelID=4, Length=4
+14-12-2025 19:18:22	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 19:18:26	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 19:44:34	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 19:44:38	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 19:45:08	User=Admin123	UserId=2	IP=127.0.0.1	Time off deleted. PersonelID=4, TimeOffID=5
+14-12-2025 19:45:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 19:45:29	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 19:45:36	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 19:45:39	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 19:46:00	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 19:46:03	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 19:48:53	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 19:48:57	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 19:49:17	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 19:49:20	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 21:27:56	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 21:28:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 21:28:52	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=6, StoreID=1, Name=Video + Yumurta
+14-12-2025 21:29:00	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=6, StoreID=1, Name=Video + Yumurta
+14-12-2025 21:29:03	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 21:29:58	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 22:01:32	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 22:02:21	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 22:02:26	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 22:02:31	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 22:43:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 22:43:32	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 22:43:32	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 22:43:54	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 22:43:59	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+14-12-2025 22:44:35	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+14-12-2025 22:44:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 22:45:04	User=Admin123	UserId=2	IP=127.0.0.1	Work history created. PersonelID=3, HistoryID=10, Title=hi
+14-12-2025 22:45:09	User=Admin123	UserId=2	IP=127.0.0.1	Work history deleted. PersonelID=3, HistoryID=10, Title=hi
+14-12-2025 22:45:12	User=Admin123	UserId=2	IP=127.0.0.1	Work history deleted. PersonelID=3, HistoryID=9, Title=
+14-12-2025 22:46:23	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 22:46:30	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 22:47:13	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 22:47:46	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+14-12-2025 22:48:06	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+14-12-2025 22:48:12	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+14-12-2025 22:48:36	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+14-12-2025 22:48:43	User=Emre	UserId=7	IP=127.0.0.1	Failed login attempt (wrong password). UserID=7, Email=emreali@gmail.com
+14-12-2025 22:49:59	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 22:54:42	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 22:54:56	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 22:55:06	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 22:55:11	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 23:11:47	User=Admin123	UserId=2	IP=127.0.0.1	Role updated. RoleID=5, StoreID=1, Name=Güvenlik
+14-12-2025 23:11:50	User=Admin123	UserId=2	IP=127.0.0.1	Role updated. RoleID=4, StoreID=1, Name=Kasiyer
+14-12-2025 23:11:58	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 23:12:03	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+14-12-2025 23:12:10	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+14-12-2025 23:12:14	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+14-12-2025 23:48:17	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+14-12-2025 23:48:22	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+14-12-2025 23:48:39	User=Admin123	UserId=2	IP=127.0.0.1	Role updated. RoleID=5, StoreID=1, Name=Güvenlik
+14-12-2025 23:48:44	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+14-12-2025 23:48:47	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+14-12-2025 23:48:51	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+14-12-2025 23:48:54	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com

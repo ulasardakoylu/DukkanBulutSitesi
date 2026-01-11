@@ -1,0 +1,565 @@
+﻿@model DükkanBulutSitesi.Models.PersonnelConversationPageVm
+@{
+    ViewData["Title"] = "Sohbetlerim";
+    Layout = "~/Views/Shared/_PersonnelLayout.cshtml";
+
+    const string SystemClosedText = "Karşı taraf sohbeti kapattı.";
+
+    bool convoClosed = (Model.SelectedMessages?.Any(m => m.Text == SystemClosedText) ?? false);
+
+    bool isIssueSelected = (Model.SelectedKind == DükkanBulutSitesi.Models.PersonnelThreadKind.IssueRequest
+                            && Model.SelectedIssueRequestID.HasValue);
+}
+
+<style>
+    .personnel-convos .chat-bubble-text {
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 0.95rem;
+    }
+
+    .personnel-convos .chat-bubble-time {
+        font-size: 0.78rem;
+        opacity: .8;
+        margin-top: 4px;
+        text-align: right;
+    }
+
+    .chat-system-pill {
+        background: #e9ecef;
+        color: #6c757d;
+        border-radius: 999px;
+        padding: 6px 12px;
+        text-align: center;
+        max-width: 70%;
+        font-size: 0.95rem;
+    }
+
+    .chat-system-time {
+        font-size: 0.8rem;
+        opacity: .85;
+        margin-top: 2px;
+    }
+
+    .emoji-wrap {
+        position: relative;
+    }
+
+    .emoji-picker {
+        position: absolute;
+        left: 0;
+        bottom: 56px;
+        width: 380px;
+        max-width: 90vw;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 12px;
+        padding: 10px;
+        z-index: 1050;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 6px;
+    }
+
+    .emoji-item {
+        border: 0;
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 8px 0;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+        .emoji-item:hover {
+            background: #e9ecef;
+        }
+
+    .thread-badge {
+        font-size: .75rem;
+    }
+</style>
+
+<div class="container mt-4 personnel-convos">
+    <h2 class="mb-3">Sohbetlerim</h2>
+
+    <div class="row">
+        <!-- LEFT: conversation list ONLY -->
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="card-header">
+                    Konuşma Listesi
+                </div>
+
+                <div class="list-group list-group-flush overflow-auto" style="max-height:480px;">
+                    @{
+                        var convoThreads = (Model.Threads ?? new List<DükkanBulutSitesi.Models.PersonnelThreadSummaryVm>())
+                        .Where(t => t.Kind == DükkanBulutSitesi.Models.PersonnelThreadKind.Conversation)
+                        .ToList();
+                    }
+
+                    @if (convoThreads.Any())
+                    {
+                        foreach (var t in convoThreads)
+                        {
+                            bool active = (!isIssueSelected) && (t.ConversationID == Model.SelectedConversationID);
+
+                            var preview = t.LastMessage ?? "";
+                            if (preview.Length > 80) preview = preview.Substring(0, 80) + "…";
+
+                            <a asp-action="Conversations"
+                               asp-route-id="@t.ConversationID"
+                               class="list-group-item list-group-item-action @(active ? "active" : "")">
+                                <div class="fw-semibold">@t.OtherUserName</div>
+                                <div class="small @(active ? "text-white" : "text-muted") text-truncate">@preview</div>
+                                <div class="small @(active ? "text-white" : "text-muted")">
+                                    @t.LastSentAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                </div>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <div class="p-3 text-muted small">
+                            Henüz konuşmanız yok.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: selected conversation OR issue request -->
+        <div class="col-md-9">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        @if (!string.IsNullOrEmpty(Model.OtherUserName))
+                        {
+                            <strong>@Model.OtherUserName</strong>
+                        }
+                        else
+                        {
+                            <span>Konuşma seçilmedi</span>
+                        }
+                    </div>
+
+                    <div class="d-flex gap-2 align-items-center">
+                        <button type="button"
+                                class="btn btn-sm btn-outline-secondary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#myIssueRequestsModal">
+                            İsteklerim
+                        </button>
+
+                        @if (isIssueSelected)
+                        {
+                            var statusBadge = Model.IssueStatus switch
+                            {
+                                Entity.IssueRequestStatus.Pending => ("bg-info", "Beklemede"),
+                                Entity.IssueRequestStatus.Accepted => ("bg-success", "Kabul"),
+                                Entity.IssueRequestStatus.Rejected => ("bg-danger", "Red"),
+                                _ => ("bg-secondary", "Durum")
+                            };
+
+                            <span class="badge @statusBadge.Item1">@statusBadge.Item2</span>
+                        }
+                        else if (convoClosed && Model.SelectedConversationID.HasValue)
+                        {
+                            <span class="badge bg-secondary">Sohbet Kapalı</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="card-body d-flex flex-column" style="height:520px;">
+
+                    @* ========== ISSUE REQUEST VIEW ========== *@
+                    @if (isIssueSelected)
+                    {
+                        <div class="flex-grow-1 mb-2 overflow-auto border rounded p-3 bg-light">
+                            <div class="mb-2 fw-semibold">Sorun Mesajınız</div>
+
+                            <div class="bg-white border rounded p-3">
+                                <div style="white-space:pre-wrap">@Model.IssueMessage</div>
+                                <div class="text-muted small mt-2">
+                                    @Model.IssueCreatedAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                @if (Model.IssueStatus == Entity.IssueRequestStatus.Pending)
+                                {
+                                    <div class="alert alert-info mb-0">
+                                        Sorun mesajınız gözden geçirilmektedir. Lütfen bekleyiniz.
+                                    </div>
+                                }
+                                else if (Model.IssueStatus == Entity.IssueRequestStatus.Rejected)
+                                {
+                                    <div class="alert alert-danger mb-0">
+                                        Sorun mesajınız reddedildi.
+                                    </div>
+                                }
+                                else if (Model.IssueStatus == Entity.IssueRequestStatus.Accepted)
+                                {
+                                    <div class="alert alert-success mb-0">
+                                        İsteğiniz kabul edildi. Sohbetiniz açılmış olmalıdır.
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="text-muted small mt-2">
+                            Bu istek sonuçlanana kadar mesaj gönderemezsiniz.
+                        </div>
+                    }
+                    @* ========== NORMAL CONVERSATION VIEW ========== *@
+                    else
+                    {
+                        <div class="flex-grow-1 mb-2 overflow-auto border rounded p-3 bg-light">
+                            @if (Model.SelectedConversationID == null)
+                            {
+                                <div class="text-muted">Soldan bir konuşma seçin.</div>
+                            }
+                            else if (Model.SelectedMessages == null || !Model.SelectedMessages.Any())
+                            {
+                                <div class="text-muted">Bu sohbet için mesaj yok.</div>
+                            }
+                            else
+                            {
+                                foreach (var m in Model.SelectedMessages)
+                                {
+                                    if (m.Text == SystemClosedText)
+                                    {
+                                        <div class="d-flex justify-content-center my-2">
+                                            <div class="chat-system-pill">
+                                                <div class="chat-system-text">@SystemClosedText</div>
+                                                <div class="chat-system-time">@m.SentAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                                            </div>
+                                        </div>
+                                        continue;
+                                    }
+
+                                    bool isMe = m.SenderUserID == Model.CurrentUserID;
+                                    var alignClass = isMe ? "justify-content-end" : "justify-content-start";
+                                    var bubbleClass = isMe ? "bg-primary text-white" : "bg-white border";
+
+                                    <div class="d-flex @alignClass mb-2">
+                                        <div class="chat-bubble @bubbleClass">
+                                            <div class="chat-bubble-text">@m.Text</div>
+                                            <div class="chat-bubble-time">@m.SentAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        @if (Model.SelectedConversationID.HasValue)
+                        {
+                            if (convoClosed)
+                            {
+                                <div class="text-muted small mt-2">
+                                    Bu sohbet kapatıldığı için mesaj gönderemezsiniz.
+                                </div>
+                            }
+                            else
+                            {
+                                <form asp-action="SendConversationMessage" method="post" class="mt-2">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="conversationId" value="@Model.SelectedConversationID" />
+
+                                    <div class="emoji-wrap">
+                                        <div class="input-group">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary emoji-toggle-btn"
+                                                    id="emojiToggle">
+                                                😊
+                                            </button>
+
+                                            <input id="conversationMessage"
+                                                   type="text"
+                                                   name="message"
+                                                   class="form-control"
+                                                   placeholder="Mesaj yazın…" />
+
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="bi bi-send"></i>
+                                            </button>
+                                        </div>
+
+                                        <div id="emojiPicker" class="emoji-picker shadow-sm d-none">
+                                            <button type="button" class="emoji-item" data-emoji="😀">😀</button>
+                                            <button type="button" class="emoji-item" data-emoji="😁">😁</button>
+                                            <button type="button" class="emoji-item" data-emoji="😂">😂</button>
+                                            <button type="button" class="emoji-item" data-emoji="🤣">🤣</button>
+                                            <button type="button" class="emoji-item" data-emoji="😊">😊</button>
+                                            <button type="button" class="emoji-item" data-emoji="😍">😍</button>
+                                            <button type="button" class="emoji-item" data-emoji="😎">😎</button>
+                                            <button type="button" class="emoji-item" data-emoji="😐">😐</button>
+                                            <button type="button" class="emoji-item" data-emoji="😢">😢</button>
+                                            <button type="button" class="emoji-item" data-emoji="😡">😡</button>
+                                            <button type="button" class="emoji-item" data-emoji="👍">👍</button>
+                                            <button type="button" class="emoji-item" data-emoji="👎">👎</button>
+                                            <button type="button" class="emoji-item" data-emoji="🙏">🙏</button>
+                                            <button type="button" class="emoji-item" data-emoji="🎉">🎉</button>
+                                            <button type="button" class="emoji-item" data-emoji="✅">✅</button>
+                                            <button type="button" class="emoji-item" data-emoji="❓">❓</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-muted small mt-2">
+                                Mesaj göndermek için bir konuşma seçin.
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* ========== MY REQUESTS MODAL (Pending/Accepted/Rejected filter) ========== *@
+<div class="modal fade" id="myIssueRequestsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">İsteklerim</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="filterPendingBtn">
+                            Bekleyenler
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="filterAcceptedBtn">
+                            Kabul Edilenler
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="filterRejectedBtn">
+                            Reddedilenler
+                        </button>
+                    </div>
+
+                    <div class="text-muted small">Seçenekten birini seçin.</div>
+                </div>
+
+                <div id="pendingBox">
+                    @if (Model.PendingIssues == null || !Model.PendingIssues.Any())
+                    {
+                        <div class="text-muted">Henüz bekleyen istek yok.</div>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (var r in Model.PendingIssues.OrderByDescending(x => x.CreatedAt))
+                            {
+                                <a class="list-group-item list-group-item-action"
+                                   asp-action="Conversations"
+                                   asp-route-issueRequestId="@r.IssueRequestID">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="fw-semibold">İstek #@r.IssueRequestID</div>
+                                        <span class="badge bg-info">Beklemede</span>
+                                    </div>
+                                    <div class="text-muted small text-truncate">@r.Message</div>
+                                    <div class="text-muted small">
+                                        @r.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div id="acceptedBox" class="d-none">
+                    @if (Model.AcceptedIssues == null || !Model.AcceptedIssues.Any())
+                    {
+                        <div class="text-muted">Henüz kabul edilmiş istek yok.</div>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (var r in Model.AcceptedIssues.OrderByDescending(x => x.DecidedAt ?? x.CreatedAt))
+                            {
+                                <a class="list-group-item list-group-item-action"
+                                   asp-action="Conversations"
+                                   asp-route-issueRequestId="@r.IssueRequestID">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="fw-semibold">İstek #@r.IssueRequestID</div>
+                                        <span class="badge bg-success">Kabul</span>
+                                    </div>
+                                    <div class="text-muted small text-truncate">@r.Message</div>
+                                    <div class="text-muted small">
+                                        @((r.DecidedAt ?? r.CreatedAt).ToLocalTime().ToString("dd.MM.yyyy HH:mm"))
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div id="rejectedBox" class="d-none">
+                    @if (Model.RejectedIssues == null || !Model.RejectedIssues.Any())
+                    {
+                        <div class="text-muted">Henüz reddedilmiş istek yok.</div>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (var r in Model.RejectedIssues.OrderByDescending(x => x.DecidedAt ?? x.CreatedAt))
+                            {
+                                <a class="list-group-item list-group-item-action"
+                                   asp-action="Conversations"
+                                   asp-route-issueRequestId="@r.IssueRequestID">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="fw-semibold">İstek #@r.IssueRequestID</div>
+                                        <span class="badge bg-danger">Red</span>
+                                    </div>
+                                    <div class="text-muted small text-truncate">@r.Message</div>
+                                    <div class="text-muted small">
+                                        @((r.DecidedAt ?? r.CreatedAt).ToLocalTime().ToString("dd.MM.yyyy HH:mm"))
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const toggle = document.getElementById("emojiToggle");
+            const picker = document.getElementById("emojiPicker");
+            const input = document.getElementById("conversationMessage");
+
+            if (toggle && picker && input) {
+                toggle.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    picker.classList.toggle("d-none");
+                });
+
+                picker.addEventListener("click", function (e) {
+                    const btn = e.target.closest("[data-emoji]");
+                    if (!btn) return;
+
+                    const emoji = btn.getAttribute("data-emoji");
+                    const start = input.selectionStart ?? input.value.length;
+                    const end = input.selectionEnd ?? input.value.length;
+                    const text = input.value;
+
+                    input.value = text.slice(0, start) + emoji + text.slice(end);
+
+                    const caret = start + emoji.length;
+                    input.focus();
+                    input.setSelectionRange(caret, caret);
+                });
+
+                document.addEventListener("click", function (e) {
+                    if (picker.classList.contains("d-none")) return;
+                    if (!picker.contains(e.target) && !toggle.contains(e.target)) {
+                        picker.classList.add("d-none");
+                    }
+                });
+
+                input.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        const form = this.form;
+                        if (form) form.submit();
+                    }
+                });
+            }
+
+            // ----- Requests modal tabs -----
+            const pendingBox = document.getElementById("pendingBox");
+            const acceptedBox = document.getElementById("acceptedBox");
+            const rejectedBox = document.getElementById("rejectedBox");
+
+            const filterPendingBtn = document.getElementById("filterPendingBtn");
+            const filterAcceptedBtn = document.getElementById("filterAcceptedBtn");
+            const filterRejectedBtn = document.getElementById("filterRejectedBtn");
+
+            function setActive(btnOn, btnOff1, btnOff2) {
+                [btnOn].forEach(b => { if (!b) return; b.classList.remove("btn-outline-primary"); b.classList.add("btn-primary"); });
+                [btnOff1, btnOff2].forEach(b => { if (!b) return; b.classList.remove("btn-primary"); b.classList.add("btn-outline-primary"); });
+            }
+
+            function showBox(which) {
+                if (pendingBox) pendingBox.classList.toggle("d-none", which !== "pending");
+                if (acceptedBox) acceptedBox.classList.toggle("d-none", which !== "accepted");
+                if (rejectedBox) rejectedBox.classList.toggle("d-none", which !== "rejected");
+            }
+
+            if (pendingBox && acceptedBox && rejectedBox && filterPendingBtn && filterAcceptedBtn && filterRejectedBtn) {
+                // default: Pending
+                showBox("pending");
+                setActive(filterPendingBtn, filterAcceptedBtn, filterRejectedBtn);
+
+                filterPendingBtn.addEventListener("click", function () {
+                    showBox("pending");
+                    setActive(filterPendingBtn, filterAcceptedBtn, filterRejectedBtn);
+                });
+
+                filterAcceptedBtn.addEventListener("click", function () {
+                    showBox("accepted");
+                    setActive(filterAcceptedBtn, filterPendingBtn, filterRejectedBtn);
+                });
+
+                filterRejectedBtn.addEventListener("click", function () {
+                    showBox("rejected");
+                    setActive(filterRejectedBtn, filterPendingBtn, filterAcceptedBtn);
+                });
+            }
+        })();
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

@@ -1,0 +1,46 @@
+20-12-2025 14:04:05	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+20-12-2025 14:53:03	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+20-12-2025 14:53:06	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+20-12-2025 14:55:24	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+20-12-2025 14:55:31	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+20-12-2025 14:55:49	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=17, PersonelID=0, Length=4
+20-12-2025 14:55:55	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+20-12-2025 14:55:58	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+20-12-2025 15:14:27	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+20-12-2025 15:14:35	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+20-12-2025 15:14:48	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=17, PersonelID=0, Length=10
+20-12-2025 15:14:52	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+20-12-2025 15:14:56	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+20-12-2025 17:57:51	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+20-12-2025 18:37:24	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+20-12-2025 18:37:27	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+20-12-2025 18:38:02	User=Admin123	UserId=2	IP=127.0.0.1	Time off added. PersonelID=6, TimeOffID=8, Range=2025-12-20..2025-12-21
+20-12-2025 18:38:08	User=Admin123	UserId=2	IP=127.0.0.1	Complaint updated. ComplaintID=5, Status=Resolved
+20-12-2025 18:38:16	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+20-12-2025 18:38:31	User=Admin123	UserId=2	IP=127.0.0.1	Warning created. PersonelID=3, WarningID=13, Level=danger
+20-12-2025 18:38:38	User=Admin123	UserId=2	IP=127.0.0.1	Role updated. RoleID=5, StoreID=1, Name=Güvenlik
+20-12-2025 18:38:39	User=Admin123	UserId=2	IP=127.0.0.1	Personnel number generated. RoleID=5, StoreID=1, Code=72548235
+20-12-2025 18:38:58	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=18, Name=twst222
+20-12-2025 18:39:11	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=7, StoreID=1, Name=gelecek
+20-12-2025 18:39:19	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=17, PersonelID=0, Length=15
+20-12-2025 18:39:23	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+20-12-2025 18:39:26	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+20-12-2025 21:48:41	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+20-12-2025 21:48:46	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+20-12-2025 21:49:09	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=19, Name=test
+20-12-2025 21:49:11	User=Admin123	UserId=2	IP=127.0.0.1	Item deleted. ItemID=19, Name=test
+20-12-2025 21:49:47	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+20-12-2025 21:49:51	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+21-12-2025 00:26:35	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+21-12-2025 00:26:38	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+21-12-2025 00:26:52	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=20, Name=test
+21-12-2025 00:26:55	User=Admin123	UserId=2	IP=127.0.0.1	Item deleted. ItemID=20, Name=test
+21-12-2025 00:26:59	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+21-12-2025 00:27:02	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+21-12-2025 00:29:17	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+21-12-2025 00:29:20	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+21-12-2025 00:29:32	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=21, Name=test
+21-12-2025 00:29:43	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=22, Name=test
+21-12-2025 00:29:45	User=Admin123	UserId=2	IP=127.0.0.1	action=DeleteItem, itemId=22, itemName=test
+21-12-2025 00:29:49	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+21-12-2025 00:29:56	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

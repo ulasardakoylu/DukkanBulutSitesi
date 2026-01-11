@@ -1,0 +1,401 @@
+﻿@model DükkanBulutSitesi.Models.Manager.SpecialOfferManagementVm
+@{
+    ViewData["Title"] = "Kampanyalar";
+    Layout = "~/Views/Owner/_StoreLayout.cshtml";
+
+    var storeId = ViewBag.StoreId as int? ?? 0;
+}
+
+<div class="mgr-main manager-specialoffers">
+
+    @if (TempData["SpecialOfferError"] is string err && !string.IsNullOrEmpty(err))
+    {
+        <div class="alert alert-danger" style="white-space: pre-line;">@err</div>
+    }
+
+
+    <div class="row">
+        <!-- LEFT: offer list -->
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Kampanya Listesi</span>
+
+                    <a class="btn btn-sm btn-outline-primary"
+                       asp-action="StoreSpecialOffers"
+                       asp-controller="Owner"
+                       asp-route-storeId="@storeId"
+                       asp-route-newOffer="true">
+                        <i class="bi bi-plus"></i>
+                    </a>
+                </div>
+
+                <!-- SEARCH + FILTERS -->
+                <div class="p-2 border-bottom">
+                    <input type="text"
+                           id="offerSearchInput"
+                           class="form-control form-control-sm mb-2"
+                           placeholder="Kampanya ara…" />
+
+                    <div class="d-flex flex-wrap gap-1 status-filter-group">
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm status-filter active flex-fill"
+                                data-filter="all">
+                            Hepsi
+                        </button>
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm status-filter flex-fill"
+                                data-filter="active">
+                            Aktif
+                        </button>
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm status-filter flex-fill"
+                                data-filter="planned">
+                            Planlı
+                        </button>
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm status-filter flex-fill"
+                                data-filter="ended">
+                            Sona Erdi
+                        </button>
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm status-filter flex-fill"
+                                data-filter="cancelled">
+                            Erken Bitti
+                        </button>
+                    </div>
+                </div>
+
+                <div class="list-group list-group-flush overflow-auto" style="max-height: 432px;">
+                    @if (Model.Offers.Any())
+                    {
+                        @foreach (var o in Model.Offers)
+                        {
+                            var active = o.SpecialOfferID == Model.SelectedOfferID;
+
+                            string badgeText;
+                            string badgeClass;
+                            string statusKey;
+
+                            if (o.IsCurrent)
+                            {
+                                badgeText = "Aktif";
+                                badgeClass = "success";
+                                statusKey = "active";
+                            }
+                            else if (o.IsCancelled)
+                            {
+                                badgeText = "Erken Bitti";
+                                badgeClass = "secondary";
+                                statusKey = "cancelled";
+                            }
+                            else if (o.IsEnded)
+                            {
+                                badgeText = "Sona Erdi";
+                                badgeClass = "dark";
+                                statusKey = "ended";
+                            }
+                            else
+                            {
+                                badgeText = "Planlı";
+                                badgeClass = "info";
+                                statusKey = "planned";
+                            }
+
+                            <a asp-action="StoreSpecialOffers"
+                               asp-controller="Owner"
+                               asp-route-storeId="@storeId"
+                               asp-route-id="@o.SpecialOfferID"
+                               class="list-group-item list-group-item-action @(active ? "active" : "")"
+                               data-status="@statusKey"
+                               data-name="@o.Name">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-semibold">@o.Name</div>
+                                    <span class="badge bg-@badgeClass">
+                                        @badgeText
+                                    </span>
+                                </div>
+                                <div class="small @(active ? "text-white-50" : "text-muted")">
+                                    @o.DateStart.ToString("g") - @o.DateEnd.ToString("g")
+                                </div>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <div class="p-3 text-muted small">
+                            Henüz tanımlı kampanya yok. Sağ üstten yeni bir kampanya oluşturabilirsiniz.
+                        </div>
+                    }
+                </div>
+
+                @if (Model.NextCampaignStart.HasValue)
+                {
+                    <div class="card-footer small text-muted">
+                        Sonraki planlı kampanya başlangıcı:<br />
+                        <strong>@Model.NextCampaignStart.Value.ToString("g")</strong>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- RIGHT: offer detail -->
+        <div class="col-md-9">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        @if (Model.SelectedOffer?.SpecialOfferID != null)
+                        {
+                            <strong>@Model.SelectedOffer.Name</strong>
+                        }
+                        else
+                        {
+                            <strong>Yeni Kampanya</strong>
+                        }
+                    </div>
+
+                    @{
+                        var now = DateTime.Now;
+                        var canEndEarly =
+                        Model.SelectedOffer?.SpecialOfferID != null
+                        && !(Model.SelectedOffer?.IsCancelled ?? false)
+                        && (Model.SelectedOffer?.End == null || Model.SelectedOffer.End > now); // not ended yet
+                    }
+
+                    @if (canEndEarly)
+                    {
+                        <form asp-action="StoreEndSpecialOfferEarly"
+                              asp-controller="Owner"
+                              method="post" class="m-0"
+                              asp-route-storeId="@storeId">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.SelectedOffer.SpecialOfferID" />
+                            <button type="submit"
+                                    class="btn btn-sm btn-outline-danger"
+                                    onclick="return confirm('Bu kampanyayı hemen sonlandırmak istediğinize emin misiniz?');">
+                                Kampanyayı Erken Bitir
+                            </button>
+                        </form>
+                    }
+                </div>
+
+                <div class="card-body d-flex flex-column" style="height: 520px;">
+                    @if (Model.SelectedOffer == null)
+                    {
+                        <div class="text-muted">
+                            Soldan bir kampanya seçin veya yeni bir kampanya oluşturun.
+                        </div>
+                    }
+                    else
+                    {
+                        <form asp-action="StoreSaveSpecialOffer"
+                              asp-controller="Owner"
+                              asp-route-storeId="@storeId"
+                              method="post"
+                              class="d-flex flex-column h-100">
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" asp-for="SelectedOffer.SpecialOfferID" />
+
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <label asp-for="SelectedOffer.Name" class="form-label">Kampanya Adı</label>
+                                    <input asp-for="SelectedOffer.Name" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label d-block">Durum</label>
+                                    @if (Model.SelectedOffer.SpecialOfferID == null)
+                                    {
+                                        <span class="badge bg-info">Yeni</span>
+                                    }
+                                    else if (Model.SelectedOffer.IsCancelled)
+                                    {
+                                        <span class="badge bg-secondary">Erken Bitti / İptal</span>
+                                    }
+                                    else if (Model.SelectedOffer.Start <= DateTime.Now && Model.SelectedOffer.End > DateTime.Now)
+                                    {
+                                        <span class="badge bg-success">Aktif</span>
+                                    }
+                                    else if (Model.SelectedOffer.End <= DateTime.Now)
+                                    {
+                                        <span class="badge bg-dark">Sona Erdi</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-primary">Planlı</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="SelectedOffer.Description" class="form-label">Kısa Açıklama</label>
+                                <textarea asp-for="SelectedOffer.Description" class="form-control" rows="2"></textarea>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Başlangıç Tarihi / Saati</label>
+                                    <input name="SelectedOffer.Start"
+                                           type="datetime-local"
+                                           class="form-control"
+                                           value="@(Model.SelectedOffer.Start?.ToString("yyyy-MM-ddTHH:mm"))" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Bitiş Tarihi / Saati</label>
+                                    <input name="SelectedOffer.End"
+                                           type="datetime-local"
+                                           class="form-control"
+                                           value="@(Model.SelectedOffer.End?.ToString("yyyy-MM-ddTHH:mm"))" />
+                                </div>
+                            </div>
+
+                            <div class="mb-2 fw-semibold">
+                                Kampanyadan Etkilenen Ürünler
+                            </div>
+
+                            <div class="flex-grow-1 border rounded overflow-auto mb-3">
+                                <table class="table table-sm mb-0 align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 60px;">Dahil</th>
+                                            <th>Ürün</th>
+                                            <th style="width: 120px;">Eski Fiyat</th>
+                                            <th style="width: 140px;">Yeni Fiyat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.SelectedOffer.Items.Count; i++)
+                                        {
+                                            <tr>
+                                                <td class="text-center">
+                                                    <input asp-for="SelectedOffer.Items[i].Included" class="form-check-input" />
+                                                    <input type="hidden" asp-for="SelectedOffer.Items[i].ItemID" />
+                                                    <input type="hidden" asp-for="SelectedOffer.Items[i].ItemName" />
+                                                    <input type="hidden" asp-for="SelectedOffer.Items[i].OriginalPrice" />
+                                                </td>
+                                                <td>@Model.SelectedOffer.Items[i].ItemName</td>
+                                                <td>@Model.SelectedOffer.Items[i].OriginalPrice.ToString("0.00")</td>
+                                                <td>
+                                                    <input asp-for="SelectedOffer.Items[i].NewPrice"
+                                                           class="form-control form-control-sm"
+                                                           type="number" step="0.01" min="0" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="mt-auto d-flex justify-content-between align-items-center">
+                                <div class="text-muted small">
+                                    Bitiş tarihine ulaşıldığında kampanya otomatik olarak sona erecektir.
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    @(Model.SelectedOffer.SpecialOfferID == null ? "Kampanya Oluştur" : "Değişiklikleri Kaydet")
+                                </button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .status-filter-group .status-filter {
+        flex: 1 1 48%;
+        white-space: nowrap;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterButtons = document.querySelectorAll('.status-filter');
+            const items = document.querySelectorAll('.list-group [data-status]');
+            const searchInput = document.getElementById('offerSearchInput');
+
+            let currentFilter = 'all';
+            let currentQuery = '';
+
+            function applyFilters() {
+                const q = (currentQuery || '').trim().toLowerCase();
+
+                items.forEach(li => {
+                    const status = li.dataset.status;
+                    const name = (li.dataset.name || '').toLowerCase();
+
+                    const matchesStatus = currentFilter === 'all' || currentFilter === status;
+                    const matchesSearch = !q || name.includes(q);
+
+                    if (matchesStatus && matchesSearch) {
+                        li.classList.remove('d-none');
+                    } else {
+                        li.classList.add('d-none');
+                    }
+                });
+            }
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentFilter = this.dataset.filter || 'all';
+
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    applyFilters();
+                });
+            });
+
+            if (searchInput) {
+                searchInput.addEventListener('input', function () {
+                    currentQuery = this.value;
+                    applyFilters();
+                });
+            }
+        });
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url',
+                'datetime-local'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

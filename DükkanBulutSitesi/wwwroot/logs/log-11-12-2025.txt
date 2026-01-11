@@ -1,0 +1,22 @@
+11-12-2025 09:57:53	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+11-12-2025 09:58:33	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+11-12-2025 09:58:36	User=Admin123	UserId=2	IP=127.0.0.1	Work history deleted. PersonelID=3, HistoryID=7, Title=tEST
+11-12-2025 09:58:38	User=Admin123	UserId=2	IP=127.0.0.1	Education deleted. PersonelID=3, EducationID=6, School=awsdw
+11-12-2025 09:58:40	User=Admin123	UserId=2	IP=127.0.0.1	Certificate deleted. PersonelID=3, CertificateID=7, Name=test
+11-12-2025 09:58:43	User=Admin123	UserId=2	IP=127.0.0.1	Certificate deleted. PersonelID=3, CertificateID=5, Name=awsd
+11-12-2025 09:59:31	User=Admin123	UserId=2	IP=127.0.0.1	Work history created. PersonelID=3, HistoryID=8, Title=Menajer
+11-12-2025 10:00:25	User=Admin123	UserId=2	IP=127.0.0.1	Education created. PersonelID=3, EducationID=8, School=Polinas Teknik Meslek Lisesi
+11-12-2025 10:04:03	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=4
+11-12-2025 10:06:27	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=4
+11-12-2025 10:16:15	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+11-12-2025 10:16:21	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran
+11-12-2025 10:25:49	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale
+11-12-2025 10:30:00	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=11
+11-12-2025 10:36:40	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=4
+11-12-2025 10:36:44	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=4
+11-12-2025 10:37:57	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=4
+11-12-2025 10:49:24	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=4
+11-12-2025 10:49:50	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=3
+11-12-2025 10:49:55	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=2
+11-12-2025 10:51:02	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=78
+11-12-2025 11:00:48	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Duran

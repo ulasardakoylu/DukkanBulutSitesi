@@ -1,0 +1,627 @@
+﻿@model DükkanBulutSitesi.Models.Cart.CartPageVm
+@{
+    ViewData["Title"] = "Sepet";
+    Layout = "_StorefrontLayout";
+
+    var returnUrl = Context.Request.Path + Context.Request.QueryString.Value;
+
+    var yearStart = DateTime.Now.Year;
+    var yearEnd = yearStart + 15;
+}
+
+<div class="store-shell">
+    @await Html.PartialAsync("_Sidebar")
+
+    <main class="store-main">
+        <div class="container-fluid px-0 px-md-4 py-4">
+
+            <h2 class="mb-3 text-center">Sepet</h2>
+
+            @if (TempData["OrderSuccess"] is string os && !string.IsNullOrEmpty(os))
+            {
+                <div class="alert alert-success mx-0 mx-md-4 mt-3">@os</div>
+            }
+            @if (TempData["CartError"] is string ce && !string.IsNullOrEmpty(ce))
+            {
+                <div class="alert alert-danger mx-0 mx-md-4 mt-3">@ce</div>
+            }
+
+            <div class="row">
+                <!-- left: cart items -->
+                <div class="col-lg-8 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Sepetiniz</span>
+                            <form asp-action="Clear" method="post" class="m-0">
+                                @Html.AntiForgeryToken()
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Sepeti tamamen boşaltmak istiyor musunuz?');">
+                                    <i class="bi bi-trash"></i> Sepeti Temizle
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="card-body p-0">
+                            @if (!Model.Items.Any())
+                            {
+                                <div class="p-4 text-center text-muted">
+                                    Sepetiniz boş.
+                                </div>
+                            }
+                            else
+                            {
+                                @foreach (var i in Model.Items)
+                                {
+                                    <div class="d-flex align-items-center border-bottom p-3">
+                                        <div style="width:80px;height:80px;"
+                                             class="me-3 d-flex align-items-center justify-content-center bg-light rounded">
+                                            <img src="@(string.IsNullOrWhiteSpace(i.PictureLink) ? "/img/placeholder.png" : i.PictureLink)"
+                                                 alt="@i.ItemName"
+                                                 style="max-width:100%;max-height:100%;object-fit:cover;"
+                                                 onerror="this.src='/img/placeholder.png';" />
+                                        </div>
+
+                                        <div class="flex-grow-1">
+                                            <div class="fw-semibold">@i.ItemName</div>
+
+                                            <div class="small text-muted">
+                                                Ürünün Eklendiği Tarih:
+                                                @i.AddedAt.ToLocalTime().ToString("g")
+                                            </div>
+
+                                            <div class="small">
+                                                Ürün Fiyatı:
+                                                @if (i.HasDiscount)
+                                                {
+                                                    <span class="text-muted text-decoration-line-through me-1">
+                                                        @i.OriginalUnitPrice.ToString("C")
+                                                    </span>
+                                                    <span class="text-success fw-bold">
+                                                        @i.UnitPrice.ToString("C")
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    @i.UnitPrice.ToString("C")
+                                                }
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-1">
+                                                <!-- qty controls -->
+                                                <form asp-controller="Cart"
+                                                      asp-action="UpdateQuantity"
+                                                      method="post"
+                                                      class="d-inline-flex align-items-center">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="cartItemId" value="@i.CartItemID" />
+                                                    <input type="hidden" name="returnUrl"
+                                                           value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+
+                                                    <button type="submit"
+                                                            name="change"
+                                                            value="-1"
+                                                            class="btn btn-sm btn-outline-secondary px-2">
+                                                        -
+                                                    </button>
+
+                                                    <span class="mx-2 fw-semibold">@i.Qty</span>
+
+                                                    <button type="submit"
+                                                            name="change"
+                                                            value="1"
+                                                            class="btn btn-sm btn-outline-secondary px-2">
+                                                        +
+                                                    </button>
+                                                </form>
+
+                                                <!-- line total -->
+                                                <div class="fw-semibold ms-3">
+                                                    Satır Toplamı:
+                                                    @((i.UnitPrice * i.Qty).ToString("C"))
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-column ms-2">
+                                            <a asp-controller="Product"
+                                               asp-action="Details"
+                                               asp-route-id="@i.ItemID"
+                                               class="btn btn-primary btn-sm mb-1">
+                                                Ürüne Git
+                                            </a>
+
+                                            <form asp-action="RemoveItem" method="post" class="mb-0">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="cartItemId" value="@i.CartItemID" />
+                                                <input type="hidden" name="returnUrl"
+                                                       value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                    Ürünü Sil
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-semibold">Toplam:</span>
+                                <span class="fw-bold ms-1">@Model.Total.ToString("C")</span>
+                            </div>
+
+                            @if (Model.Items.Any())
+                            {
+                                <form asp-controller="Cart"
+                                      asp-action="Complete"
+                                      method="post"
+                                      class="m-0">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="returnUrl"
+                                           value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+                                    <button type="submit"
+                                            class="btn btn-success btn-sm"
+                                            onclick="return confirm('Siparişi tamamlamak istiyor musunuz?');">
+                                        Siparişi Tamamla
+                                    </button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- right: payment, addresses, suggestions -->
+                <div class="col-lg-4">
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-header text-center fw-semibold">
+                            Kayıtlı Ödeme Yöntemleri
+                        </div>
+                        <div class="card-body">
+
+                            <div id="savedCardsCarousel" class="d-flex align-items-center justify-content-between">
+                                <button type="button"
+                                        class="btn btn-outline-secondary btn-sm saved-arrow"
+                                        data-target="cards"
+                                        data-dir="-1">
+                                    ‹
+                                </button>
+
+                                <div class="flex-grow-1 px-2 d-flex justify-content-center">
+                                    @if (!Model.SavedCards.Any())
+                                    {
+                                        <div class="text-muted small">
+                                            Kayıtlı kartınız yok.
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        @for (var i = 0; i < Model.SavedCards.Count; i++)
+                                        {
+                                            var c = Model.SavedCards[i];
+                                            var label = !string.IsNullOrWhiteSpace(c.Brand)
+                                            ? c.Brand
+                                            : $"Kart #{i + 1}";
+
+                                            <div class="saved-item saved-card @(i == 0 ? "" : "d-none")" data-index="@i">
+                                                <div class="border rounded-3 px-3 py-2 text-center">
+                                                    <div class="mb-1">
+                                                        <i class="bi bi-credit-card-2-front fs-4"></i>
+                                                    </div>
+                                                    <div class="fw-semibold small">@label</div>
+                                                    <div class="small text-muted">
+                                                        **** **** **** ****<br />
+                                                        **/**
+                                                    </div>
+                                                    <div class="mt-2 d-flex justify-content-center gap-1">
+                                                        <button type="button"
+                                                                class="btn btn-primary btn-sm saved-card-edit-btn"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#cardEditModal"
+                                                                data-card-id="@c.CardID"
+                                                                data-brand="@c.Brand"
+                                                                data-last4="@c.Last4"
+                                                                data-expmonth="@c.ExpMonth"
+                                                                data-expyear="@c.ExpYear">
+                                                            Düzenle
+                                                        </button>
+
+                                                        <form asp-controller="Cart"
+                                                              asp-action="DeleteCard"
+                                                              method="post"
+                                                              class="d-inline">
+                                                            @Html.AntiForgeryToken()
+                                                            <input type="hidden" name="id" value="@c.CardID" />
+                                                            <input type="hidden" name="returnUrl"
+                                                                   value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+                                                            <button type="submit"
+                                                                    class="btn btn-outline-danger btn-sm"
+                                                                    onclick="return confirm('Kartı silmek istiyor musunuz?');">
+                                                                Sil
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+
+                                <button type="button"
+                                        class="btn btn-outline-primary btn-sm mx-1"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#cardEditModal"
+                                        id="savedCardAddBtn">
+                                    +
+                                </button>
+
+                                <button type="button"
+                                        class="btn btn-outline-secondary btn-sm saved-arrow"
+                                        data-target="cards"
+                                        data-dir="1">
+                                    ›
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-header text-center fw-semibold">
+                            Kayıtlı Adresler
+                        </div>
+                        <div class="card-body">
+
+                            <div id="savedAddressesCarousel" class="d-flex align-items-center justify-content-between">
+                                <button type="button"
+                                        class="btn btn-outline-secondary btn-sm saved-arrow"
+                                        data-target="addresses"
+                                        data-dir="-1">
+                                    ‹
+                                </button>
+
+                                <div class="flex-grow-1 px-2 d-flex justify-content-center">
+                                    @if (!Model.SavedAddresses.Any())
+                                    {
+                                        <div class="text-muted small">
+                                            Kayıtlı adresiniz yok.
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        @for (var i = 0; i < Model.SavedAddresses.Count; i++)
+                                        {
+                                            var a = Model.SavedAddresses[i];
+                                            var name = string.IsNullOrWhiteSpace(a.AddressName)
+                                            ? $"Adres #{i + 1}"
+                                            : a.AddressName;
+
+                                            <div class="saved-item saved-address @(i == 0 ? "" : "d-none")" data-index="@i">
+                                                <div class="border rounded-3 px-3 py-2">
+                                                    <div class="fw-semibold small mb-1">
+                                                        <i class="bi bi-box2 me-1"></i>@name
+                                                    </div>
+                                                    <div class="small text-muted">
+                                                        @a.AddressInformation
+                                                    </div>
+
+                                                    <div class="mt-2 d-flex justify-content-start gap-1">
+                                                        <button type="button"
+                                                                class="btn btn-primary btn-sm saved-address-edit-btn"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#addressEditModal"
+                                                                data-address-id="@a.AddressID"
+                                                                data-address-name="@a.AddressName"
+                                                                data-address-info="@a.AddressInformation">
+                                                            Düzenle
+                                                        </button>
+
+                                                        <form asp-controller="Cart"
+                                                              asp-action="DeleteAddress"
+                                                              method="post"
+                                                              class="d-inline">
+                                                            @Html.AntiForgeryToken()
+                                                            <input type="hidden" name="id" value="@a.AddressID" />
+                                                            <input type="hidden" name="returnUrl"
+                                                                   value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+                                                            <button type="submit"
+                                                                    class="btn btn-outline-danger btn-sm"
+                                                                    onclick="return confirm('Adresi silmek istiyor musunuz?');">
+                                                                Sil
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+
+                                <button type="button"
+                                        class="btn btn-outline-primary btn-sm mx-1"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#addressEditModal"
+                                        id="savedAddressAddBtn">
+                                    +
+                                </button>
+
+                                <button type="button"
+                                        class="btn btn-outline-secondary btn-sm saved-arrow"
+                                        data-target="addresses"
+                                        data-dir="1">
+                                    ›
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm">
+                        <div class="card-header">
+                            Hoşunuza Gidebilecek Ürünler
+                        </div>
+                        <div class="card-body">
+                            @if (!Model.Suggestions.Any())
+                            {
+                                <div class="text-muted small">
+                                    Bu mağaza için öneri bulunamadı.
+                                </div>
+                            }
+                            else
+                            {
+                                @foreach (var s in Model.Suggestions)
+                                {
+                                    <a asp-controller="Product"
+                                       asp-action="Details"
+                                       asp-route-id="@s.ItemID"
+                                       class="d-flex align-items-center mb-2 text-decoration-none text-reset border rounded p-2">
+                                        <div style="width:60px;height:60px;"
+                                             class="me-2 d-flex align-items-center justify-content-center bg-light rounded">
+                                            <img src="@(string.IsNullOrWhiteSpace(s.PictureLink) ? "/img/placeholder.png" : s.PictureLink)"
+                                                 alt="@s.ItemName"
+                                                 style="max-width:100%;max-height:100%;object-fit:cover;"
+                                                 onerror="this.src='/img/placeholder.png';" />
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="small fw-semibold">@s.ItemName</div>
+
+                                            @if (s.HasCampaignPrice)
+                                            {
+                                                <div class="small">
+                                                    <span class="text-muted text-decoration-line-through me-1">
+                                                        @s.OriginalPrice.ToString("C")
+                                                    </span>
+                                                    <span class="text-success fw-bold">
+                                                        @s.Price.ToString("C")
+                                                    </span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="small text-muted">
+                                                    @s.Price.ToString("C")
+                                                </div>
+                                            }
+                                        </div>
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- CARD EDIT / ADD MODAL -->
+        <div class="modal fade" id="cardEditModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form asp-controller="Cart"
+                          asp-action="SaveCard"
+                          method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="CardID" id="cardForm_Id" />
+                        <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cardFormTitle">Kart</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            @if (TempData["CardFormError"] is string cerr && !string.IsNullOrEmpty(cerr))
+                            {
+                                <div class="alert alert-danger">@cerr</div>
+                            }
+
+                            <div class="mb-3">
+                                <label class="form-label">Kart Adı</label>
+                                <input type="text" class="form-control" name="Brand" id="cardForm_Brand" required maxlength="30" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Son 4 Hane</label>
+                                <input type="text" class="form-control" name="Last4" id="cardForm_Last4" required maxlength="4" />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <label class="form-label">Ay</label>
+                                    <select class="form-select" name="ExpMonth" id="cardForm_ExpMonth" required>
+                                        <option value="">Seçiniz</option>
+                                        @for (var m = 1; m <= 12; m++)
+                                        {
+                                            <option value="@m">@m.ToString("00")</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="form-label">Yıl</label>
+                                    <select class="form-select" name="ExpYear" id="cardForm_ExpYear" required>
+                                        <option value="">Seçiniz</option>
+                                        @for (var y = yearStart; y <= yearEnd; y++)
+                                        {
+                                            <option value="@y">@y</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADDRESS EDIT / ADD MODAL -->
+        <div class="modal fade" id="addressEditModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form asp-controller="Cart"
+                          asp-action="SaveAddress"
+                          method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="AddressID" id="addressForm_Id" />
+                        <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addressFormTitle">Adres</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            @if (TempData["AddressFormError"] is string aerr && !string.IsNullOrEmpty(aerr))
+                            {
+                                <div class="alert alert-danger">@aerr</div>
+                            }
+
+                            <div class="mb-3">
+                                <label class="form-label">Adres Adı (örn. Ev, İş)</label>
+                                <input type="text" class="form-control" name="AddressName" id="addressForm_Name" maxlength="100" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Adres</label>
+                                <textarea class="form-control" name="AddressInformation" id="addressForm_Info" rows="3" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // ---- simple carousel logic for cards and addresses ----
+            function initSimpleCarousel(rootId) {
+                const root = document.getElementById(rootId);
+                if (!root) return;
+
+                const items = root.querySelectorAll('.saved-item');
+                if (!items.length) return;
+
+                let index = 0;
+
+                function show(idx) {
+                    items.forEach((el, i) => {
+                        if (i === idx) {
+                            el.classList.remove('d-none');
+                        } else {
+                            el.classList.add('d-none');
+                        }
+                    });
+                }
+
+                show(0);
+
+                root.querySelectorAll('.saved-arrow').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const dir = parseInt(this.dataset.dir || "1", 10);
+                        index = (index + dir + items.length) % items.length;
+                        show(index);
+                    });
+                });
+            }
+
+            initSimpleCarousel('savedCardsCarousel');
+            initSimpleCarousel('savedAddressesCarousel');
+
+            // ---- card modal: add vs edit ----
+            const cardIdInput = document.getElementById('cardForm_Id');
+            const cardBrandInput = document.getElementById('cardForm_Brand');
+            const cardLast4Input = document.getElementById('cardForm_Last4');
+            const cardExpMonthInput = document.getElementById('cardForm_ExpMonth');
+            const cardExpYearInput = document.getElementById('cardForm_ExpYear');
+            const cardFormTitle = document.getElementById('cardFormTitle');
+
+            function clearCardForm() {
+                if (!cardIdInput) return;
+                cardIdInput.value = "";
+                cardBrandInput.value = "";
+                cardLast4Input.value = "";
+                cardExpMonthInput.value = "";
+                cardExpYearInput.value = "";
+                if (cardFormTitle) cardFormTitle.textContent = "Yeni Kart";
+            }
+
+            const addCardBtn = document.getElementById('savedCardAddBtn');
+            if (addCardBtn) {
+                addCardBtn.addEventListener('click', clearCardForm);
+            }
+
+            document.querySelectorAll('.saved-card-edit-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (!cardIdInput) return;
+                    cardIdInput.value = this.dataset.cardId || "";
+                    cardBrandInput.value = this.dataset.brand || "";
+                    cardLast4Input.value = this.dataset.last4 || "";
+                    cardExpMonthInput.value = this.dataset.expmonth || "";
+                    cardExpYearInput.value = this.dataset.expyear || "";
+                    if (cardFormTitle) cardFormTitle.textContent = "Kart Düzenle";
+                });
+            });
+
+            // ---- address modal: add vs edit ----
+            const addrIdInput = document.getElementById('addressForm_Id');
+            const addrNameInput = document.getElementById('addressForm_Name');
+            const addrInfoInput = document.getElementById('addressForm_Info');
+            const addrFormTitle = document.getElementById('addressFormTitle');
+
+            function clearAddressForm() {
+                if (!addrIdInput) return;
+                addrIdInput.value = "";
+                addrNameInput.value = "";
+                addrInfoInput.value = "";
+                if (addrFormTitle) addrFormTitle.textContent = "Yeni Adres";
+            }
+
+            const addAddressBtn = document.getElementById('savedAddressAddBtn');
+            if (addAddressBtn) {
+                addAddressBtn.addEventListener('click', clearAddressForm);
+            }
+
+            document.querySelectorAll('.saved-address-edit-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (!addrIdInput) return;
+                    addrIdInput.value = this.dataset.addressId || "";
+                    addrNameInput.value = this.dataset.addressName || "";
+                    addrInfoInput.value = this.dataset.addressInfo || "";
+                    if (addrFormTitle) addrFormTitle.textContent = "Adresi Düzenle";
+                });
+            });
+        });
+    </script>
+}

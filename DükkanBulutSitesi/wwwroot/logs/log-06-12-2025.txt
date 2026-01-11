@@ -1,0 +1,41 @@
+06-12-2025 13:08:25	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+06-12-2025 13:10:08	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+06-12-2025 13:27:13	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+06-12-2025 13:32:55	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=12, Name=Kaşar Peyniri
+06-12-2025 17:07:00	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+06-12-2025 18:19:17	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=3, Name=Yumurta 10lu
+06-12-2025 18:23:07	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=5, Name=Su 1.5L
+06-12-2025 18:23:16	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=1, Name=Süt 1L
+06-12-2025 18:33:29	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=12, Name=Kaşar Peyniri
+06-12-2025 18:33:34	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=12, Name=Kaşar Peyniri
+06-12-2025 18:33:52	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=4, Name=Makarna 500g
+06-12-2025 18:33:56	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=5, Name=Su 1.5L
+06-12-2025 18:34:05	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=1, Name=Süt 1L
+06-12-2025 18:34:13	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=5, Name=Su 1.5L
+06-12-2025 18:34:26	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=10, Name=Test11
+06-12-2025 18:34:32	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=3, Name=Yumurta 10lu
+06-12-2025 18:50:34	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=2, Name=Ekmek
+06-12-2025 18:50:38	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=12, Name=Kaşar Peyniri
+06-12-2025 18:50:42	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=4, Name=Makarna 500g
+06-12-2025 18:50:45	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=5, Name=Su 1.5L
+06-12-2025 18:50:48	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=1, Name=Süt 1L
+06-12-2025 18:50:51	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=1, Name=Süt 1L
+06-12-2025 18:50:56	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=10, Name=Test11
+06-12-2025 18:50:59	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=3, Name=Yumurta 10lu
+06-12-2025 22:00:43	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+06-12-2025 22:08:36	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=3, Name=Yumurta 10lu
+06-12-2025 22:11:22	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=4, Name=Makarna 500g
+06-12-2025 23:37:08	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+06-12-2025 23:37:12	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+06-12-2025 23:37:38	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+06-12-2025 23:37:42	User=test	UserId=10	IP=127.0.0.1	User logged in. UserID=10, Email=test334@gmail.com
+06-12-2025 23:38:02	User=test	UserId=10	IP=127.0.0.1	User logged out.
+06-12-2025 23:38:06	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+06-12-2025 23:38:39	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=13, Name=Video1
+06-12-2025 23:38:47	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+06-12-2025 23:38:53	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+06-12-2025 23:45:47	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+06-12-2025 23:45:51	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+06-12-2025 23:46:10	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=14, Name=Video2
+06-12-2025 23:46:16	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+06-12-2025 23:46:20	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com

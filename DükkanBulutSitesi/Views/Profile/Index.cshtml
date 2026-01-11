@@ -1,0 +1,543 @@
+﻿@model DükkanBulutSitesi.Models.Profile.ProfilePageVm
+@{
+    ViewData["Title"] = "Profil";
+    Layout = "_StorefrontLayout";
+}
+
+<link rel="stylesheet" href="~/css/store.css" />
+
+<style>
+
+    .profile-main {
+        padding: 24px 32px;
+        background: #e7f1ff;
+        overflow-y: auto;
+    }
+
+    .profile-card {
+        max-width: 950px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px 32px 32px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #dde6ff;
+        padding-bottom: 16px;
+        margin-bottom: 20px;
+    }
+
+    .profile-back {
+        margin-right: 16px;
+        font-size: 20px;
+        text-decoration: none;
+        color: #1d66ff;
+    }
+
+    .profile-avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 999px;
+        border: 2px solid #1d66ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        color: #1d66ff;
+        margin-right: 24px;
+        background: #f4f7ff;
+    }
+
+    .profile-info h3 {
+        margin: 0 0 4px;
+    }
+
+    .profile-info-row {
+        font-size: 14px;
+    }
+
+        .profile-info-row span.label {
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+    .profile-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .profile-tab {
+        border-radius: 20px;
+        padding: 6px 16px;
+        font-size: 14px;
+        border: 1px solid #1d66ff;
+        background: #fff;
+        color: #1d66ff;
+        cursor: pointer;
+    }
+
+        .profile-tab.active {
+            background: #1d66ff;
+            color: #fff;
+        }
+
+    .profile-section {
+        display: none;
+    }
+
+        .profile-section.active {
+            display: block;
+        }
+
+    .prof-carousel-shell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .prof-arrow {
+        border-radius: 999px;
+        width: 32px;
+        height: 32px;
+        border: 1px solid #c4d4ff;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+        .prof-arrow.disabled {
+            opacity: .4;
+            pointer-events: none;
+        }
+
+    .prof-window {
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .prof-items {
+        display: flex;
+        gap: 16px;
+    }
+
+    .prof-card {
+        background: #f4f7ff;
+        border-radius: 12px;
+        padding: 12px;
+        min-width: 200px;
+        max-width: 220px;
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .prof-img {
+        width: 100%;
+        height: 150px;
+        border-radius: 12px;
+        background: #dde6ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-bottom: 8px;
+    }
+
+        .prof-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+    .prof-name {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .prof-price {
+        font-size: 14px;
+        color: #111;
+        margin-bottom: 4px;
+    }
+
+    .prof-date {
+        font-size: 12px;
+        color: #555;
+    }
+
+    .prof-empty {
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+        padding: 24px 0;
+    }
+</style>
+
+<div class="store-shell profile-shell">
+    @await Html.PartialAsync("_Sidebar")
+
+    <main class="store-main profile-main">
+        <div class="profile-card">
+            <div class="profile-header">
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="profile-back"
+                   title="Ürünlere dön">
+                    ‹
+                </a>
+
+                <div class="profile-avatar">
+                    <i class="bi bi-person"></i>
+                </div>
+
+                <div class="profile-info">
+                    <h3>Profil</h3>
+
+                    <div class="profile-info-row">
+                        <span class="label">Profil İsmi:</span>
+                        <span>@Model.UserName</span>
+                    </div>
+                    <div class="profile-info-row">
+                        <span class="label">Profilin Oluşturulduğu Tarih:</span>
+                        <span>@Model.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy")</span>
+                    </div>
+                    <div class="profile-info-row">
+                        <span class="label">Satın Alınan Ürün Sayısı:</span>
+                        <span>@Model.BoughtItemCount</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-target="purchased">Satın Alınan Ürünler</button>
+                <button class="profile-tab" data-target="viewed">Son Bakılan Ürünler</button>
+                <button class="profile-tab" data-target="favourites">Favori Edilen Ürünler</button>
+            </div>
+
+            <!-- Purchased -->
+            <div class="profile-section active" id="section-purchased">
+                @if (!Model.PurchasedItems.Any())
+                {
+                    <div class="prof-empty">Henüz satın aldığınız ürün bulunmuyor.</div>
+                }
+                else
+                {
+                    <div class="prof-carousel-shell" data-group="purchased">
+                        <button type="button"
+                                class="prof-arrow"
+                                data-group="purchased"
+                                data-dir="-1">
+                            ‹
+                        </button>
+
+                        <div class="prof-window">
+                            <div class="prof-items">
+                                @foreach (var p in Model.PurchasedItems)
+                                {
+                                    <a asp-controller="Product"
+                                       asp-action="Details"
+                                       asp-route-id="@p.ItemID"
+                                       class="prof-card">
+                                        <div class="prof-img">
+                                            <img src="@(string.IsNullOrWhiteSpace(p.PictureLink) ? "/img/placeholder.png" : p.PictureLink)"
+                                                 alt="@p.ItemName"
+                                                 onerror="this.src='/img/placeholder.png';" />
+                                        </div>
+                                        <div class="prof-name">@p.ItemName</div>
+                                        <div class="prof-price">
+                                            @if (p.HasCampaignPrice && p.Price < p.OriginalPrice)
+                                            {
+                                                <span class="text-muted text-decoration-line-through me-1">
+                                                    @p.OriginalPrice.ToString("C")
+                                                </span>
+                                                <span class="text-success fw-bold">
+                                                    @p.Price.ToString("C")
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                @p.Price.ToString("C")
+                                            }
+                                        </div>
+                                        <div class="prof-date">
+                                            Satın Alınma Tarihi<br />
+                                            @p.Date.ToLocalTime().ToString("dd.MM.yyyy")
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+
+                        <button type="button"
+                                class="prof-arrow"
+                                data-group="purchased"
+                                data-dir="1">
+                            ›
+                        </button>
+                    </div>
+                }
+            </div>
+
+            <!-- Viewed -->
+            <div class="profile-section" id="section-viewed">
+                @if (!Model.ViewedItems.Any())
+                {
+                    <div class="prof-empty">Henüz görüntülediğiniz ürün bulunmuyor.</div>
+                }
+                else
+                {
+                    <div class="prof-carousel-shell" data-group="viewed">
+                        <button type="button"
+                                class="prof-arrow"
+                                data-group="viewed"
+                                data-dir="-1">
+                            ‹
+                        </button>
+
+                        <div class="prof-window">
+                            <div class="prof-items">
+                                @foreach (var p in Model.ViewedItems)
+                                {
+                                    <a asp-controller="Product"
+                                       asp-action="Details"
+                                       asp-route-id="@p.ItemID"
+                                       class="prof-card">
+                                        <div class="prof-img">
+                                            <img src="@(string.IsNullOrWhiteSpace(p.PictureLink) ? "/img/placeholder.png" : p.PictureLink)"
+                                                 alt="@p.ItemName"
+                                                 onerror="this.src='/img/placeholder.png';" />
+                                        </div>
+                                        <div class="prof-name">@p.ItemName</div>
+                                        <div class="prof-price">
+                                            @if (p.HasCampaignPrice && p.Price < p.OriginalPrice)
+                                            {
+                                                <span class="text-muted text-decoration-line-through me-1">
+                                                    @p.OriginalPrice.ToString("C")
+                                                </span>
+                                                <span class="text-success fw-bold">
+                                                    @p.Price.ToString("C")
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                @p.Price.ToString("C")
+                                            }
+                                        </div>
+                                        <div class="prof-date">
+                                            Son Bakılma Tarihi<br />
+                                            @p.Date.ToLocalTime().ToString("dd.MM.yyyy")
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+
+                        <button type="button"
+                                class="prof-arrow"
+                                data-group="viewed"
+                                data-dir="1">
+                            ›
+                        </button>
+                    </div>
+                }
+            </div>
+
+            <!-- Favourites -->
+            <div class="profile-section" id="section-favourites">
+                @if (!Model.FavouriteItems.Any())
+                {
+                    <div class="prof-empty">Henüz favoriye eklediğiniz ürün bulunmuyor.</div>
+                }
+                else
+                {
+                    <div class="prof-carousel-shell" data-group="favourites">
+                        <button type="button"
+                                class="prof-arrow"
+                                data-group="favourites"
+                                data-dir="-1">
+                            ‹
+                        </button>
+
+                        <div class="prof-window">
+                            <div class="prof-items">
+                                @foreach (var p in Model.FavouriteItems)
+                                {
+                                    <a asp-controller="Product"
+                                       asp-action="Details"
+                                       asp-route-id="@p.ItemID"
+                                       class="prof-card">
+                                        <div class="prof-img">
+                                            <img src="@(string.IsNullOrWhiteSpace(p.PictureLink) ? "/img/placeholder.png" : p.PictureLink)"
+                                                 alt="@p.ItemName"
+                                                 onerror="this.src='/img/placeholder.png';" />
+                                        </div>
+                                        <div class="prof-name">@p.ItemName</div>
+                                        <div class="prof-price">
+                                            @if (p.HasCampaignPrice && p.Price < p.OriginalPrice)
+                                            {
+                                                <span class="text-muted text-decoration-line-through me-1">
+                                                    @p.OriginalPrice.ToString("C")
+                                                </span>
+                                                <span class="text-success fw-bold">
+                                                    @p.Price.ToString("C")
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                @p.Price.ToString("C")
+                                            }
+                                        </div>
+                                        <div class="prof-date">
+                                            Favori Edilme Tarihi<br />
+                                            @p.Date.ToLocalTime().ToString("dd.MM.yyyy")
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+
+                        <button type="button"
+                                class="prof-arrow"
+                                data-group="favourites"
+                                data-dir="1">
+                            ›
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </main>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // ---- tab switching ----
+            const tabs = document.querySelectorAll('.profile-tab');
+            const sections = {
+                purchased: document.getElementById('section-purchased'),
+                viewed: document.getElementById('section-viewed'),
+                favourites: document.getElementById('section-favourites')
+            };
+
+            tabs.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const target = this.dataset.target;
+
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    for (const key in sections) {
+                        if (!sections[key]) continue;
+                        sections[key].classList.toggle('active', key === target);
+                    }
+                });
+            });
+
+            // ---- simple carousel logic ----
+            function initProfCarousel(groupName, visibleCount) {
+                const shell = document.querySelector('.prof-carousel-shell[data-group="' + groupName + '"]');
+                if (!shell) return;
+
+                const cards = shell.querySelectorAll('.prof-card');
+                if (!cards.length) return;
+
+                const arrows = shell.querySelectorAll('.prof-arrow[data-group="' + groupName + '"]');
+
+                let startIndex = 0;
+                const maxStart = Math.max(0, cards.length - visibleCount);
+
+                function applySlice() {
+                    cards.forEach((card, idx) => {
+                        if (idx >= startIndex && idx < startIndex + visibleCount) {
+                            card.classList.remove('d-none');
+                        } else {
+                            card.classList.add('d-none');
+                        }
+                    });
+
+                    arrows.forEach(a => {
+                        a.classList.toggle('disabled',
+                            (a.dataset.dir === "-1" && startIndex === 0) ||
+                            (a.dataset.dir === "1" && startIndex === maxStart)
+                        );
+                    });
+                }
+
+                if (cards.length <= visibleCount) {
+                    arrows.forEach(a => a.classList.add('disabled'));
+                    return;
+                }
+
+                arrows.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const dir = parseInt(this.dataset.dir || '1', 10);
+                        startIndex += dir;
+                        if (startIndex < 0) startIndex = 0;
+                        if (startIndex > maxStart) startIndex = maxStart;
+                        applySlice();
+                    });
+                });
+
+                applySlice();
+            }
+
+            // show 3 at a time
+            initProfCarousel('purchased', 3);
+            initProfCarousel('viewed', 3);
+            initProfCarousel('favourites', 3);
+        });
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

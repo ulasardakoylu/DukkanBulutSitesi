@@ -1,0 +1,401 @@
+﻿@model DükkanBulutSitesi.Models.Manager.ShiftDayVm
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Vardiya Yönetimi";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+
+    // HTML date input needs yyyy-MM-dd
+    var dateDisplay = Model.SelectedDate.ToString("yyyy-MM-dd");
+}
+
+<div class="mgr-main">
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <div class="d-flex align-items-center gap-3">
+        <form asp-action="ShiftsDay"
+              asp-controller="Manager"
+              method="get"
+              class="d-flex align-items-center gap-2 mb-0">
+
+            <label class="form-label mb-0">Seçilen Gün:</label>
+            <input type="date"
+                   name="date"
+                   class="form-control"
+                   style="max-width: 200px;"
+                   value="@dateDisplay" />
+
+            <button type="submit" class="btn btn-outline-primary btn-sm">
+                Günü Değiştir
+            </button>
+        </form>
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+
+        @* NEW: open weekly view for a person on this date *@
+        @{
+            string? selectedPersonelIdStr = ViewBag.SelectedPersonelId as string;
+            if (string.IsNullOrEmpty(selectedPersonelIdStr) && Model.Personnel.Any())
+            {
+                selectedPersonelIdStr = Model.Personnel.First().PersonelID.ToString();
+            }
+        }
+<div>
+    <select id="personDropdown" class="form-select form-select-sm">
+        @foreach (var p in Model.Personnel)
+        {
+            <option value="@p.PersonelID"
+                    selected="@(selectedPersonelIdStr == p.PersonelID.ToString())">
+                @p.DisplayName
+            </option>
+        }
+    </select>
+</div>
+
+<a id="openWeekBtn"
+   class="btn btn-outline-primary btn-sm">
+    Haftasını Aç
+</a>
+
+        <a asp-action="ShiftsDayPdf"
+           asp-controller="Manager"
+           asp-route-date="@dateDisplay"
+           class="btn btn-outline-secondary btn-sm">
+            Bilgileri PDF olarak yükle
+        </a>
+
+        <a asp-action="Shifts"
+           asp-controller="Manager"
+           class="btn btn-outline-danger btn-sm">
+            Kapat
+        </a>
+    </div>
+</div>
+
+    <div class="card">
+        <div class="card-body">
+            <div id="dp"></div>
+
+            <div class="mt-3 d-flex align-items-center gap-2">
+                <span>Renk seçimi:</span>
+
+                <button type="button"
+                        class="shift-color-dot"
+                        data-color="#e74c3c"
+                        style="width:22px;height:22px;border-radius:50%;border:2px solid #333;background:#e74c3c;">
+                </button>
+                <button type="button"
+                        class="shift-color-dot"
+                        data-color="#27ae60"
+                        style="width:22px;height:22px;border-radius:50%;border:2px solid transparent;background:#27ae60;">
+                </button>
+                <button type="button"
+                        class="shift-color-dot"
+                        data-color="#2980b9"
+                        style="width:22px;height:22px;border-radius:50%;border:2px solid transparent;background:#2980b9;">
+                </button>
+                <button type="button"
+                        class="shift-color-dot"
+                        data-color="#f1c40f"
+                        style="width:22px;height:22px;border-radius:50%;border:2px solid transparent;background:#f1c40f;">
+                </button>
+
+                <label class="ms-3">Özel renk:</label>
+                <input type="color"
+                       id="customColorPicker"
+                       value="#ff0000"
+                       style="width:40px;height:40px;border:none;cursor:pointer;">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // ------------- COLOR PICKING -------------
+        let currentColor = "#e74c3c";
+        const customPicker = document.getElementById("customColorPicker");
+
+        document.querySelectorAll(".shift-color-dot").forEach(btn => {
+            btn.addEventListener("click", () => {
+                currentColor = btn.dataset.color;
+
+                document.querySelectorAll(".shift-color-dot").forEach(b => {
+                    b.style.borderColor = "transparent";
+                });
+                btn.style.borderColor = "#333";
+                customPicker.style.boxShadow = "none";
+            });
+        });
+
+        customPicker.addEventListener("input", () => {
+            currentColor = customPicker.value;
+
+            document.querySelectorAll(".shift-color-dot").forEach(b => {
+                b.style.borderColor = "transparent";
+            });
+            customPicker.style.boxShadow = "0 0 0 2px #333";
+        });
+
+        // ------------- DATA FROM SERVER -------------
+        const resources = @Html.Raw(JsonSerializer.Serialize(
+            Model.Personnel.Select(p => new {
+                id   = p.PersonelID.ToString(),
+                name = p.DisplayName,
+                role = p.RoleName
+            })
+        ));
+
+        const events = @Html.Raw(JsonSerializer.Serialize(
+            Model.Shifts.Select(e => new {
+                id       = e.ShiftID.ToString(),
+                resource = e.PersonelID.ToString(),
+                start    = e.Start.ToString("yyyy-MM-ddTHH:mm:ss"),
+                end      = e.End.ToString("yyyy-MM-ddTHH:mm:ss"),
+                text     = e.Text,
+                backColor = e.Color
+            })
+        ));
+
+        // ------------- DAYPILOT SETUP -------------
+        var dp = new DayPilot.Scheduler("dp");
+
+        dp.startDate = "@dateDisplay";
+        dp.days = 1;
+        dp.scale = "Hour";
+        dp.cellDuration = 60;
+
+        dp.cellWidth = 60;
+        dp.eventHeight = 30;
+        dp.rowHeight = 50;
+        dp.rowHeaderWidth = 230;
+
+        dp.timeHeaders = [
+            { groupBy: "Day",  format: "dd-MM-yyyy" },
+            { groupBy: "Hour", format: "HH:mm" }
+        ];
+
+        dp.treeEnabled = false;
+        dp.rowHeaderColumns = [
+            { name: "Personel", display: "name" }
+        ];
+
+        dp.onBeforeRowHeaderRender = function (args) {
+            var name = args.row.data.name || "";
+            var role = args.row.data.role || "";
+            args.row.html =
+                "<div style='font-weight:bold'>" + DayPilot.Util.escapeHtml(name) + "</div>" +
+                "<div style='font-size:11px;color:#666'>[" + DayPilot.Util.escapeHtml(role) + "]</div>";
+        };
+
+        dp.onBeforeEventRender = function (args) {
+            args.data.fontColor = "#ffffff";
+        };
+
+        dp.resources = resources;
+        dp.events.list = events;
+
+        const minHeight = 200;
+        const rowHeight = 50;
+        const extraHeader = 80;
+        dp.height = Math.max(minHeight, resources.length * rowHeight + extraHeader);
+
+        // ------------- SERVER API HELPER -------------
+        async function apiPost(url, data) {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+            return await response.json();
+        }
+
+        // ------------- CREATE SHIFT -------------
+        dp.timeRangeSelectedHandling = "JavaScript";
+        dp.onTimeRangeSelected = async function (args) {
+
+            dp.clearSelection();
+
+            if (!confirm("Bu zaman aralığı için vardiya eklemek istiyor musunuz?"))
+                return;
+
+            try {
+                const payload = {
+                    personelId: parseInt(args.resource),
+                    start: args.start.toString("yyyy-MM-ddTHH:mm:ss"),
+                    end: args.end.toString("yyyy-MM-ddTHH:mm:ss"),
+                    color: currentColor
+                };
+
+                const result = await apiPost("@Url.Action("CreateShift", "Manager")", payload);
+
+                dp.events.add({
+                    id: result.id.toString(),
+                    resource: args.resource,
+                    start: args.start,
+                    end: args.end,
+                    text: "",
+                    backColor: currentColor
+                });
+
+            } catch (e) {
+                alert("Vardiya oluşturulamadı: " + e.message);
+            }
+        };
+
+        // ------------- MOVE SHIFT -------------
+        dp.eventMoveHandling = "JavaScript";
+        dp.onEventMove = async function (args) {
+            const ev = args.e.data;
+
+            if (parseInt(ev.id) < 0) {
+                alert("İzin blokları taşınamaz.");
+                args.preventDefault();
+                return;
+            }
+
+            try {
+                const payload = {
+                    id: parseInt(ev.id),
+                    personelId: parseInt(args.newResource),
+                    start: args.newStart.toString("yyyy-MM-ddTHH:mm:ss"),
+                    end: args.newEnd.toString("yyyy-MM-ddTHH:mm:ss"),
+                    color: ev.backColor || currentColor
+                };
+
+                await apiPost("@Url.Action("UpdateShift", "Manager")", payload);
+
+                args.e.data.resource = args.newResource;
+                args.e.data.start = args.newStart;
+                args.e.data.end = args.newEnd;
+                dp.events.update(args.e);
+
+            } catch (e) {
+                alert("Vardiya taşınamadı: " + e.message);
+            }
+        };
+
+        // ------------- RESIZE SHIFT -------------
+        dp.eventResizeHandling = "JavaScript";
+        dp.onEventResize = async function (args) {
+            const ev = args.e.data;
+
+            if (parseInt(ev.id) < 0) {
+                alert("İzin bloklarının süresi değiştirilemez.");
+                args.preventDefault();
+                return;
+            }
+
+            try {
+                const payload = {
+                    id: parseInt(ev.id),
+                    personelId: parseInt(ev.resource),
+                    start: args.newStart.toString("yyyy-MM-ddTHH:mm:ss"),
+                    end: args.newEnd.toString("yyyy-MM-ddTHH:mm:ss"),
+                    color: ev.backColor || currentColor
+                };
+
+                await apiPost("@Url.Action("UpdateShift", "Manager")", payload);
+
+                args.e.data.start = args.newStart;
+                args.e.data.end = args.newEnd;
+                dp.events.update(args.e);
+
+            } catch (e) {
+                alert("Vardiya değiştirilemedi: " + e.message);
+            }
+        };
+
+        // ------------- DELETE SHIFT -------------
+        dp.eventClickHandling = "JavaScript";
+        dp.onEventClick = async function (args) {
+            const ev = args.e.data;
+
+            if (parseInt(ev.id) < 0) {
+                alert("İzin blokları buradan silinemez. İzni kaldırmak için haftalık izin ekranını kullanın.");
+                return;
+            }
+
+            if (!confirm("Bu vardiyayı silmek istiyor musunuz?")) return;
+
+            try {
+                await apiPost("@Url.Action("DeleteShift", "Manager")", { id: parseInt(ev.id) });
+                dp.events.remove(args.e);
+            } catch (e) {
+                alert("Vardiya silinemedi: " + e.message);
+            }
+        };
+
+        dp.init();
+
+        var selectedPersonelId = "@(ViewBag.SelectedPersonelId ?? "")";
+        if (selectedPersonelId) {
+            dp.scrollToResource(selectedPersonelId);
+        }
+
+        // ------------- OPEN WEEKLY VIEW BUTTON -------------
+        var openWeekBtn = document.getElementById("openWeekBtn");
+        if (openWeekBtn) {
+            openWeekBtn.addEventListener("click", function () {
+                const pid = document.getElementById("personDropdown").value;
+                const date = "@dateDisplay";
+
+                if (!pid) {
+                    alert("Lütfen bir personel seçin.");
+                    return;
+                }
+
+                window.location.href =
+                    "/Manager/ShiftsPersonWeek?SelectedPersonelId=" + pid + "&SelectedDate=" + date;
+            });
+        }
+
+    }); 
+</script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

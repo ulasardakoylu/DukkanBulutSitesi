@@ -1,0 +1,16 @@
+05-12-2025 08:40:14	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+05-12-2025 08:43:41	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+05-12-2025 08:44:48	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=5, StoreID=1, Name=Test5
+05-12-2025 08:44:57	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=5, StoreID=1, Name=Test5
+05-12-2025 12:56:56	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+05-12-2025 13:06:01	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+05-12-2025 13:06:05	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+05-12-2025 13:10:35	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+05-12-2025 13:10:39	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+05-12-2025 13:26:55	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+05-12-2025 13:26:59	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+05-12-2025 13:27:09	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=3, StoreID=1, Name=Test3
+05-12-2025 13:30:21	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=3, StoreID=1, Name=Test3
+05-12-2025 20:23:05	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+05-12-2025 20:23:32	User=Admin123	UserId=2	IP=127.0.0.1	Special offer ended early. OfferID=3, StoreID=1
+05-12-2025 22:53:13	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local

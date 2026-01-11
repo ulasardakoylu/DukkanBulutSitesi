@@ -1,0 +1,180 @@
+﻿@model DükkanBulutSitesi.Models.Manager.ShiftLandingVm
+@{
+    ViewData["Title"] = "Vardiya Yönetimi";
+    Layout = "~/Views/Owner/_StoreLayout.cshtml";
+
+    var storeId = ViewBag.StoreId as int? ?? 0;
+}
+
+<div class="mgr-main">
+
+    <div class="d-flex justify-content-center">
+        <div class="card shadow-sm" style="max-width: 520px;">
+            <div class="card-body">
+
+                <h4 class="mb-4 text-center">Vardiya Yönetimi</h4>
+
+                <!-- GÜN BAZLI GÖRÜNÜM (OWNER) -->
+                <form asp-action="StoreShiftsDay"
+                      asp-controller="Owner"
+                      method="get"
+                      class="mb-4">
+                    <input type="hidden" name="storeId" value="@storeId" />
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label">Gün Seçimi</label>
+                        <input name="date"
+                               type="date"
+                               class="form-control"
+                               required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Seçilen Gün İçin Vardiya Bilgilerini Gör veya Değiştir
+                    </button>
+                </form>
+
+                <!-- HAFTA / PERSONEL BAZLI GÖRÜNÜM (OWNER) -->
+                <form id="weekForm"
+                      asp-action="StoreShiftsPersonWeek"
+                      asp-controller="Owner"
+                      method="get">
+                    <input type="hidden" name="storeId" value="@storeId" />
+
+                    <div class="mb-2 text-start">
+                        <label class="form-label">Personel Seçimi</label>
+                        <select id="SelectedPersonelId"
+                                asp-for="SelectedPersonelId"
+                                asp-items="Model.PersonelOptions"
+                                class="form-select">
+                            <option value="">Personel seçiniz…</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label">Hafta İçin Tarih</label>
+                        <input name="selectedDate"
+                               type="date"
+                               class="form-control" />
+                    </div>
+
+                    <!-- Manager’daki ile aynı tooltip wrapper -->
+                    <span id="weekBtnWrapper"
+                          class="d-inline-block w-100"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="">
+                        <button id="weekBtn"
+                                type="submit"
+                                class="btn btn-outline-primary w-100"
+                                disabled>
+                            Seçilecek Personel İçin Gün Gün Vardiya Planını Gör
+                        </button>
+                    </span>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const personSelect = document.getElementById("SelectedPersonelId");
+            const weekDate     = document.querySelector("#weekForm input[name='selectedDate']");
+            const weekBtn      = document.getElementById("weekBtn");
+            const wrapper      = document.getElementById("weekBtnWrapper");
+
+            // Bootstrap tooltip
+            let tooltip = typeof bootstrap !== "undefined"
+                ? new bootstrap.Tooltip(wrapper)
+                : null;
+
+            function refreshTooltip() {
+                if (!tooltip || typeof bootstrap === "undefined") return;
+                tooltip.dispose();
+                tooltip = new bootstrap.Tooltip(wrapper);
+            }
+
+            function updateWeekButtonState() {
+                const missing = [];
+
+                if (!personSelect.value) missing.push("personel seçmeniz");
+                if (!weekDate.value)     missing.push("tarih seçmeniz");
+
+                if (missing.length === 0) {
+                    weekBtn.disabled = false;
+                    wrapper.setAttribute("data-bs-title", "");
+                    wrapper.removeAttribute("data-bs-original-title");
+                } else {
+                    weekBtn.disabled = true;
+                    const msg = "Butonu kullanmak için " + missing.join(" ve ") + " gerekir.";
+                    wrapper.setAttribute("data-bs-title", msg);
+                    wrapper.setAttribute("data-bs-original-title", msg);
+                }
+
+                refreshTooltip();
+            }
+
+            personSelect.addEventListener("change", updateWeekButtonState);
+            weekDate.addEventListener("change", updateWeekButtonState);
+
+            document.getElementById("weekForm").addEventListener("submit", function (e) {
+                if (!personSelect.value || !weekDate.value) {
+                    e.preventDefault();
+                    if (tooltip) {
+                        tooltip.show();
+                        setTimeout(() => tooltip.hide(), 2000);
+                    } else {
+                        alert("Lütfen personel ve tarih seçiniz.");
+                    }
+                }
+            });
+
+            updateWeekButtonState();
+        });
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

@@ -1,0 +1,21 @@
+30-11-2025 10:12:19	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+30-11-2025 10:23:22	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+30-11-2025 10:23:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+30-11-2025 10:24:13	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=2, PersonelID=2, Length=3
+30-11-2025 10:27:16	User=Admin123	UserId=2	IP=127.0.0.1	Item created. ItemID=10, Name=Test
+30-11-2025 10:27:30	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=10, Name=Test11
+30-11-2025 10:27:58	User=Admin123	UserId=2	IP=127.0.0.1	Work history deleted. PersonelID=3, HistoryID=5, Title=adawsd
+30-11-2025 10:44:05	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+30-11-2025 10:44:10	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+30-11-2025 11:12:59	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Ali
+30-11-2025 11:13:07	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Work history created. PersonelID=3, HistoryID=6, Title=awdas
+30-11-2025 11:13:16	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Education created. PersonelID=3, EducationID=7, School=dwads
+30-11-2025 11:13:24	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Certificate created. PersonelID=3, CertificateID=6, Name=aasd
+30-11-2025 11:13:34	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Certificate deleted. PersonelID=3, CertificateID=6, Name=aasd
+30-11-2025 11:13:37	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Education deleted. PersonelID=3, EducationID=7, School=dwads
+30-11-2025 11:13:41	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Work history deleted. PersonelID=3, HistoryID=6, Title=awdas
+30-11-2025 11:13:53	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Warning created. PersonelID=3, WarningID=9, Level=warning
+30-11-2025 19:08:27	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+30-11-2025 20:29:32	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel number generated. RoleID=4, StoreID=1, Code=91112969
+30-11-2025 21:15:57	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+30-11-2025 21:16:35	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

@@ -1,0 +1,131 @@
+﻿@model DükkanBulutSitesi.Models.Search.SearchResultsVm
+
+@if (string.IsNullOrWhiteSpace(Model.Query))
+{
+    <div class="text-muted small">Bir ürün adı yazarak arama yapın.</div>
+}
+else if (!Model.Results.Any())
+{
+    <div class="text-muted small">"@Model.Query" için sonuç bulunamadı.</div>
+}
+else
+{
+    <div class="search-results-list">
+        @foreach (var item in Model.Results)
+        {
+            <a class="search-result-card"
+               asp-controller="Product"
+               asp-action="Details"
+               asp-route-id="@item.ItemID">
+                <div class="search-result-img">
+                    <img src="@(string.IsNullOrWhiteSpace(item.PictureLink) ? "/img/placeholder.png" : item.PictureLink)"
+                         alt="@item.ItemName"
+                         onerror="this.src='/img/placeholder.png';" />
+                </div>
+
+                <div class="search-result-body">
+                    <div class="search-result-name">@item.ItemName</div>
+
+                    <div class="search-result-price">
+                        @if (item.HasCampaignPrice)
+                        {
+                            <span class="text-muted text-decoration-line-through me-1">
+                                @item.OriginalPrice.ToString("C")
+                            </span>
+                            <span class="fw-bold text-success">@item.Price.ToString("C")</span>
+                        }
+                        else
+                        {
+                            @item.Price.ToString("C")
+                        }
+                    </div>
+
+                    <div class="search-result-stars">
+                        @{
+                            var rounded = (int)Math.Round(item.AverageStars);
+                        }
+                        @for (var i = 1; i <= 5; i++)
+                        {
+                            <span class="star @(i <= rounded ? "filled" : "")">★</span>
+                        }
+                        <span class="ms-1 small text-muted">(@item.ReviewCount)</span>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}
+
+<style>
+    .search-results-list {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .search-result-card {
+        display: flex;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: inherit;
+        margin-bottom: 6px;
+        transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+        .search-result-card:hover {
+            background: #0051b8;
+            color: #fff;
+        }
+
+            .search-result-card:hover .text-muted,
+            .search-result-card:hover .search-result-price span {
+                color: #e6efff !important;
+            }
+
+    .search-result-img {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+        margin-right: 10px;
+        background: #f3f3f3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .search-result-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+    .search-result-body {
+        flex: 1;
+    }
+
+    .search-result-name {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .search-result-price {
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+
+    .search-result-stars {
+        font-size: 12px;
+    }
+
+        .search-result-stars .star {
+            color: #ffc107;
+        }
+
+            .search-result-stars .star:not(.filled) {
+                color: #ddd;
+            }
+</style>

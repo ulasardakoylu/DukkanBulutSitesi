@@ -1,0 +1,351 @@
+﻿@model DükkanBulutSitesi.Models.RoleManagementVm
+@{
+    ViewData["Title"] = "Rol Yönetimi";
+    Layout = "~/Views/Owner/_StoreLayout.cshtml";
+
+    var canEdit = !(Model.SelectedRole?.IsSystem ?? false);
+}
+
+<div class="mgr-main">
+
+    @if (TempData["RoleError"] is string err && !string.IsNullOrWhiteSpace(err))
+    {
+        <div class="alert alert-danger">@err</div>
+    }
+
+    <div class="row">
+
+        <!-- LEFT: ROLE LIST -->
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-header">Rol Listesi</div>
+
+                <!-- search bar -->
+                <div class="p-2 border-top">
+                    <input type="text"
+                           id="roleSearchInput"
+                           class="form-control form-control-sm"
+                           placeholder="Rol ara…">
+                </div>
+
+                <div class="list-group list-group-flush">
+
+                    @foreach (var r in Model.Roles)
+                    {
+                        var active = (Model.SelectedRole?.RoleID == r.RoleID);
+                        <a asp-controller="Owner"
+                           asp-action="StoreRoles"
+                           asp-route-id="@r.RoleID"
+                           class="list-group-item list-group-item-action existing-role-item @(active ? "active" : "")"
+                           data-role-name="@r.RoleName.ToLowerInvariant()">
+                            @r.RoleName
+                            @if (r.IsSystem)
+                            {
+                                <span class="badge bg-secondary ms-1">Sistem</span>
+                            }
+                        </a>
+                    }
+
+                    <a class="role-list-item new-role list-group-item list-group-item-action text-center"
+                       asp-controller="Owner"
+                       asp-action="StoreRoles"
+                       asp-route-newRole="true">
+                        + Yeni Rol
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: ROLE DETAIL -->
+        <div class="col-md-9">
+            <div class="card">
+
+                @if (Model.SelectedRole?.RoleID != null)
+                {
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <form asp-controller="Owner"
+                              asp-action="StoreGeneratePersonnelNumber"
+                              method="post"
+                              class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="roleId" value="@Model.SelectedRole.RoleID" />
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Yeni Personel Numarası Oluştur
+                            </button>
+                        </form>
+
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#personnelCodeModal">
+                            Numaraları Göster
+                        </button>
+                    </div>
+                }
+
+                <div class="card-body">
+                    @if (Model.SelectedRole == null)
+                    {
+                        <div class="alert alert-info mb-0">
+                            Bu mağaza için henüz bir rol seçilmedi. Soldan bir rol seçin
+                            veya <strong>+ Yeni Rol</strong> butonuna tıklayarak yeni bir rol oluşturun.
+                        </div>
+                    }
+                    else
+                    {
+                        <form asp-controller="Owner" asp-action="StoreSaveRole" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <input asp-for="SelectedRole.RoleID" type="hidden" />
+                            <input asp-for="SelectedRole.IsSystem" type="hidden" />
+
+                            <div class="mb-3">
+                                <label class="form-label">Rolün Adı</label>
+                                <input asp-for="SelectedRole.RoleName"
+                                       class="form-control" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label">İşe Başlama Saati</label>
+                                    <input asp-for="SelectedRole.StartTime"
+                                           type="time"
+                                           class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">İşten Çıkma Saati</label>
+                                    <input asp-for="SelectedRole.ExitTime"
+                                           type="time"
+                                           class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Rol İzinleri</label>
+                                <div class="row">
+                                    @for (int i = 0; i < Model.SelectedRole.Permissions.Count; i++)
+                                    {
+                                        <div class="col-md-4 mb-2">
+                                            <div class="form-check">
+                                                <input type="hidden"
+                                                       asp-for="SelectedRole.Permissions[i].PermissionID" />
+
+                                                <input type="hidden"
+                                                       asp-for="SelectedRole.Permissions[i].PermissionName" />
+
+                                                <input class="form-check-input"
+                                                       asp-for="SelectedRole.Permissions[i].Granted" />
+                                                <label class="form-check-label"
+                                                       asp-for="SelectedRole.Permissions[i].Granted">
+                                                    @Model.SelectedRole.Permissions[i].PermissionName
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+
+                            @{
+                                var isNew = Model.SelectedRole.RoleID == null;
+                            }
+
+                            <button type="submit" class="btn btn-primary">
+                                @(isNew ? "Rolü Oluştur" : "Değişiklikleri Kaydet")
+                            </button>
+
+                            @if (!isNew && !Model.SelectedRole.IsSystem)
+                            {
+                                <button type="submit"
+                                        formaction="@Url.Action("StoreDeleteRole", "Owner")"
+                                        formmethod="post"
+                                        name="id"
+                                        value="@Model.SelectedRole.RoleID"
+                                        class="btn btn-outline-danger ms-2"
+                                        onclick="return confirm('Bu rolü silmek istediğinize emin misiniz?');">
+                                    Rolü Sil
+                                </button>
+                            }
+
+                        </form>
+
+                        @if (Model.SelectedRole?.RoleID != null)
+                        {
+                            if (TempData["LastGeneratedCode"] is string lastCode && !string.IsNullOrEmpty(lastCode))
+                            {
+                                <div class="alert alert-success mt-3">
+                                    Yeni personel numarası oluşturuldu: <strong>@lastCode</strong>
+                                </div>
+                            }
+
+                            <div class="modal fade" id="personnelCodeModal" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Bu Rol İçin Personel Numaraları</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Kod filtreleri">
+                                                    <button type="button" class="btn btn-outline-secondary active" data-code-filter="all">
+                                                        Tümü
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-secondary" data-code-filter="available">
+                                                        Kullanılabilir
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-secondary" data-code-filter="used">
+                                                        Kullanıldı
+                                                    </button>
+                                                </div>
+
+                                                <small class="text-muted" id="codeFilterCount"></small>
+                                            </div>
+
+                                            @if (Model.SelectedRole.PersonnelCodes != null && Model.SelectedRole.PersonnelCodes.Any())
+                                            {
+                                                <table class="table table-sm mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Kod</th>
+                                                            <th>Durum</th>
+                                                            <th>Oluşturulma</th>
+                                                            <th>Kullanılma</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var c in Model.SelectedRole.PersonnelCodes)
+                                                        {
+                                                            <tr data-used="@(c.IsUsed ? "true" : "false")">
+                                                                <td><code>@c.Code</code></td>
+                                                                <td>@(c.IsUsed ? "Kullanıldı" : "Boşta")</td>
+                                                                <td>@c.CreatedAt.ToLocalTime()</td>
+                                                                <td>
+                                                                    @(c.UsedAt.HasValue
+                                                                 ? c.UsedAt.Value.ToLocalTime().ToString()
+                                                                 : "-")
+                                                </td>
+                                            </tr>
+                                                                                        }
+                                                    </tbody>
+                                                </table>
+                                            }
+                                            else
+                                            {
+                                                <span>Bu rol için henüz personel numarası oluşturulmamış.</span>
+                                            }
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const input = document.getElementById('roleSearchInput');
+            if (input) {
+                input.addEventListener('input', function () {
+                    const q = this.value.trim().toLowerCase();
+                    document.querySelectorAll('.existing-role-item[data-role-name]').forEach(function (el) {
+                        const name = el.getAttribute('data-role-name') || '';
+                        el.classList.toggle('d-none', q && !name.includes(q));
+                    });
+                });
+            }
+
+            const codeModal = document.getElementById('personnelCodeModal');
+            if (codeModal) {
+                const tbody = codeModal.querySelector('tbody');
+                const filterButtons = codeModal.querySelectorAll('[data-code-filter]');
+                const countEl = document.getElementById('codeFilterCount');
+
+                function applyCodeFilter(mode) {
+                    if (!tbody) return;
+
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+                    let visible = 0;
+
+                    rows.forEach(row => {
+                        const isUsed = row.getAttribute('data-used') === 'true';
+
+                        const show =
+                            mode === 'all' ||
+                            (mode === 'used' && isUsed) ||
+                            (mode === 'available' && !isUsed);
+
+                        row.classList.toggle('d-none', !show);
+                        if (show) visible++;
+                    });
+
+                    if (countEl) countEl.textContent = `${visible} / ${rows.length}`;
+                }
+
+                filterButtons.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        filterButtons.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        applyCodeFilter(this.getAttribute('data-code-filter') || 'all');
+                    });
+                });
+
+                codeModal.addEventListener('shown.bs.modal', function () {
+                    const allBtn = codeModal.querySelector('[data-code-filter="all"]');
+                    if (allBtn) allBtn.click();
+                    else applyCodeFilter('all');
+                });
+            }
+        })();
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

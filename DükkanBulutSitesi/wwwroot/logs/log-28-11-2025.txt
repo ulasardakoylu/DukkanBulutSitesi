@@ -1,0 +1,12 @@
+28-11-2025 08:55:06	User=Admin123	UserId=2	IP=::1	User logged in. UserID=2, Email=admin@school.local
+28-11-2025 09:00:40	User=Admin123	UserId=2	IP=::1	Conversation started or reused. ConversationID=5, TargetPersonelID=4, FirstMessageLength=7
+28-11-2025 09:01:17	User=Admin123	UserId=2	IP=::1	User logged out.
+28-11-2025 09:06:16	User=Admin123	UserId=2	IP=::1	User logged in. UserID=2, Email=admin@school.local
+28-11-2025 09:20:05	User=Admin123	UserId=2	IP=::1	Personnel number generated. RoleID=5, Code=39950165
+28-11-2025 09:22:30	User=Admin123	UserId=2	IP=::1	Personnel picture changed. UserID=6, Old=/img/personnel/3a47de78-c23c-46dd-a80f-6c1cf93a0650.png, New=/img/personnel/51e3831e-95b3-4fcc-bc12-56257357d160.jpg
+28-11-2025 09:22:30	User=Admin123	UserId=2	IP=::1	Personnel updated. PersonelID=2, Name=Seraph1 Ser
+28-11-2025 09:22:37	User=Admin123	UserId=2	IP=::1	Personnel picture changed. UserID=6, Old=/img/personnel/51e3831e-95b3-4fcc-bc12-56257357d160.jpg, New=/img/personnel/6f6c63d5-63a4-425b-9887-a4d727acf738.png
+28-11-2025 09:22:37	User=Admin123	UserId=2	IP=::1	Personnel updated. PersonelID=2, Name=Seraph1 Ser
+28-11-2025 09:26:05	User=Admin123	UserId=2	IP=::1	User logged out.
+28-11-2025 09:26:25	User=Seraph2	UserId=6	IP=::1	User logged in. UserID=6, Email=testseraph2@gmail.com
+28-11-2025 09:27:15	User=Seraph2	UserId=6	IP=::1	User logged out.

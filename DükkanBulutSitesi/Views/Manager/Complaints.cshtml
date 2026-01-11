@@ -1,0 +1,161 @@
+﻿@model DükkanBulutSitesi.Models.Manager.ComplaintManagementVm
+@{
+    ViewData["Title"] = "Şikayetler";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<style>
+    .list-group-item.active .small,
+    .list-group-item.active .text-muted {
+        color: #f8f9fa !important;
+    }
+</style>
+
+<div class="mgr-main">
+    <h2 class="mb-3">Şikayetler</h2>
+
+    <div class="row">
+        <!-- Left: complaint list -->
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-header">Şikayet Listesi</div>
+                <div class="list-group list-group-flush">
+                    @foreach (var c in Model.Complaints)
+                    {
+                        var active = Model.Selected?.ComplaintID == c.ComplaintID;
+                        <a asp-action="Complaints"
+                           asp-route-id="@c.ComplaintID"
+                           class="list-group-item list-group-item-action @(active ? "active" : "")">
+                            @c.Title
+                            <div class="small text-muted">
+                                @c.CreatedAt.ToLocalTime().ToString("g") – @c.Status
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: detail -->
+        <div class="col-md-9">
+            @if (Model.Selected == null)
+            {
+                <div class="alert alert-info">Henüz seçili bir şikayet yok.</div>
+            }
+            else
+            {
+                var c = Model.Selected;
+                <div class="card">
+                    <div class="card-header">
+                        @c.Title
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">Şikayetin Olduğu Alan</dt>
+                            <dd class="col-sm-8">@c.Area</dd>
+
+                            <dt class="col-sm-4">Şikayeti Oluşturan Kişi</dt>
+                            <dd class="col-sm-8">@c.ReporterName</dd>
+
+                            <dt class="col-sm-4">Şikayetin Oluştuğu Tarih</dt>
+                            <dd class="col-sm-8">@c.CreatedAt.ToLocalTime().ToString("f")</dd>
+
+                            <dt class="col-sm-4">Şikayet Türü</dt>
+                            <dd class="col-sm-8">@c.ComplaintTypeName</dd>
+                        </dl>
+
+                        <div class="mb-3">
+                            <label class="form-label">Şikayet ile ilgili bilgi</label>
+                            <textarea class="form-control" rows="5" readonly>@c.Description</textarea>
+                        </div>
+
+                        <form asp-action="UpdateComplaint" method="post" class="mt-3">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@c.ComplaintID" />
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Durum</label>
+                                    <select name="status" class="form-select">
+                                        <option value="New" selected="@(c.Status == "New")">Yeni</option>
+                                        <option value="InReview" selected="@(c.Status == "InReview")">İncelemede</option>
+                                        <option value="Resolved" selected="@(c.Status == "Resolved")">Çözüldü</option>
+                                        <option value="Dismissed" selected="@(c.Status == "Dismissed")">Reddedildi</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="form-label">Yönetici Notu</label>
+                                    <textarea name="managerNotes" rows="2" class="form-control">@c.ManagerNotes</textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+
+                            @if (c.CommentID.HasValue)
+                            {
+                                <a asp-controller="Product"
+                                   asp-action="Details"
+                                   asp-route-id="@c.ItemID"
+                                   class="btn btn-outline-secondary ms-2">
+                                    Şikayet Oluşan Yere Git
+                                </a>
+                            }
+                            else if (c.ItemID.HasValue)
+                            {
+                                <a asp-controller="Product"
+                                   asp-action="Details"
+                                   asp-route-id="@c.ItemID"
+                                   class="btn btn-outline-secondary ms-2">
+                                    Ürüne Git
+                                </a>
+                            }
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

@@ -1,0 +1,338 @@
+﻿@model DükkanBulutSitesi.Models.Manager.PersonelWeekShiftVm
+@{
+    ViewData["Title"] = "Vardiya Planı";
+    Layout = "~/Views/Owner/_StoreLayout.cshtml";
+
+    bool noShiftAndNoLeaveThisWeek = !Model.HasAnyShiftThisWeek && !Model.EntireWeekIsTimeOff;
+    var personelOptions = ViewBag.PersonelOptions as IEnumerable<SelectListItem>;
+    var storeId = ViewBag.StoreId as int? ?? 0;
+}
+
+<div class="mgr-main">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>@Model.PersonelName için Hafta Planı</h2>
+
+        <div class="d-flex align-items-center gap-2">
+
+            @if (personelOptions != null && personelOptions.Any())
+            {
+                <select id="weekPersonSelect"
+                        class="form-select form-select-sm"
+                        onchange="window.location.href='@Url.Action("StoreShiftsPersonWeek", "Owner")?storeId=@storeId&SelectedPersonelId=' + this.value + '&SelectedDate=@Model.WeekStart.ToString("yyyy-MM-dd")'">
+                    @foreach (var opt in personelOptions)
+                    {
+                        <option value="@opt.Value"
+                                selected="@(opt.Value == Model.PersonelID.ToString())">
+                            @opt.Text
+                        </option>
+                    }
+                </select>
+            }
+
+            <a asp-action="StoreShiftsPersonWeekPdf"
+               asp-controller="Owner"
+               asp-route-storeId="@storeId"
+               asp-route-selectedPersonelId="@Model.PersonelID"
+               asp-route-selectedDate="@Model.WeekStart.ToString("yyyy-MM-dd")"
+               class="btn btn-outline-secondary btn-sm">
+                Bilgileri PDF olarak yükle
+            </a>
+
+            <div class="btn-group">
+                <a asp-action="StoreShiftsPersonWeek"
+                   asp-controller="Owner"
+                   asp-route-storeId="@storeId"
+                   asp-route-selectedPersonelId="@Model.PersonelID"
+                   asp-route-selectedDate="@(Model.WeekStart.AddDays(-7).ToString("yyyy-MM-dd"))"
+                   class="btn btn-outline-secondary btn-sm">
+                    Önceki Hafta
+                </a>
+
+                <a asp-action="StoreShiftsPersonWeek"
+                   asp-controller="Owner"
+                   asp-route-storeId="@storeId"
+                   asp-route-selectedPersonelId="@Model.PersonelID"
+                   asp-route-selectedDate="@(Model.WeekStart.AddDays(7).ToString("yyyy-MM-dd"))"
+                   class="btn btn-outline-secondary btn-sm">
+                    Sonraki Hafta
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <p class="text-muted mb-3">
+        @Model.WeekStart.ToString("dd.MM.yyyy") - @Model.WeekEnd.ToString("dd.MM.yyyy")
+        Haftası
+    </p>
+
+    @if (noShiftAndNoLeaveThisWeek)
+    {
+        <div class="alert alert-warning">
+            Bu hafta için <strong>@Model.PersonelName</strong> adına atanmış herhangi bir
+            vardiya bulunamadı ve izin kaydı da yok. Planlamayı kontrol etmeniz önerilir.
+        </div>
+    }
+    else if (Model.EntireWeekIsTimeOff)
+    {
+        <div class="alert alert-info">
+            Bu hafta için <strong>@Model.PersonelName</strong> tamamen izinli görünüyor.
+        </div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Gün Gün Vardiya ve İzin Durumu</h5>
+
+            <div class="table-responsive">
+                <table class="table table-sm align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">Gün</th>
+                            <th>Vardiyalar</th>
+                            <th>İzinler / Mazeretler</th>
+                            <th style="width: 140px;"></th>   @* “Go to day” button column *@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var d in Model.Days)
+                        {
+                            var rowClass = d.NeedsAttention ? "table-warning" : "";
+                            <tr class="@rowClass">
+                                <td>
+                                    <div class="fw-semibold">
+                                        @d.Date.ToString("dddd", System.Globalization.CultureInfo.GetCultureInfo("tr-TR"))
+                                    </div>
+                                    <div class="text-muted small">
+                                        @d.Date.ToString("dd.MM.yyyy")
+                                    </div>
+                                </td>
+                                <td>
+                                    @if (d.Shifts.Any())
+                                    {
+                                        @foreach (var s in d.Shifts)
+                                        {
+                                            <div>
+                                                <span class="badge bg-primary me-1">
+                                                    @s.TimeRange
+                                                </span>
+                                            </div>
+                                        }
+                                    }
+                                    else if (!d.TimeOffs.Any())
+                                    {
+                                        <span class="text-danger small">
+                                            Vardiya yok (izin kaydı da yok)
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">Vardiya yok</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (d.TimeOffs.Any())
+                                    {
+                                        @foreach (var t in d.TimeOffs)
+                                        {
+                                            <div class="mb-1">
+                                                @{
+                                                    string izinTipi = t.Type switch
+                                                    {
+                                                        "PaidLeave" => "Yıllık izin",
+                                                        "SickLeave" => "Raporlu",
+                                                        "UnpaidLeave" => "Ücretsiz izin",
+                                                        "OffDay" => "İdari izin",
+                                                        _ => "Diğer"
+                                                    };
+
+                                                    string ucretDurumu = t.IsPaid ? "Ücretli" : "Ücretsiz";
+                                                    string onayMetni = t.IsApproved ? "" : " • Onay bekliyor";
+                                                }
+
+                                                <span class="badge @(t.IsPaid ? "bg-success" : "bg-secondary") me-1">
+                                                    @izinTipi
+                                                </span>
+                                                <span class="small">
+                                                    @t.DateStart.ToString("dd.MM") - @t.DateEnd.ToString("dd.MM")
+                                                    (@ucretDurumu)@onayMetni
+                                                </span>
+
+                                                @if (!string.IsNullOrWhiteSpace(t.Description))
+                                                {
+                                                    <div class="small text-muted">@t.Description</div>
+                                                }
+
+                                                <form asp-action="DeletePersonelTimeOff"
+                                                      asp-controller="Owner"
+                                                      asp-route-storeId="@storeId"
+                                                      method="post"
+                                                      class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="timeOffId" value="@t.TimeOffID" />
+                                                    <input type="hidden" name="personelId" value="@Model.PersonelID" />
+                                                    <input type="hidden" name="anchorDate" value="@d.Date.ToString("yyyy-MM-dd")" />
+                                                    <button type="submit"
+                                                            class="btn btn-link btn-sm text-danger p-0 ms-1"
+                                                            onclick="return confirm('Bu izin kaydını silmek istiyor musunuz?');">
+                                                        Sil
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">Kayıt yok</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    <a asp-action="StoreShiftsDay"
+                                       asp-controller="Owner"
+                                       asp-route-storeId="@storeId"
+                                       asp-route-date="@d.Date.ToString("yyyy-MM-dd")"
+                                       asp-route-selectedPersonelId="@Model.PersonelID"
+                                       class="btn btn-outline-primary btn-sm">
+                                        Günü Aç
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Yeni İzin / Mazeret Ekle</h5>
+
+            <form asp-action="AddPersonelTimeOff"
+                  asp-controller="Owner"
+                  asp-route-storeId="@storeId"
+                  method="post">
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" name="PersonelID" value="@Model.PersonelID" />
+                <input type="hidden" name="StoreId" value="@storeId" />
+                <input type="hidden" name="AnchorDate" value="@Model.WeekStart.ToString("yyyy-MM-dd")" />
+
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Başlangıç Tarihi</label>
+                        <input type="date" name="DateStart"
+                               class="form-control"
+                               value="@Model.WeekStart.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Bitiş Tarihi</label>
+                        <input type="date" name="DateEnd"
+                               class="form-control"
+                               value="@Model.WeekEnd.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Tür</label>
+                        <select name="TimeOffType" id="timeOffTypeSelect" class="form-select">
+                            <option value="PaidLeave">Yıllık İzin</option>
+                            <option value="SickLeave">Raporlu</option>
+                            <option value="UnpaidLeave">Ücretsiz İzin</option>
+                            <option value="OffDay">İdari İzin</option>
+                            <option value="Other">Diğer</option>
+                        </select>
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Ücret Durumu</label>
+                        <input type="text" class="form-control" id="paidLabel" value="Ücretli" readonly />
+                        <input type="hidden" name="IsPaid" id="isPaidHidden" value="true" />
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Açıklama (isteğe bağlı)</label>
+                        <textarea name="Description" class="form-control" rows="2"></textarea>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">
+                            İzin Kaydı Ekle
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <p class="small text-muted mt-3 mb-0">
+                Not: Bir gün için izin girildiğinde o günle çakışan vardiyalar otomatik
+                olarak iptal edilir ve bu zaman aralığına yeni vardiya eklenmesine izin verilmez.
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        (function () {
+            const typeSelect = document.getElementById('timeOffTypeSelect');
+            const isPaidHidden = document.getElementById('isPaidHidden');
+            const paidLabel = document.getElementById('paidLabel');
+
+            function computeIsPaid(typeVal) {
+                return typeVal !== 'UnpaidLeave';
+            }
+
+            function syncPaid() {
+                if (!typeSelect || !isPaidHidden) return;
+
+                const paid = computeIsPaid(typeSelect.value);
+                isPaidHidden.value = paid ? 'true' : 'false';
+
+                if (paidLabel) paidLabel.value = paid ? 'Ücretli' : 'Ücretsiz';
+            }
+
+            if (typeSelect) {
+                typeSelect.addEventListener('change', syncPaid);
+                syncPaid();
+            }
+        })();
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

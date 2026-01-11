@@ -1,0 +1,568 @@
+﻿@model DükkanBulutSitesi.Models.Manager.ConversationPageVm
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Konuşmalar";
+    Layout = "~/Views/Owner/_StoreLayout.cshtml";
+
+    var storeOptions = ViewBag.OwnerStores as List<SelectListItem> ?? new List<SelectListItem>();
+    var selectedStoreId = ViewBag.SelectedStoreId as int? ?? 0;
+    var selectedStoreItem = storeOptions.FirstOrDefault(o => o.Value == selectedStoreId.ToString());
+    var selectedStoreName = selectedStoreItem?.Text;
+
+    const string SystemClosedText = "Karşı taraf sohbeti kapattı.";
+    bool convoClosed = Model.Messages?.Any(m => m.IsSystem && m.Message == SystemClosedText) == true;
+}
+
+<style>
+    .chat-system {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .chat-system-text {
+        background: #e9ecef;
+        color: #6c757d;
+        padding: 6px 10px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        max-width: 70%;
+    }
+
+    .chat-system-time {
+        color: #adb5bd;
+        font-size: 0.75rem;
+        margin-top: 4px;
+    }
+</style>
+
+<div class="mgr-main manager-convos">
+
+    @if (TempData["ConvError"] is string ce && !string.IsNullOrEmpty(ce))
+    {
+        <div class="alert alert-danger">@ce</div>
+    }
+
+    <div class="row">
+        <!-- Left: conversation list -->
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Konuşma Listesi</span>
+
+                    <button class="btn btn-sm btn-outline-primary"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#newConversationBox">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                </div>
+
+                <div class="collapse border-top" id="newConversationBox">
+                    <div class="p-2">
+                        <!-- NEW CONVERSATION / STORE + PERSONNEL -->
+                        <form asp-controller="Owner"
+                              asp-action="StartConversation"
+                              method="post"
+                              class="d-flex flex-column gap-2">
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" name="storeId" id="selectedStoreIdInput" value="@selectedStoreId" />
+
+                            <select class="form-select" id="storeSelect">
+                                @foreach (var opt in storeOptions)
+                                {
+                                    <option value="@opt.Value"
+                                            selected="@(opt.Value == selectedStoreId.ToString() ? "selected" : null)">
+                                        @opt.Text
+                                    </option>
+                                }
+                            </select>
+
+                            <select class="form-select" name="targetPersonelId">
+                                <option value="">Personel seçiniz…</option>
+                                @foreach (var p in Model.PersonelChoices)
+                                {
+                                    <option value="@p.PersonelID">@p.DisplayName</option>
+                                }
+                            </select>
+
+                            <textarea class="form-control"
+                                      name="firstMessage"
+                                      rows="2"
+                                      placeholder="İlk mesajınızı yazın..."></textarea>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                Sohbet Başlat
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="p-2 border-top">
+                    <input type="text"
+                           id="conversationSearchInput"
+                           class="form-control form-control-sm"
+                           placeholder="Konuşma ara…">
+                </div>
+
+                <div class="list-group list-group-flush overflow-auto" style="max-height: 480px;">
+                    @if (Model.Conversations.Any())
+                    {
+                        foreach (var c in Model.Conversations)
+                        {
+                            var active = c.ConversationID == Model.SelectedConversationID;
+                            var preview = c.LastMessage ?? "";
+                            if (preview.Length > 80)
+                            {
+                                preview = preview.Substring(0, 80) + "…";
+                            }
+
+                            <a asp-controller="Owner"
+                               asp-action="StoreConversations"
+                               asp-route-storeId="@selectedStoreId"
+                               asp-route-id="@c.ConversationID"
+                               class="list-group-item list-group-item-action @(active ? "active" : "")"
+                               data-personel="@c.PersonelName.ToLowerInvariant()">
+                                <div class="fw-semibold">@c.PersonelName</div>
+                                <div class="small convo-last-message @(active ? "text-white" : "text-muted")">
+                                    @preview
+                                </div>
+                                <div class="small conv-preview text-truncate">
+                                    @c.LastSentAt.ToLocalTime().ToString("g")
+                                </div>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <div class="p-3 text-muted small">
+                            Henüz sohbet yok. Soldaki + butonuyla bir personel ile konuşma başlatabilirsiniz.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: chat area -->
+        <div class="col-md-9">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        @if (Model.SelectedPersonelName != null)
+                        {
+                            <strong>@Model.SelectedPersonelName</strong>
+                        }
+                        else
+                        {
+                            <span>Konuşma seçilmedi</span>
+                        }
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-muted small">
+                            Dükkan: @(Model.SelectedPersonelStoreName ?? selectedStoreName ?? "-")
+                        </span>
+
+                        @if (convoClosed && Model.SelectedConversationID.HasValue)
+                        {
+                            <span class="badge bg-secondary">Sohbet Kapalı</span>
+                        }
+
+                        <button type="button"
+                                class="btn btn-sm btn-outline-secondary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#archivedConversationsModal">
+                            Arşivlenmiş Sohbetler
+                        </button>
+
+                        @if (Model.SelectedConversationID.HasValue)
+                        {
+                            <form asp-controller="Owner"
+                                  asp-action="DeleteConversation"
+                                  method="post"
+                                  class="m-0">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="conversationId" value="@Model.SelectedConversationID" />
+                                <input type="hidden" name="storeId" value="@selectedStoreId" />
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Bu sohbeti silmek istediğinize emin misiniz?');">
+                                    Sohbeti Sil
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+
+                <div class="card-body d-flex flex-column" style="height: 520px;">
+                    <div class="flex-grow-1 mb-2 overflow-auto border rounded p-3 bg-light">
+                        @if (Model.SelectedConversationID == null)
+                        {
+                            <div class="text-muted">Soldan bir konuşma seçin veya yeni bir sohbet başlatın.</div>
+                        }
+                        else if (!Model.Messages.Any())
+                        {
+                            <div class="text-muted">Bu sohbet için mesaj yok.</div>
+                        }
+                        else
+                        {
+                            @foreach (var m in Model.Messages)
+                            {
+                                if (m.IsSystem)
+                                {
+                                    <div class="chat-system my-2">
+                                        <span class="chat-system-text">@m.Message</span>
+                                        <span class="chat-system-time">@m.SentAt.ToLocalTime().ToString("g")</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    var alignClass = m.IsFromManager ? "justify-content-end" : "justify-content-start";
+                                    var bubbleClass = m.IsFromManager ? "bg-primary text-white" : "bg-white border";
+
+                                    <div class="d-flex @alignClass mb-2">
+                                        <div class="chat-bubble @bubbleClass">
+                                            <div class="chat-bubble-text">@m.Message</div>
+                                            <div class="chat-bubble-time">@m.SentAt.ToLocalTime().ToString("g")</div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+
+                    @if (Model.SelectedConversationID.HasValue && Model.SelectedPersonelID.HasValue)
+                    {
+                        if (convoClosed)
+                        {
+                            <div class="text-muted small mt-2">
+                                Bu sohbet kapatıldığı için mesaj gönderemezsiniz.
+                            </div>
+                        }
+                        else
+                        {
+                            <form asp-controller="Owner"
+                                  asp-action="SendConversationMessage"
+                                  method="post"
+                                  class="mt-2">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="conversationId" value="@Model.SelectedConversationID" />
+                                <input type="hidden" name="personelId" value="@Model.SelectedPersonelID" />
+
+                                <div class="position-relative">
+                                    <div class="input-group">
+                                        <button type="button"
+                                                class="btn btn-outline-secondary emoji-toggle-btn"
+                                                id="emojiToggle">
+                                            😊
+                                        </button>
+
+                                        <input type="text"
+                                               id="conversationMessage"
+                                               name="message"
+                                               class="form-control"
+                                               placeholder="Mesaj yazın…" />
+
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="bi bi-send"></i>
+                                        </button>
+                                    </div>
+
+                                    <div id="emojiPicker"
+                                         class="emoji-picker shadow-sm d-none">
+                                        <button type="button" class="emoji-item" data-emoji="😀">😀</button>
+                                        <button type="button" class="emoji-item" data-emoji="😁">😁</button>
+                                        <button type="button" class="emoji-item" data-emoji="😂">😂</button>
+                                        <button type="button" class="emoji-item" data-emoji="🤣">🤣</button>
+                                        <button type="button" class="emoji-item" data-emoji="😊">😊</button>
+                                        <button type="button" class="emoji-item" data-emoji="😍">😍</button>
+                                        <button type="button" class="emoji-item" data-emoji="😎">😎</button>
+                                        <button type="button" class="emoji-item" data-emoji="😐">😐</button>
+                                        <button type="button" class="emoji-item" data-emoji="😢">😢</button>
+                                        <button type="button" class="emoji-item" data-emoji="😡">😡</button>
+                                        <button type="button" class="emoji-item" data-emoji="👍">👍</button>
+                                        <button type="button" class="emoji-item" data-emoji="👎">👎</button>
+                                        <button type="button" class="emoji-item" data-emoji="🙏">🙏</button>
+                                        <button type="button" class="emoji-item" data-emoji="🎉">🎉</button>
+                                        <button type="button" class="emoji-item" data-emoji="✅">✅</button>
+                                        <button type="button" class="emoji-item" data-emoji="❓">❓</button>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-muted small mt-2">
+                            Mesaj göndermek için bir konuşma seçin.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.ArchivedConversations != null)
+{
+    <div class="modal fade" id="archivedConversationsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Arşivlenmiş Sohbetler</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    @if (!Model.ArchivedConversations.Any())
+                    {
+                        <div class="text-muted">
+                            Henüz arşivlenmiş sohbet yok.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-4 border-end">
+                                <div class="list-group small" id="archivedConvoList">
+                                    @for (int i = 0; i < Model.ArchivedConversations.Count; i++)
+                                    {
+                                        var c = Model.ArchivedConversations[i];
+                                        var activeClass = i == 0 ? "active" : "";
+
+                                        <button type="button"
+                                                class="list-group-item list-group-item-action archived-convo-item @activeClass"
+                                                data-archived-index="@i">
+                                            <div class="fw-semibold">@c.PersonelName</div>
+                                            <div class="text-truncate archived-last-message @(i == 0 ? "text-white" : "text-muted")">
+                                                @{
+                                                    var preview = c.LastMessage ?? "";
+                                                    if (preview.Length > 60)
+                                                    {
+                                                        preview = preview.Substring(0, 60) + "…";
+                                                    }
+                                                }
+                                                @preview
+                                            </div>
+                                            <div class="small archived-last-time @(i == 0 ? "text-white" : "text-muted")">
+                                                @c.LastSentAt.ToLocalTime().ToString("g")
+                                            </div>
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @for (int i = 0; i < Model.ArchivedConversations.Count; i++)
+                                {
+                                    var c = Model.ArchivedConversations[i];
+                                    var hiddenClass = i == 0 ? "" : "d-none";
+
+                                    <div class="archived-convo-thread @hiddenClass"
+                                         data-archived-thread-index="@i">
+                                        <div class="mb-2 fw-semibold">@c.PersonelName</div>
+
+                                        <div class="border rounded p-3 bg-light"
+                                             style="max-height: 400px; overflow:auto;">
+                                            @if (!c.Messages.Any())
+                                            {
+                                                <div class="text-muted small">
+                                                    Bu sohbet için mesaj yok.
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                @foreach (var m in c.Messages)
+                                                {
+                                                    if (m.IsSystem)
+                                                    {
+                                                        <div class="chat-system my-2">
+                                                            <span class="chat-system-text">@m.Message</span>
+                                                            <span class="chat-system-time">@m.SentAt.ToLocalTime().ToString("g")</span>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        var alignClass = m.IsFromManager ? "justify-content-end" : "justify-content-start";
+                                                        var bubbleClass = m.IsFromManager ? "bg-primary text-white" : "bg-white border";
+
+                                                        <div class="d-flex @alignClass mb-2">
+                                                            <div class="chat-bubble @bubbleClass">
+                                                                <div class="chat-bubble-text">@m.Message</div>
+                                                                <div class="chat-bubble-time">@m.SentAt.ToLocalTime().ToString("g")</div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Kapat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        // store selector => reload page with new storeId
+        document.addEventListener('DOMContentLoaded', function () {
+            var storeSelect = document.getElementById('storeSelect');
+            if (storeSelect) {
+                storeSelect.addEventListener('change', function () {
+                    var newId = this.value;
+                    if (!newId) return;
+                    var url = '@Url.Action("StoreConversations", "Owner")' + '?storeId=' + encodeURIComponent(newId);
+                    window.location.href = url;
+                });
+            }
+        });
+    </script>
+
+    <script>
+        (function () {
+            const toggle = document.getElementById("emojiToggle");
+            const picker = document.getElementById("emojiPicker");
+            const input = document.getElementById("conversationMessage");
+
+            if (toggle && picker && input) {
+                function togglePicker() {
+                    picker.classList.toggle("d-none");
+                }
+
+                toggle.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    togglePicker();
+                });
+
+                picker.addEventListener("click", function (e) {
+                    const btn = e.target.closest("[data-emoji]");
+                    if (!btn) return;
+
+                    const emoji = btn.getAttribute("data-emoji");
+                    const start = input.selectionStart ?? input.value.length;
+                    const end = input.selectionEnd ?? input.value.length;
+                    const text = input.value;
+
+                    input.value = text.slice(0, start) + emoji + text.slice(end);
+
+                    const caret = start + emoji.length;
+                    input.focus();
+                    input.setSelectionRange(caret, caret);
+                });
+
+                document.addEventListener("click", function (e) {
+                    if (picker.classList.contains("d-none")) return;
+
+                    if (!picker.contains(e.target) && !toggle.contains(e.target)) {
+                        picker.classList.add("d-none");
+                    }
+                });
+            }
+
+            // search in conversation list
+            const searchInput = document.getElementById("conversationSearchInput");
+            if (searchInput) {
+                searchInput.addEventListener("input", function () {
+                    const query = this.value.trim().toLowerCase();
+                    const items = document.querySelectorAll(
+                        ".manager-convos .list-group-flush .list-group-item"
+                    );
+
+                    items.forEach(function (item) {
+                        const name = (item.getAttribute("data-personel") || "").toLowerCase();
+
+                        if (!query || name.includes(query)) {
+                            item.classList.remove("d-none");
+                        } else {
+                            item.classList.add("d-none");
+                        }
+                    });
+                });
+            }
+
+            // archived conversation switcher
+            document.addEventListener("click", function (e) {
+                const btn = e.target.closest(".archived-convo-item");
+                if (!btn) return;
+
+                const index = btn.getAttribute("data-archived-index");
+                if (index === null) return;
+
+                document.querySelectorAll(".archived-convo-item").forEach(function (el) {
+                    el.classList.remove("active");
+                });
+                btn.classList.add("active");
+
+                document.querySelectorAll(".archived-last-message, .archived-last-time").forEach(function (el) {
+                    el.classList.remove("text-white");
+                    el.classList.add("text-muted");
+                });
+
+                btn.querySelectorAll(".archived-last-message, .archived-last-time").forEach(function (el) {
+                    el.classList.remove("text-muted");
+                    el.classList.add("text-white");
+                });
+
+                document.querySelectorAll(".archived-convo-thread").forEach(function (el) {
+                    if (el.getAttribute("data-archived-thread-index") === index) {
+                        el.classList.remove("d-none");
+                    } else {
+                        el.classList.add("d-none");
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

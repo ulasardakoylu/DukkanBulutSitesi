@@ -1,0 +1,321 @@
+﻿@model DükkanBulutSitesi.Models.Personnel.StockControlVm
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Stok Kontrol";
+    Layout = "~/Views/Shared/_PersonnelLayout.cshtml";
+}
+
+<div class="personnel-shell">
+
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+            <div class="text-uppercase small text-muted">PERSONEL PANELİ (STOK KONTROL)</div>
+            <h3 class="mb-0">Stok Kontrol</h3>
+            <div class="text-muted small">@Model.StoreName</div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header">Stokta Kalan</div>
+                <div class="card-body">
+                    <canvas id="inStockPie" height="220"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header">Seçilen Ürün</div>
+                <div class="card-body">
+
+                    @if (Model.SelectedItem != null)
+                    {
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <img src="@(string.IsNullOrWhiteSpace(Model.SelectedItem.PictureLink) ? "/img/placeholder.png" : Model.SelectedItem.PictureLink)"
+                                 onerror="this.src='/img/placeholder.png';"
+                                 style="width:64px;height:64px;object-fit:cover;border-radius:12px;" />
+                            <div class="flex-grow-1">
+                                <div class="fw-semibold">@Model.SelectedItem.ItemName</div>
+                                <div class="text-muted small">
+                                    Stok: <strong>@Model.SelectedItem.OnHand</strong> adet
+                                    <span class="mx-2">•</span>
+                                    Satış (30g): <strong>@Model.SelectedItem.SoldLast30</strong> adet
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info small mb-3">
+                            Bu dükkanda seçilecek ürün bulunamadı.
+                        </div>
+                    }
+
+                    <button class="btn btn-outline-primary w-100 mb-3"
+                            data-bs-toggle="modal"
+                            data-bs-target="#stockSearchModal">
+                        Detaylı Arama
+                    </button>
+
+                    <div class="text-muted small mb-2">7 Günlük Satış Trendi (Adet)</div>
+                    <canvas id="trendLine" height="170"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header">Satılan (Son 30 Gün) (Adet)</div>
+                <div class="card-body">
+                    <canvas id="soldPie" height="220"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="selectItemForm" asp-controller="Personnel" asp-action="SetCurrentStockItem" method="post" class="d-none">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="itemId" id="selectItemId" value="" />
+</form>
+
+<div class="modal fade" id="stockSearchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Aradığınız Ürünü Giriniz</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+                <label class="form-label text-muted small">Arama</label>
+                <input id="stockSearchInput" class="form-control" placeholder="..." />
+
+                <div class="mt-3 text-muted small">Sonuçlar</div>
+
+                <div class="d-flex align-items-center gap-2 mt-2">
+                    <button id="stockPrevBtn" type="button" class="btn btn-outline-secondary btn-sm">←</button>
+
+                    <div class="flex-grow-1">
+                        <div id="stockCardsRow" class="d-flex gap-3 justify-content-center flex-wrap"></div>
+                    </div>
+
+                    <button id="stockNextBtn" type="button" class="btn btn-outline-secondary btn-sm">→</button>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // IMPORTANT: support BOTH PascalCase + camelCase to avoid "undefined"
+            const inStock = @Html.Raw(JsonSerializer.Serialize(Model.InStockBreakdown));
+            const sold = @Html.Raw(JsonSerializer.Serialize(Model.SoldBreakdown));
+            const trend = @Html.Raw(JsonSerializer.Serialize(Model.StockTrend));
+
+            const getLabel = (x) => (x?.label ?? x?.Label ?? "");
+            const getValue = (x) => (x?.value ?? x?.Value ?? 0);
+
+            function makePie(canvasId, dataArr) {
+                const el = document.getElementById(canvasId);
+                if (!el || typeof Chart === "undefined") return;
+
+                new Chart(el, {
+                    type: "doughnut",
+                    data: {
+                        labels: dataArr.map(getLabel),
+                        datasets: [{ data: dataArr.map(getValue) }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: "bottom" },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (ctx) {
+                                        const label = ctx.label || "";
+                                        const v = ctx.parsed || 0;
+                                        return `${label}: ${v} adet`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function makeLine(canvasId, dataArr) {
+                const el = document.getElementById(canvasId);
+                if (!el || typeof Chart === "undefined") return;
+
+                new Chart(el, {
+                    type: "line",
+                    data: {
+                        labels: dataArr.map(getLabel),
+                        datasets: [{
+                            label: "Satış Adedi",
+                            data: dataArr.map(getValue),
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (ctx) {
+                                        const v = ctx.parsed.y ?? 0;
+                                        return `Satış: ${v} adet`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { precision: 0 }
+                            }
+                        }
+                    }
+                });
+            }
+
+            makePie("inStockPie", inStock);
+            makePie("soldPie", sold);
+            makeLine("trendLine", trend);
+
+            // ---------------- MODAL SEARCH ----------------
+            const input = document.getElementById("stockSearchInput");
+            const row = document.getElementById("stockCardsRow");
+            const prevBtn = document.getElementById("stockPrevBtn");
+            const nextBtn = document.getElementById("stockNextBtn");
+
+            const selectForm = document.getElementById("selectItemForm");
+            const selectInput = document.getElementById("selectItemId");
+
+            let allItems = @Html.Raw(JsonSerializer.Serialize(Model.InitialItems));
+            let page = 0;
+            const pageSize = 3; // show 3 items at once
+
+            const getItemId = (x) => (x?.itemId ?? x?.ItemID ?? 0);
+            const getItemName = (x) => (x?.itemName ?? x?.ItemName ?? "");
+            const getPic = (x) => (x?.pictureLink ?? x?.PictureLink ?? "");
+            const getOnHand = (x) => (x?.onHand ?? x?.OnHand ?? 0);
+
+            function renderCards() {
+                row.innerHTML = "";
+
+                const start = page * pageSize;
+                const slice = allItems.slice(start, start + pageSize);
+
+                slice.forEach(it => {
+                    const img = (getPic(it) || "").trim()
+                        ? getPic(it)
+                        : "/img/placeholder.png";
+
+                    const card = document.createElement("div");
+                    card.className = "border rounded p-2 text-center";
+                    card.style.width = "170px";
+
+                    card.innerHTML = `
+                        <img src="${img}"
+                             style="width:125px;height:125px;object-fit:cover;border-radius:10px;"
+                             onerror="this.src='/img/placeholder.png';" />
+                        <div class="mt-2 fw-semibold" style="font-size:.9rem;">${getItemName(it)}</div>
+                        <div class="text-muted small mt-1">Stok: <strong>${getOnHand(it)}</strong> adet</div>
+                        <button type="button" class="btn btn-primary btn-sm w-100 mt-2" data-item="${getItemId(it)}">
+                            Bu Ürünü Seç
+                        </button>
+                    `;
+
+                    card.querySelector("button").addEventListener("click", function () {
+                        const id = this.getAttribute("data-item");
+                        selectInput.value = id;
+                        selectForm.submit(); // redirects to StockControl?selectedItemId=...
+                    });
+
+                    row.appendChild(card);
+                });
+
+                prevBtn.disabled = (page <= 0);
+                nextBtn.disabled = (start + pageSize >= allItems.length);
+            }
+
+            async function doSearch(q) {
+                const url = `/Personnel/SearchStockItems?q=${encodeURIComponent(q || "")}`;
+                const res = await fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } });
+                allItems = await res.json();
+                page = 0;
+                renderCards();
+            }
+
+            let t = null;
+            input.addEventListener("input", function () {
+                clearTimeout(t);
+                t = setTimeout(() => doSearch(input.value), 250);
+            });
+
+            prevBtn.addEventListener("click", () => { if (page > 0) { page--; renderCards(); } });
+            nextBtn.addEventListener("click", () => {
+                if ((page + 1) * pageSize < allItems.length) { page++; renderCards(); }
+            });
+
+            renderCards();
+        });
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

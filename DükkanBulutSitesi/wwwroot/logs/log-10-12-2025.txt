@@ -1,0 +1,21 @@
+10-12-2025 09:21:16	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+10-12-2025 09:44:30	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+10-12-2025 09:44:37	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+10-12-2025 09:47:51	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+10-12-2025 09:47:54	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+10-12-2025 10:23:27	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+10-12-2025 10:27:09	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel number generated. RoleID=2, StoreID=1, Code=M8957458
+10-12-2025 10:44:21	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+10-12-2025 10:44:24	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+10-12-2025 10:44:40	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=10, PersonelID=0, Length=4
+10-12-2025 14:29:47	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+10-12-2025 15:09:32	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+10-12-2025 15:14:08	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+10-12-2025 15:14:12	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged in. UserID=12, Email=admin3@school.local
+10-12-2025 15:14:18	User=Dükkan3	UserId=12	IP=127.0.0.1	User logged out.
+10-12-2025 15:14:23	User=Dükkan2	UserId=11	IP=127.0.0.1	User logged in. UserID=11, Email=admin2@school.local
+10-12-2025 15:16:00	User=Dükkan2	UserId=11	IP=127.0.0.1	User logged out.
+10-12-2025 15:16:15	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+10-12-2025 15:16:47	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+10-12-2025 15:17:09	User=Anonymous	UserId=-	IP=127.0.0.1	Failed personnel registration. EmployeeNumber=M8957458, Email=admin2@school.local, Reason=Email in use
+10-12-2025 15:19:24	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

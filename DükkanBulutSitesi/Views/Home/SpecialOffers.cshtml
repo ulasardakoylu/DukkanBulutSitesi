@@ -1,0 +1,203 @@
+﻿@model DükkanBulutSitesi.Models.Store.StoreSpecialOffersVm
+
+@{
+    ViewData["Title"] = "Kampanyalar";
+    Layout = "_StorefrontLayout";
+}
+
+<div class="store-shell">
+    <!-- LEFT: sidebar -->
+    @await Html.PartialAsync("_Sidebar")
+
+    <!-- RIGHT: page content -->
+    <main class="store-main">
+        <div class="container-fluid px-0 px-md-4 py-4">
+
+            <h2 class="mb-3">Kampanyalar</h2>
+
+            <!-- TOP INFO BOX -->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+
+                    <div class="me-3 mb-2">
+                        @if (Model.ActiveOffers.Any())
+                        {
+                            var current = Model.ActiveOffers
+                            .First(a => a.SpecialOfferID == Model.SelectedOfferID);
+
+                            <div class="fw-semibold">
+                                Aktif Olan Kampanyanın Adı:
+                                <span class="text-primary">@current.Name</span>
+                            </div>
+
+                            <div class="text-muted small mt-1">
+                                Aktif Olan Kampanyanın Başlangıç ve Bitiş Tarihi:
+                                @current.Start.ToString("g") - @current.End.ToString("g")
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="fw-semibold">
+                                Şu anda bu mağaza için aktif bir kampanya bulunmamaktadır.
+                            </div>
+                        }
+
+                        <div class="text-muted small mt-1">
+                            Sonraki Kampanyanın Başlangıç Tarihi:
+                            @if (Model.NextPlannedOfferStart.HasValue)
+                            {
+                                <strong>@Model.NextPlannedOfferStart.Value.ToString("g")</strong>
+                            }
+                            else
+                            {
+                                <span>Tanımlı değil.</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- NEXT / PREV CAMPAIGN BUTTONS -->
+                    @if (Model.ActiveOffers.Any())
+                    {
+                        <div class="d-flex gap-2 mb-2">
+                            @if (Model.PreviousOfferID.HasValue)
+                            {
+                                <a asp-action="SpecialOffers"
+                                   asp-route-id="@Model.PreviousOfferID"
+                                   class="btn btn-outline-primary btn-sm">
+                                    &laquo; Önceki Kampanya
+                                </a>
+                            }
+
+                            @if (Model.NextOfferID.HasValue)
+                            {
+                                <a asp-action="SpecialOffers"
+                                   asp-route-id="@Model.NextOfferID"
+                                   class="btn btn-outline-primary btn-sm">
+                                    Sonraki Kampanya &raquo;
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (!Model.ActiveOffers.Any())
+            {
+                <div class="alert alert-info">
+                    Şu anda görüntüleyebileceğiniz kampanya bulunmuyor.
+                </div>
+            }
+            else
+            {
+                var selected = Model.ActiveOffers.First(a => a.SpecialOfferID == Model.SelectedOfferID);
+
+                <!-- CAMPAIGN DESCRIPTION -->
+                @if (!string.IsNullOrWhiteSpace(selected.Description))
+                {
+                    <div class="mb-3">
+                        <h5>Kampanya Açıklaması</h5>
+                        <p class="text-muted mb-0">@selected.Description</p>
+                    </div>
+                }
+
+                <!-- PRODUCTS AFFECTED BY THIS CAMPAIGN -->
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Kampanyadan Etkilenen Ürünler</h5>
+                    </div>
+
+                    <div class="card-body">
+                        @if (!selected.Items.Any())
+                        {
+                            <div class="text-muted">
+                                Bu kampanyaya bağlı ürün bulunamadı.
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                @foreach (var item in selected.Items)
+                                {
+                                    <div class="col">
+                                        <a asp-controller="Product"
+                                           asp-action="Details"
+                                           asp-route-id="@item.ItemID"
+                                           class="text-decoration-none text-reset">
+                                            <div class="card h-100 border-0 shadow-sm">
+                                                @if (!string.IsNullOrWhiteSpace(item.PictureLink))
+                                                {
+                                                    <img src="@item.PictureLink"
+                                                         class="card-img-top"
+                                                         alt="@item.ItemName" />
+                                                }
+                                                <div class="card-body d-flex flex-column">
+                                                    <h6 class="card-title">@item.ItemName</h6>
+
+                                                    <div class="mt-auto">
+                                                        <div class="small text-muted">
+                                                            Eski Fiyat:
+                                                            <span class="text-decoration-line-through">
+                                                                @item.OriginalPrice.ToString("0.00") ₺
+                                                            </span>
+                                                        </div>
+                                                        <div class="fw-bold text-success">
+                                                            Yeni Fiyat: @item.NewPrice.ToString("0.00") ₺
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+    </main>
+</div>
+
+@section Scripts{
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

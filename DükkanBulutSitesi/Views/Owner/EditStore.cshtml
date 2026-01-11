@@ -1,0 +1,138 @@
+﻿@model DükkanBulutSitesi.Models.Owner.OwnerEditStoreVm
+
+@{
+    ViewData["Title"] = Model.StoreID.HasValue ? "Dükkanı Düzenle" : "Yeni Dükkan";
+    Layout = "_StorefrontLayout";
+}
+
+<div class="container py-4">
+
+    <a asp-action="Dashboard"
+       asp-controller="Owner"
+       class="btn btn-link text-decoration-none mb-3">
+        <i class="bi bi-arrow-left"></i>
+        Dükkanlar listesine dön
+    </a>
+
+    <h2 class="mb-3">@ViewData["Title"]</h2>
+
+    <form asp-action="SaveStore"
+          asp-controller="Owner"
+          method="post"
+          enctype="multipart/form-data"
+          class="card shadow-sm">
+        @Html.AntiForgeryToken()
+
+        <div class="card-body">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            @if (Model.StoreID.HasValue)
+            {
+                <input type="hidden" asp-for="StoreID" />
+            }
+
+            <div class="mb-3">
+                <label asp-for="StoreName" class="form-label"></label>
+                <input asp-for="StoreName" class="form-control" />
+                <span asp-validation-for="StoreName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="StoreDescription" class="form-label"></label>
+                <textarea asp-for="StoreDescription" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="StoreDescription" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="StoreAddress" class="form-label"></label>
+                <textarea asp-for="StoreAddress" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="StoreAddress" class="text-danger"></span>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label asp-for="StoreOpenedAt" class="form-label"></label>
+                    <input asp-for="StoreOpenedAt" class="form-control" />
+                    <span asp-validation-for="StoreOpenedAt" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-check form-switch">
+                        <input asp-for="IsActive" class="form-check-input" />
+                        <label asp-for="IsActive" class="form-check-label"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="StorePictureFile" class="form-label"></label>
+                <input asp-for="StorePictureFile" type="file" class="form-control" accept="image/*" />
+                <span asp-validation-for="StorePictureFile" class="text-danger"></span>
+
+                @if (!string.IsNullOrWhiteSpace(Model.ExistingPictureLink))
+                {
+                    <div class="mt-3">
+                        <p class="mb-1 text-muted">Mevcut Fotoğraf:</p>
+                        <img src="@Model.ExistingPictureLink"
+                             alt="Dükkan Fotoğrafı"
+                             class="img-thumbnail"
+                             style="max-height: 180px;" />
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="card-footer d-flex justify-content-between">
+            <a asp-action="Dashboard" asp-controller="Owner" class="btn btn-outline-secondary">
+                İptal
+            </a>
+            <button type="submit" class="btn btn-primary">
+                Kaydet
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

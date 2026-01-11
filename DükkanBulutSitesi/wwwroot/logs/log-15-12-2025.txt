@@ -1,0 +1,57 @@
+15-12-2025 09:39:36	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+15-12-2025 10:13:44	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+15-12-2025 10:13:49	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+15-12-2025 10:14:19	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+15-12-2025 10:14:23	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+15-12-2025 10:14:37	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+15-12-2025 10:14:40	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+15-12-2025 10:14:52	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+15-12-2025 10:14:55	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+15-12-2025 10:35:09	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+15-12-2025 10:35:13	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+15-12-2025 10:35:28	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+15-12-2025 10:35:33	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+15-12-2025 20:20:14	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+15-12-2025 20:20:51	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+15-12-2025 20:20:57	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+15-12-2025 20:24:16	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel picture changed. UserID=7, Old=/img/personnel/1ad20858-41b7-46fe-8b0f-73ab7364cf42.jpg, New=/img/personnel/b6132a39-5322-4afa-973f-27caa0dc670a.jpg
+15-12-2025 20:24:16	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+15-12-2025 20:24:48	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+15-12-2025 20:41:37	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+15-12-2025 20:41:56	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Work history deleted. PersonelID=3, HistoryID=8, Title=Menajer
+15-12-2025 20:42:34	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Work history created. PersonelID=3, HistoryID=11, Title=Kasiyer
+15-12-2025 20:42:44	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Education deleted. PersonelID=3, EducationID=8, School=Polinas Teknik Meslek Lisesi
+15-12-2025 20:43:24	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=3, Name=Emre Duran
+15-12-2025 20:44:00	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Education created. PersonelID=3, EducationID=10, School=Atatürk Anadolu Lisesi
+15-12-2025 20:44:09	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Warning deleted. PersonelID=3, WarningID=11, Level=danger
+15-12-2025 20:44:12	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Warning deleted. PersonelID=3, WarningID=8, Level=warning
+15-12-2025 20:44:31	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Warning created. PersonelID=3, WarningID=12, Level=warning
+15-12-2025 20:54:30	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel picture set for the first time. UserID=10, New=/img/personnel/3146b154-43b8-4039-b2c8-0711c36c47b5.jpg
+15-12-2025 20:54:31	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel updated. PersonelID=6, Name=Ayşe Demir
+15-12-2025 20:56:21	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Work history created. PersonelID=6, HistoryID=12, Title=Güvenlik
+15-12-2025 20:57:54	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Education created. PersonelID=6, EducationID=11, School=Şişli Meslek Lisesi
+15-12-2025 21:43:00	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+15-12-2025 21:44:38	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+15-12-2025 21:50:24	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+15-12-2025 21:52:29	User=Admin123	UserId=2	IP=127.0.0.1	Certificate created. PersonelID=3, CertificateID=8, Name=Kasa Kullanımı ve POS Sistemleri
+15-12-2025 21:53:37	User=Admin123	UserId=2	IP=127.0.0.1	Personnel picture changed. UserID=6, Old=/img/personnel/6f6c63d5-63a4-425b-9887-a4d727acf738.png, New=/img/personnel/23b9808b-e6c3-40cd-87a6-6f2412b04e8f.jpg
+15-12-2025 21:53:37	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=2, Name=Murat Çetin
+15-12-2025 21:53:45	User=Admin123	UserId=2	IP=127.0.0.1	Work history deleted. PersonelID=2, HistoryID=2, Title=Test22
+15-12-2025 21:53:48	User=Admin123	UserId=2	IP=127.0.0.1	Education deleted. PersonelID=2, EducationID=5, School=hi
+15-12-2025 21:53:51	User=Admin123	UserId=2	IP=127.0.0.1	Education deleted. PersonelID=2, EducationID=4, School=daswd
+15-12-2025 21:53:53	User=Admin123	UserId=2	IP=127.0.0.1	Education deleted. PersonelID=2, EducationID=2, School=ffsaaq2131
+15-12-2025 21:54:00	User=Admin123	UserId=2	IP=127.0.0.1	Certificate deleted. PersonelID=2, CertificateID=4, Name=awdsa
+15-12-2025 21:54:41	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=6, StoreID=1, Name=Video + Yumurta
+15-12-2025 21:54:54	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=6, StoreID=1, Name=Video + Yumurta
+15-12-2025 21:55:14	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=7, StoreID=1, Name=gelecek
+15-12-2025 23:05:32	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+15-12-2025 23:05:55	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused (active only). ConversationID=21, TargetPersonelID=6, FirstMessageLength=2
+15-12-2025 23:06:00	User=Admin123	UserId=2	IP=127.0.0.1	Manager->Owner conversation started/reused. ConversationID=17, TargetOwnerUserId=9
+15-12-2025 23:07:56	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused (active only). ConversationID=9, TargetPersonelID=4, FirstMessageLength=3
+15-12-2025 23:08:14	User=Admin123	UserId=2	IP=127.0.0.1	Conversation soft-deleted by user. ConversationID=21, UserID=2
+15-12-2025 23:09:42	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+15-12-2025 23:09:55	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+15-12-2025 23:11:36	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+15-12-2025 23:11:40	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+15-12-2025 23:28:21	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+15-12-2025 23:28:24	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

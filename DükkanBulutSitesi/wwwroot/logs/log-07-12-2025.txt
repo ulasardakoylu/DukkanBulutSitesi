@@ -1,0 +1,27 @@
+07-12-2025 13:18:41	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+07-12-2025 13:21:43	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+07-12-2025 13:21:47	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+07-12-2025 13:41:58	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=2, Name=Ekmek
+07-12-2025 13:42:02	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=12, Name=Kaşar Peyniri
+07-12-2025 13:42:05	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=4, Name=Makarna 500g
+07-12-2025 13:42:10	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=5, Name=Su 1.5L
+07-12-2025 13:42:13	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=1, Name=Süt 1L
+07-12-2025 13:42:16	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=1, Name=Süt 1L
+07-12-2025 13:42:19	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=10, Name=Test11
+07-12-2025 13:42:22	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=13, Name=Video1
+07-12-2025 13:42:26	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=14, Name=Video2
+07-12-2025 13:42:29	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=3, Name=Yumurta 10lu
+07-12-2025 13:42:53	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=12, Name=Kaşar Peyniri
+07-12-2025 13:42:57	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=4, Name=Makarna 500g
+07-12-2025 13:43:01	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=5, Name=Su 1.5L
+07-12-2025 13:43:06	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=1, Name=Süt 1L
+07-12-2025 13:43:09	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=10, Name=Test11
+07-12-2025 13:43:18	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=13, Name=Video1
+07-12-2025 13:43:22	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=14, Name=Video2
+07-12-2025 13:43:28	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=3, Name=Yumurta 10lu
+07-12-2025 17:59:52	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+07-12-2025 19:56:41	User=Admin123	UserId=2	IP=127.0.0.1	Special offer saved. OfferID=1, StoreID=1, Name=Ale
+07-12-2025 21:07:22	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=4, Name=Ayşe222 Test
+07-12-2025 21:09:02	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+07-12-2025 21:09:07	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+07-12-2025 21:28:06	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Conversation soft-deleted by user. ConversationID=6, UserID=9

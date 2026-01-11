@@ -1,0 +1,239 @@
+﻿@model DükkanBulutSitesi.Models.Owner.ManagerActivityLogVm
+@{
+    ViewData["Title"] = "Yönetici Logları";
+    Layout = "_StoreLayout";
+
+    string BuildUrl(int page, int pageSize)
+    {
+        return Url.Action("StoreManagerActivityLog", "Owner", new
+        {
+            storeId = Model.StoreIdContext,
+            filterStoreId = Model.FilterStoreId,
+            filterManagerUserId = Model.FilterManagerUserId,
+            filterAction = Model.FilterAction,
+            page,
+            pageSize
+        })!;
+    }
+}
+
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <div class="row g-2 align-items-end">
+            <div class="col-12 col-md-6 col-lg-3">
+                <label class="form-label">Dükkan</label>
+                <select id="filterStore" class="form-select">
+                    @foreach (var opt in Model.StoreOptions)
+                    {
+                        <option value="@opt.Value" selected="@opt.Selected">@opt.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <label class="form-label">Yönetici</label>
+                <select id="filterManager" class="form-select">
+                    @foreach (var opt in Model.ManagerOptions)
+                    {
+                        <option value="@opt.Value" selected="@opt.Selected">@opt.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <label class="form-label">Aksiyon</label>
+                <select id="filterAction" class="form-select">
+                    @foreach (var opt in Model.ActionOptions)
+                    {
+                        <option value="@opt.Value" selected="@opt.Selected">@opt.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <label class="form-label">Sayfa Boyutu</label>
+                <select id="pageSize" class="form-select">
+                    @{
+                        int[] sizes = new[] { 25, 50, 100, 200 };
+                        foreach (var s in sizes)
+                        {
+                            <option value="@s" selected="@(s == Model.PageSize)">@s</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row g-2 mt-2">
+            <div class="col-12 text-lg-end">
+                <div class="small text-muted">
+                    Toplam @Model.TotalCount kayıt • Sayfa @Model.Page / @Model.TotalPages
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="fw-semibold">Log Kayıtları</div>
+        <div class="small text-muted">
+            Bu sayfada @Model.Rows.Count kayıt
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" id="logTable">
+            <thead class="table-light">
+                <tr>
+                    <th style="width:190px;">Zaman</th>
+                    <th style="width:200px;">Dükkan</th>
+                    <th style="width:220px;">Yönetici</th>
+                    <th style="width:220px;">Aksiyon</th>
+                    <th>Detay</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model.Rows)
+                {
+                    <tr>
+                        <td class="text-muted small">@r.FriendlyTime</td>
+                        <td>@r.StoreName</td>
+                        <td>@r.ManagerName</td>
+                        <td class="fw-semibold">@r.FriendlyAction</td>
+                        <td>@r.FriendlyDetail</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="card-footer d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+            <div class="small text-muted">
+                @{
+                    var from = Model.TotalCount == 0 ? 0 : ((Model.Page - 1) * Model.PageSize + 1);
+                    var to = (Model.Page - 1) * Model.PageSize + Model.Rows.Count;
+                }
+                Gösterilen: @from - @to / @Model.TotalCount
+            </div>
+
+            <nav aria-label="Log sayfalama">
+                <ul class="pagination mb-0">
+                    <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                        <a class="page-link" href="@(Model.Page <= 1 ? "#" : BuildUrl(Model.Page - 1, Model.PageSize))">«</a>
+                    </li>
+
+                    @{
+                        int start = Math.Max(1, Model.Page - 2);
+                        int end = Math.Min(Model.TotalPages, Model.Page + 2);
+
+                        if (start > 1)
+                        {
+                            <li class="page-item"><a class="page-link" href="@BuildUrl(1, Model.PageSize)">1</a></li>
+                            if (start > 2)
+                            {
+                                <li class="page-item disabled"><span class="page-link">…</span></li>
+                            }
+                        }
+
+                        for (int p = start; p <= end; p++)
+                        {
+                            <li class="page-item @(p == Model.Page ? "active" : "")">
+                                <a class="page-link" href="@BuildUrl(p, Model.PageSize)">@p</a>
+                            </li>
+                        }
+
+                        if (end < Model.TotalPages)
+                        {
+                            if (end < Model.TotalPages - 1)
+                            {
+                                <li class="page-item disabled"><span class="page-link">…</span></li>
+                            }
+                            <li class="page-item"><a class="page-link" href="@BuildUrl(Model.TotalPages, Model.PageSize)">@Model.TotalPages</a></li>
+                        }
+                    }
+
+                    <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+                        <a class="page-link" href="@(Model.Page >= Model.TotalPages ? "#" : BuildUrl(Model.Page + 1, Model.PageSize))">»</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const storeSel = document.getElementById('filterStore');
+            const managerSel = document.getElementById('filterManager');
+            const actionSel = document.getElementById('filterAction');
+            const pageSizeSel = document.getElementById('pageSize');
+
+            function navigateToFirstPage() {
+                const qs = new URLSearchParams(window.location.search);
+
+                qs.set('storeId', '@Model.StoreIdContext');
+                qs.set('filterStoreId', storeSel.value || "0");
+                qs.set('filterManagerUserId', managerSel.value || "0");
+                qs.set('filterAction', actionSel.value || "");
+
+                // ensure search param is removed if it exists in old URLs
+                qs.delete('q');
+
+                qs.set('page', '1');
+                qs.set('pageSize', pageSizeSel.value || '@Model.PageSize');
+
+                window.location.href = window.location.pathname + '?' + qs.toString();
+            }
+
+            storeSel.addEventListener('change', navigateToFirstPage);
+            managerSel.addEventListener('change', navigateToFirstPage);
+            actionSel.addEventListener('change', navigateToFirstPage);
+            pageSizeSel.addEventListener('change', navigateToFirstPage);
+        })();
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

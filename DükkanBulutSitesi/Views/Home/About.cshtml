@@ -1,0 +1,142 @@
+﻿@model DükkanBulutSitesi.Models.Store.StoreAboutVm
+@{
+    ViewData["Title"] = "Dükkan Hakkında";
+    Layout = "_StorefrontLayout";
+}
+
+<div class="store-shell">
+    <!-- LEFT: sidebar -->
+    @await Html.PartialAsync("_Sidebar")
+
+    <!-- RIGHT: page content -->
+    <main class="store-main">
+        <div class="container-fluid px-0 px-md-4 py-4">
+
+            <h2 class="mb-3 text-center">Dükkan Hakkında Bilgiler</h2>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    <!-- Top info: name, date, owners, picture -->
+                    <div class="d-flex flex-wrap mb-3 align-items-center">
+                        <div class="flex-grow-1">
+                            <h4 class="mb-2">@Model.StoreName</h4>
+
+                            <p class="mb-1">
+                                <strong>Dükkan Açılış Tarihi:</strong>
+                                @Model.StoreOpenedAt.ToString("dd.MM.yyyy")
+                            </p>
+
+                            <p class="mb-1">
+                                <strong>Dükkan Sahibi / Sahipleri:</strong>
+                                @if (Model.OwnerNames.Any())
+                                {
+                                    @string.Join(", ", Model.OwnerNames)
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Tanımlı değil</span>
+                                }
+                            </p>
+                        </div>
+
+                        <div class="ms-auto" style="width: 140px; height: 140px;">
+                            <div class="border rounded d-flex align-items-center justify-content-center bg-light"
+                                 style="width:100%;height:100%;overflow:hidden;">
+                                @if (!string.IsNullOrWhiteSpace(Model.StorePictureLink))
+                                {
+                                    <img src="@Model.StorePictureLink"
+                                         alt="@Model.StoreName"
+                                         style="max-width:100%;max-height:100%;object-fit:cover;" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted small text-center px-2">
+                                        Dükkan görseli yok
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <h5 class="mb-2">Dükkan ile İlgili Açıklama</h5>
+                        <div class="border rounded p-2" style="min-height:80px;">
+                            @if (!string.IsNullOrWhiteSpace(Model.StoreDescription))
+                            {
+                                @Model.StoreDescription
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Bu mağaza için henüz açıklama eklenmemiştir.
+                                </span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="mb-2">
+                        <h5 class="mb-1">Dükkanın Yeri</h5>
+                        <p class="text-muted mb-0">
+                            @Model.StoreAddress
+                        </p>
+                        <a target="_blank"
+                           class="btn btn-primary mt-2 px-4 py-2 shadow-sm"
+                           style="border-radius: 25px; font-weight: 600;"
+                           href="https://www.google.com/maps/search/@Uri.EscapeDataString(Model.StoreAddress)">
+                            <i class="bi bi-geo-alt-fill me-1"></i> Haritada Aç
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@section Scripts{
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

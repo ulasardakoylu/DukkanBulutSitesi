@@ -1,0 +1,767 @@
+﻿@model DükkanBulutSitesi.Models.Manager.PersonnelManagementVm
+@{
+    ViewData["Title"] = "Personeller";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="mgr-main">
+    <h2 class="mb-3">Personeller</h2>
+
+    <div class="row">
+
+        <!-- LEFT: Personnel list -->
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-header">Personel Listesi</div>
+
+                <!-- NEW: search bar -->
+                <div class="p-2 border-top">
+                    <input type="text"
+                           id="personelSearchInput"
+                           class="form-control form-control-sm"
+                           placeholder="Personel ara…">
+                </div>
+
+                <div class="px-2 pb-2">
+                    <div class="btn-group w-100" role="group">
+                        <a class="btn btn-sm @(Model.StatusFilter == "all" ? "btn-primary" : "btn-outline-primary")"
+                           asp-action="Personnel"
+                           asp-controller="Manager"
+                           asp-route-status="all">
+                            Tümü
+                        </a>
+                        <a class="btn btn-sm @(Model.StatusFilter == "active" ? "btn-primary" : "btn-outline-primary")"
+                           asp-action="Personnel"
+                           asp-controller="Manager"
+                           asp-route-status="active">
+                            Aktif
+                        </a>
+                        <a class="btn btn-sm @(Model.StatusFilter == "inactive" ? "btn-primary" : "btn-outline-primary")"
+                           asp-action="Personnel"
+                           asp-controller="Manager"
+                           asp-route-status="inactive">
+                            Aktif Değil
+                        </a>
+                    </div>
+                </div>
+
+                <div class="list-group list-group-flush">
+                    @foreach (var p in Model.Personnel)
+                    {
+                        var active = (Model.Selected?.PersonelID == p.PersonelID);
+                        <a asp-action="Personnel"
+                           asp-controller="Manager"
+                           asp-route-id="@p.PersonelID"
+                           class="list-group-item list-group-item-action @(active ? "active" : "")"
+                           data-name="@p.DisplayName.ToLowerInvariant()">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>@p.DisplayName</span>
+
+                                <div class="d-flex align-items-center gap-2">
+                                    <small class="@(active ? "text-white" : "text-muted")">@p.RoleName</small>
+
+                                    <small class="badge @(p.IsActive ? "bg-success" : "bg-secondary")">
+                                        @(p.IsActive ? "Aktif" : "Aktif Değil")
+                                    </small>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Personnel detail -->
+        <div class="col-md-9">
+            @if (Model.Selected == null)
+            {
+                <div class="alert alert-info">Bir personel seçiniz.</div>
+            }
+            else
+            {
+                var s = Model.Selected;
+
+                <!-- ===================== PROFIL / TEMEL BİLGİLER ===================== -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form asp-action="SavePersonnel"
+                              asp-controller="Manager"
+                              method="post"
+                              enctype="multipart/form-data">
+                            @Html.AntiForgeryToken()
+                            <input asp-for="Selected.PersonelID" type="hidden" />
+                            <input asp-for="Selected.PersonelNumber" type="hidden" />
+
+                            <div class="row mb-4">
+                                <div class="col-md-3 d-flex flex-column align-items-center">
+                                    @{
+                                        var imgSrc = string.IsNullOrWhiteSpace(s.ProfilePictureLink)
+                                        ? Url.Content("~/img/placeholder.png")
+                                        : s.ProfilePictureLink;
+                                    }
+                                    <img src="@imgSrc"
+                                         class="rounded-circle mb-2"
+                                         style="width:120px;height:120px;object-fit:cover;"
+                                         alt="Profil" />
+
+                                    <div class="text-muted mb-2">
+                                        Hoşgeldin @(s.FirstName ?? "[TEMPLATE]")
+                                    </div>
+
+                                    <div class="w-100">
+                                        <label class="form-label small mb-1">Profil Fotoğrafı</label>
+                                        <input asp-for="Selected.ProfilePictureFile"
+                                               type="file"
+                                               accept="image/*"
+                                               class="form-control form-control-sm" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-9">
+                                    <div class="row mb-3">
+                                        <div class="col-md-8">
+                                            <label class="form-label">Adı ve Soyadı</label>
+                                            <div class="input-group">
+                                                <input asp-for="Selected.FirstName" class="form-control" placeholder="Ad" />
+                                                <input asp-for="Selected.LastName" class="form-control" placeholder="Soyad" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Personel Numarası</label>
+                                            <input asp-for="Selected.PersonelNumber" class="form-control" readonly />
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">T.C. Kimlik Numarası</label>
+                                            <input asp-for="Selected.TcKimlikNo" class="form-control" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">E-posta</label>
+                                            <input asp-for="Selected.UserEmail" class="form-control" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Yeni Şifre (boş bırak = değişme)</label>
+                                            <input asp-for="Selected.NewPassword" class="form-control" type="password" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Doğum Tarihi</label>
+                                            <input asp-for="Selected.BirthDate" type="date" class="form-control" />
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">İşe Girdiği Tarih</label>
+                                            <input asp-for="Selected.HireDate"
+                                                   type="date"
+                                                   class="form-control"
+                                                   id="hireDateInput" />
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">İşten Çıkış Tarihi</label>
+                                            <input asp-for="Selected.ExitDate"
+                                                   type="date"
+                                                   class="form-control"
+                                                   id="exitDateInput" />
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Maaş</label>
+                                            <input asp-for="Selected.Salary" type="number" step="0.01" min="0" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end mb-2">
+                                        <a asp-action="PersonnelPdf"
+                                           asp-controller="Manager"
+                                           asp-route-id="@s.PersonelID"
+                                           class="btn btn-outline-secondary">
+                                            Bilgileri PDF olarak yükle
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">
+                                    Değişiklikleri Kaydet
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ===================== İŞ GEÇMİŞİ ===================== -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">İş Geçmişi</h5>
+                        </div>
+
+                        @if (s.Histories.Any())
+                        {
+                            <div class="list-group mb-3">
+                                @foreach (var h in s.Histories.OrderByDescending(x => x.Start))
+                                {
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <strong>@(string.IsNullOrWhiteSpace(h.Title) ? "İş Kaydı" : h.Title)</strong><br />
+                                                <small class="text-muted">
+                                                    @h.Start.ToString("dd.MM.yyyy")
+                                                    @if (h.End.HasValue)
+                                                    {
+                                                        @: - @h.End.Value.ToString("dd.MM.yyyy")
+                                                    }
+                                                </small>
+                                                @if (!string.IsNullOrWhiteSpace(h.Description))
+                                                {
+                                                    <div class="small text-muted">@h.Description</div>
+                                                }
+                                            </div>
+
+                                            <form asp-action="DeleteHistory"
+                                                  asp-controller="Manager"
+                                                  method="post"
+                                                  class="ms-2">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@h.PersonelHistoryID" />
+                                                <input type="hidden" name="personelId" value="@s.PersonelID" />
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        title="Sil"
+                                                        onclick="return confirm('Bu iş geçmişi kaydını silmek istiyor musunuz?');">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-light border small mb-3">
+                                Bu personele ait kayıtlı iş geçmişi yok.
+                            </div>
+                        }
+
+                        <form asp-action="SaveHistory" asp-controller="Manager" method="post" class="border rounded p-2">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="PersonelHistoryID" value="0" />
+                            <input type="hidden" name="PersonelID" value="@s.PersonelID" />
+
+                            <div class="row g-2 align-items-center">
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Pozisyon / Başlık</label>
+                                    <input type="text" class="form-control" name="Title" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Başlama</label>
+                                    <input type="date" class="form-control" name="Start" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Bitiş</label>
+                                    <input type="date" class="form-control" name="End" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Açıklama</label>
+                                    <textarea class="form-control" name="Description" rows="1"></textarea>
+                                </div>
+                                <div class="col-md-12 mt-2 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-sm btn-success">Yeni İş Ekle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ===================== EĞİTİM GEÇMİŞİ ===================== -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="mb-2">Eğitim Geçmişi</h5>
+
+                        @if (s.Educations.Any())
+                        {
+                            <div class="list-group mb-3">
+                                @foreach (var e in s.Educations.OrderByDescending(x => x.Start))
+                                {
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <strong>@e.School</strong><br />
+                                                <small class="text-muted">
+                                                    @if (e.Start != default)
+                                                    {
+                                                        @e.Start.ToString("dd.MM.yyyy")
+                                                    }
+                                                    @if (e.End.HasValue)
+                                                    {
+                                                        @: - @e.End.Value.ToString("dd.MM.yyyy")
+                                                    }
+                                                </small>
+                                                @if (!string.IsNullOrWhiteSpace(e.Description))
+                                                {
+                                                    <div class="small text-muted">@e.Description</div>
+                                                }
+                                            </div>
+
+                                            <form asp-action="DeleteEducation"
+                                                  asp-controller="Manager"
+                                                  method="post"
+                                                  class="ms-2">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@e.PersonelEducationID" />
+                                                <input type="hidden" name="personelId" value="@s.PersonelID" />
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        title="Sil"
+                                                        onclick="return confirm('Bu eğitim kaydını silmek istiyor musunuz?');">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-light border small mb-3">
+                                Bu personele ait eğitim kaydı bulunmuyor.
+                            </div>
+                        }
+
+                        <form asp-action="SaveEducation" asp-controller="Manager" method="post" class="border rounded p-2">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="PersonelEducationID" value="0" />
+                            <input type="hidden" name="PersonelID" value="@s.PersonelID" />
+
+                            <div class="row g-2 align-items-center">
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Okul</label>
+                                    <input type="text" class="form-control" name="School" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Başlama</label>
+                                    <input type="date" class="form-control" name="Start" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Bitiş</label>
+                                    <input type="date" class="form-control" name="End" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Açıklama</label>
+                                    <textarea class="form-control" name="Description" rows="1"></textarea>
+                                </div>
+                                <div class="col-md-12 mt-2 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-sm btn-success">Yeni Eğitim Ekle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ===================== SERTİFİKALAR ===================== -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="mb-2">Sahip Olduğu Sertifikalar</h5>
+
+                        @if (s.Certificates.Any())
+                        {
+                            <div class="list-group mb-3">
+                                @foreach (var c in s.Certificates.OrderByDescending(x => x.Start))
+                                {
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <strong>@c.CertificateName</strong><br />
+                                                <small class="text-muted">
+                                                    @if (c.Start != default)
+                                                    {
+                                                        @c.Start.ToString("dd.MM.yyyy")
+                                                    }
+                                                    @if (c.End.HasValue)
+                                                    {
+                                                        @: - @c.End.Value.ToString("dd.MM.yyyy")
+                                                    }
+                                                    @if (!string.IsNullOrWhiteSpace(c.Place))
+                                                    {
+                                                        @:  •  @c.Place
+                                                    }
+                                                </small>
+                                                @if (!string.IsNullOrWhiteSpace(c.Description))
+                                                {
+                                                    <div class="small text-muted">@c.Description</div>
+                                                }
+                                            </div>
+
+                                            <form asp-action="DeleteCertificate"
+                                                  asp-controller="Manager"
+                                                  method="post"
+                                                  class="ms-2">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@c.PersonelCertificateID" />
+                                                <input type="hidden" name="personelId" value="@s.PersonelID" />
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        title="Sil"
+                                                        onclick="return confirm('Bu sertifikayı silmek istiyor musunuz?');">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-light border small mb-3">
+                                Bu personele ait sertifika kaydı bulunmuyor.
+                            </div>
+                        }
+
+                        <form asp-action="SaveCertificate" asp-controller="Manager" method="post" class="border rounded p-2">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="PersonelCertificateID" value="0" />
+                            <input type="hidden" name="PersonelID" value="@s.PersonelID" />
+
+                            <div class="row g-2 align-items-center">
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Sertifika</label>
+                                    <input type="text" class="form-control" name="CertificateName" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Başlama</label>
+                                    <input type="date" class="form-control" name="Start" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Bitiş</label>
+                                    <input type="date" class="form-control" name="End" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label mb-1">Açıklama</label>
+                                    <textarea class="form-control" name="Description" rows="1"></textarea>
+                                </div>
+                                <div class="col-md-12 mt-2 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-sm btn-success">Yeni Sertifika Ekle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ===================== UYARILAR (ÖZET + MODAL) ===================== -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>Uyarılar</h5>
+                        <p class="small text-muted mb-2">
+                            Bu personele ait @s.Warnings.Count uyarı var.
+                        </p>
+
+                        <button type="button"
+                                class="btn btn-outline-warning btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#warningModal">
+                            Uyarı Listesi
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===================== UYARI MODAL ===================== -->
+                <div class="modal fade" id="warningModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="warningModalTitle">Uyarı Listesi</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Kapat"></button>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <!-- SCREEN: LIST -->
+                                <div id="warningsView-list">
+                                    @if (s.Warnings.Any())
+                                    {
+                                        <div class="list-group mb-3">
+                                            @foreach (var w in s.Warnings.OrderByDescending(x => x.Date))
+                                            {
+                                                var iconClass = w.Level == "danger"
+                                                ? "bi-exclamation-octagon-fill text-danger"
+                                                : "bi-exclamation-triangle-fill text-warning";
+
+                                                <button type="button"
+                                                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                                        onclick="openWarningDetail(this)"
+                                                        data-warning-id="@w.PersonelWarningID"
+                                                        data-warning-personel="@w.PersonelID"
+                                                        data-warning-date="@w.Date.ToString("yyyy-MM-dd")"
+                                                        data-warning-text="@System.Net.WebUtility.HtmlEncode(w.WarningText)"
+                                                        data-warning-level="@w.Level"
+                                                        data-warning-givenby="@System.Net.WebUtility.HtmlEncode(w.GivenBy)">
+                                                    <div>
+                                                        <div class="fw-semibold">
+                                                            @w.Date.ToString("dd.MM.yyyy")
+                                                        </div>
+                                                        <div class="small text-muted text-truncate" style="max-width: 420px;">
+                                                            @w.WarningText
+                                                        </div>
+                                                        <div class="small text-muted">
+                                                            Kim Tarafından: @w.GivenBy
+                                                        </div>
+                                                    </div>
+                                                    <span class="ms-3">
+                                                        <i class="bi @iconClass"></i>
+                                                    </span>
+                                                </button>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-light border mb-3">
+                                            Bu personele ait kayıtlı uyarı bulunmuyor.
+                                        </div>
+                                    }
+
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="openWarningAdd()">
+                                            Uyarı Ekle
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- SCREEN: ADD -->
+                                <div id="warningsView-add" class="d-none">
+                                    <form asp-action="SaveWarning" asp-controller="Manager" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="PersonelWarningID" value="0" />
+                                        <input type="hidden" name="PersonelID" value="@s.PersonelID" />
+                                        <input type="hidden" name="GivenBy"
+                                               value="@User.Identity?.Name" />
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Tarih</label>
+                                            <input type="date" class="form-control"
+                                                   name="Date"
+                                                   value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Detay</label>
+                                            <textarea class="form-control" name="WarningText" rows="4"></textarea>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label d-block">Uyarı Derecesi</label>
+                                            <div class="d-flex gap-3">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="Level" value="warning" checked />
+                                                    <i class="bi bi-exclamation-triangle-fill text-warning"></i> Uyarı
+                                                </label>
+
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="Level" value="danger" />
+                                                    <i class="bi bi-exclamation-octagon-fill text-danger"></i> Kritik
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                    onclick="showWarningView('list')">
+                                                Geri
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">
+                                                Uyarı Ekle
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- SCREEN: DETAIL -->
+                                <div id="warningsView-detail" class="d-none">
+                                    <form asp-action="DeleteWarning" asp-controller="Manager" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" id="warningDetailId" name="id" value="" />
+                                        <input type="hidden" id="warningDetailPersonelId"
+                                               name="personelId" value="@s.PersonelID" />
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Veren</label>
+                                            <input type="text" class="form-control"
+                                                   id="warningDetailGivenBy" readonly />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Tarih</label>
+                                            <input type="date" class="form-control"
+                                                   id="warningDetailDate" readonly />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Detay</label>
+                                            <textarea class="form-control" rows="4"
+                                                  id="warningDetailText" readonly></textarea>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label d-block">Derece</label>
+                                            <span id="warningDetailLevelBadge" class="badge bg-warning text-dark">
+                                                Uyarı
+                                            </span>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                    onclick="showWarningView('list')">
+                                                Geri
+                                            </button>
+                                            <button type="submit"
+                                                    class="btn btn-danger"
+                                                    onclick="return confirm('Bu uyarıyı silmek istiyor musunuz?');">
+                                                Uyarıyı Sil
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if (TempData["PersonnelSaved"] is string msg && !string.IsNullOrEmpty(msg))
+                {
+                    <div class="alert alert-success mt-3">@msg</div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const title = document.getElementById('warningModalTitle');
+            const viewList = document.getElementById('warningsView-list');
+            const viewAdd = document.getElementById('warningsView-add');
+            const viewDetail = document.getElementById('warningsView-detail');
+
+            function setVisible(el, visible) {
+                if (!el) return;
+                el.classList.toggle('d-none', !visible);
+            }
+
+            window.showWarningView = function (view) {
+                switch (view) {
+                    case 'add':
+                        title.textContent = 'Yeni Uyarı Ekle';
+                        setVisible(viewList, false);
+                        setVisible(viewDetail, false);
+                        setVisible(viewAdd, true);
+                        break;
+                    case 'detail':
+                        title.textContent = 'Uyarı Detayı';
+                        setVisible(viewList, false);
+                        setVisible(viewAdd, false);
+                        setVisible(viewDetail, true);
+                        break;
+                    default:
+                        title.textContent = 'Uyarı Listesi';
+                        setVisible(viewList, true);
+                        setVisible(viewAdd, false);
+                        setVisible(viewDetail, false);
+                        break;
+                }
+            };
+
+            window.openWarningAdd = function () {
+                showWarningView('add');
+            };
+
+            window.openWarningDetail = function (btn) {
+                document.getElementById('warningDetailId').value = btn.dataset.warningId;
+                document.getElementById('warningDetailPersonelId').value = btn.dataset.warningPersonel;
+                document.getElementById('warningDetailDate').value = btn.dataset.warningDate;
+                document.getElementById('warningDetailText').value = btn.dataset.warningText;
+                document.getElementById('warningDetailGivenBy').value = btn.dataset.warningGivenby;
+
+                const badge = document.getElementById('warningDetailLevelBadge');
+                if (btn.dataset.warningLevel === 'danger') {
+                    badge.textContent = 'Kritik';
+                    badge.className = 'badge bg-danger';
+                } else {
+                    badge.textContent = 'Uyarı';
+                    badge.className = 'badge bg-warning text-dark';
+                }
+
+                showWarningView('detail');
+            };
+
+            const modalEl = document.getElementById('warningModal');
+            if (modalEl) {
+                modalEl.addEventListener('hidden.bs.modal', function () {
+                    showWarningView('list');
+                });
+            }
+
+            const personelSearch = document.getElementById('personelSearchInput');
+            if (personelSearch) {
+                personelSearch.addEventListener('input', function () {
+                    const query = this.value.trim().toLowerCase();
+                    const items = document.querySelectorAll('.list-group.list-group-flush .list-group-item');
+
+                    items.forEach(function (item) {
+                        const name = (item.getAttribute('data-name') || '').toLowerCase();
+                        item.classList.toggle('d-none', query && !name.includes(query));
+                    });
+                });
+            }
+
+            const hire = document.getElementById('hireDateInput');
+            const exit = document.getElementById('exitDateInput');
+            if (hire && exit) {
+                hire.addEventListener('change', function () {
+                    if (hire.value) exit.value = "";
+                });
+
+                exit.addEventListener('change', function () {
+                    if (exit.value) hire.value = "";
+                });
+            }
+
+            const handledTypes = new Set(['text', 'password', 'date', 'email', 'number', 'tel', 'search']);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                if (el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

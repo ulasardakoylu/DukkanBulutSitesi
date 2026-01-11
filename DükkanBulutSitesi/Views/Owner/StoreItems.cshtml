@@ -1,0 +1,165 @@
+﻿@model DükkanBulutSitesi.Models.Manager.ManagerItemListVm
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "~/Views/Owner/_StoreLayout.cshtml";
+}
+
+<div class="mgr-main">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <!-- LEFT SIDE -->
+        <div class="d-flex align-items-center" style="gap: 12px;">
+            <input type="text"
+                   id="itemSearchInput"
+                   class="form-control"
+                   placeholder="Ürün ara…"
+                   style="width: 260px; max-width: 260px;">
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <a asp-action="CreateItem"
+           class="btn btn-primary d-flex align-items-center">
+            <i class="bi bi-plus-lg me-1"></i> Yeni Ürün
+        </a>
+
+    </div>
+
+    <div class="card">
+        <div class="card-body p-0">
+            @if (!Model.Items.Any())
+            {
+                <div class="p-3 text-muted">
+                    Henüz ürün yok. Sağ üstten <strong>Yeni Ürün</strong> ekleyebilirsiniz.
+                </div>
+            }
+            else
+            {
+
+                <div class="table-responsive">
+                    <table class="table mb-0 align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Resim</th>
+                                <th>Adı</th>
+                                <th>Fiyat</th>
+                                <th>Stok</th>
+                                <th>Durum</th>
+                                <th class="text-end">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model.Items)
+                            {
+                                <tr data-item-name="@i.ItemName.ToLowerInvariant()">
+                                    <td style="width:70px">
+                                        @if (!string.IsNullOrEmpty(i.PictureLink))
+                                        {
+                                            <img src="@i.PictureLink" alt="@i.ItemName"
+                                                 class="img-thumbnail" style="max-height:48px;" />
+                                        }
+                                    </td>
+                                    <td>@i.ItemName</td>
+                                    <td>@i.ItemPrice.ToString("0.00") ₺</td>
+                                    <td>@i.OnHand</td>
+                                    <td>
+                                        @if (i.IsActive)
+                                        {
+                                            <span class="badge bg-success">Aktif</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Pasif</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        <a asp-action="EditItem" asp-route-id="@i.ItemID"
+                                           class="btn btn-sm btn-outline-primary me-1">
+                                            Düzenle
+                                        </a>
+
+                                        <form asp-action="DeleteItem" asp-route-id="@i.ItemID"
+                                              method="post" class="d-inline"
+                                              onsubmit="return confirm('Bu ürünü pasif yapmak istediğinize emin misiniz?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                Sil
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+
+            const searchInput = document.getElementById('itemSearchInput');
+            if (!searchInput) return;
+
+            searchInput.addEventListener('input', function () {
+                const query = this.value.trim().toLowerCase();
+
+                const rows = document.querySelectorAll('table tbody tr');
+
+                rows.forEach(function (row) {
+                    const name = (row.getAttribute('data-item-name') || '').toLowerCase();
+
+                    if (!query || name.includes(query)) {
+                        row.classList.remove('d-none');
+                    } else {
+                        row.classList.add('d-none');
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

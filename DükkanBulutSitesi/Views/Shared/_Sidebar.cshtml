@@ -1,0 +1,823 @@
+﻿@using Entity
+@using DükkanBulutSitesi.Infrastructure
+@using System.Security.Claims
+@using Microsoft.EntityFrameworkCore
+@inject AppDbContext Db
+@inject CurrentStoreAccessor StoreAccessor
+
+@{
+    var selectedId = StoreAccessor.CurrentStoreId;
+    var stores = Db.Stores.AsQueryable().OrderBy(s => s.StoreName).ToList();
+    var selected = stores.FirstOrDefault(s => s.StoreID == selectedId);
+
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+    bool isProductsPage = currentController == "Home" && currentAction == "Index";
+    bool isSpecialOffersPage = currentController == "Home" && currentAction == "SpecialOffers";
+    bool isAboutPage = currentController == "Home" && currentAction == "About";
+
+    var currentPath = Context.Request.Path.ToString();
+    var currentQuery = Context.Request.QueryString.ToString();
+    var queryReturn = Context.Request.Query["ReturnUrl"].ToString();
+
+    var effectiveReturnUrl = !string.IsNullOrEmpty(queryReturn)
+        ? queryReturn
+        : (currentPath + currentQuery);
+
+    int? currentUserId = null;
+    var idStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    if (!string.IsNullOrEmpty(idStr) && int.TryParse(idStr, out var tmpId))
+    {
+        currentUserId = tmpId;
+    }
+
+    bool isOwnerOfCurrentStore = false;
+    bool isManagerOfCurrentStore = false;
+    bool isPersonnelOfCurrentStore = false;
+
+    if (currentUserId.HasValue && selectedId != 0)
+    {
+        // OWNER of THIS store?
+        isOwnerOfCurrentStore = await Db.StoreOwners.AnyAsync(o =>
+            o.UserID == currentUserId.Value &&
+            o.StoreID == selectedId &&
+            o.IsActive);
+
+        // Manager role id for THIS store
+        var managerRoleId = await Db.Roles
+            .Where(r => r.StoreID == selectedId && r.RoleName == "Manager")
+            .Select(r => r.RoleID)
+            .FirstOrDefaultAsync();
+
+        // MANAGER of THIS store?
+        if (managerRoleId != 0)
+        {
+            isManagerOfCurrentStore = await Db.Personels.AnyAsync(p =>
+                p.UserID == currentUserId.Value &&
+                p.StoreID == selectedId &&
+                p.IsActive &&
+                p.RoleID == managerRoleId);
+        }
+
+        // PERSONNEL of THIS store?
+        isPersonnelOfCurrentStore = await Db.Personels.AnyAsync(p =>
+            p.UserID == currentUserId.Value &&
+            p.StoreID == selectedId &&
+            p.IsActive &&
+            (managerRoleId == 0 || p.RoleID != managerRoleId));
+    }
+
+    List<ShoppingCartItem> quickCartItems = new();
+
+    var quickDiscounts = new Dictionary<int, decimal>();
+
+    if (currentUserId.HasValue)
+    {
+        var storeIdForCart = selectedId;
+
+        ShoppingCart? quickCart = null;
+        if (currentUserId.HasValue && storeIdForCart != 0)
+        {
+            quickCart = Db.ShoppingCarts
+                .Include(c => c.Items).ThenInclude(i => i.Item)
+                .Where(c => c.UserID == currentUserId.Value
+                         && c.StoreID == storeIdForCart
+                         && c.IsActive)
+                .OrderByDescending(c => c.CreatedAt)
+                .FirstOrDefault();
+        }
+
+        if (quickCart != null)
+        {
+            quickCartItems = quickCart.Items
+                .OrderByDescending(i => i.AddedToCartAt)
+                .Take(5)
+                .ToList();
+        }
+
+        var now = DateTime.Now;
+
+        if (storeIdForCart != 0 && quickCartItems.Any())
+        {
+            var quickItemIds = quickCartItems
+                .Select(ci => ci.ItemID)
+                .Distinct()
+                .ToList();
+
+            quickDiscounts = Db.SpecialOfferItems
+                .Where(soi => quickItemIds.Contains(soi.ItemID))
+                .Join(
+                    Db.SpecialOffers,
+                    soi => soi.SpecialOfferID,
+                    so => so.SpecialOfferID,
+                    (soi, so) => new { soi.ItemID, soi.NewPrice, so }
+                )
+                .Where(x =>
+                    x.so.StoreID == storeIdForCart &&
+                    !x.so.IsCancelled &&
+                    x.so.SpecialOfferDateStart <= now &&
+                    x.so.SpecialOfferDateEnd > now
+                )
+                .GroupBy(x => x.ItemID)
+                .Select(g => new { ItemID = g.Key, MinPrice = g.Min(x => x.NewPrice) })
+                .ToDictionary(x => x.ItemID, x => x.MinPrice);
+        }
+    }
+
+    var currentUrl = currentPath + currentQuery;
+}
+
+<style>
+    .store-logo-img {
+        width: 70%;
+        height: 70%;
+        object-fit: cover;
+        border-radius: inherit;
+        display: block;
+    }
+
+    .search-results-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .search-result-item {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: #ffffff;
+        margin-bottom: 6px;
+        text-decoration: none;
+        color: #000000;
+        transition: background 0.15s ease, color 0.15s ease;
+    }
+
+        .search-result-item:hover {
+            background: #0B56C6;
+            color: #ffffff;
+        }
+
+            .search-result-item:hover .search-price-old {
+                color: #e0e0e0;
+            }
+
+            .search-result-item:hover .search-price-new {
+                color: #ffffff;
+            }
+
+    .search-result-thumb {
+        width: 55px;
+        height: 55px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #dde6ff;
+        flex-shrink: 0;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .search-result-thumb img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+    .search-result-main {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .search-result-name {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .search-stars {
+        font-size: 13px;
+        color: #ffb400;
+    }
+
+        .search-stars .empty {
+            color: #cccccc;
+        }
+
+        .search-stars small {
+            color: #666666;
+            margin-left: 4px;
+            font-size: 10px;
+        }
+
+    .search-result-right {
+        text-align: right;
+        margin-left: 10px;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+
+    .search-price-old {
+        display: block;
+        font-size: 12px;
+        color: #777777;
+        text-decoration: line-through;
+    }
+
+    .search-price-new {
+        display: block;
+        font-weight: 700;
+        color: #16a34a;
+    }
+</style>
+
+<script>
+    // Block Shift+Enter everywhere EXCEPT textarea
+    (function () {
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Enter' || !e.shiftKey) return;
+
+            const el = e.target;
+            if (!el) return;
+
+            // allow Shift+Enter inside textarea (newline)
+            if (el.tagName === 'TEXTAREA') return;
+
+            // also allow any contenteditable
+            if (el.isContentEditable) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+        }, true); // <-- capture mode is important
+    })();
+</script>
+
+<aside class="store-sidenav">
+    <!-- header -->
+    <div class="sidenav-header">
+        <div class="store-logo">
+            @if (selected != null && !string.IsNullOrWhiteSpace(selected.StorePictureLink))
+            {
+                <img src="@selected.StorePictureLink"
+                     alt="@selected.StoreName"
+                     class="store-logo-img" />
+            }
+            else
+            {
+                <div class="logo-ph"></div>
+            }
+        </div>
+
+        @if (User.Identity?.IsAuthenticated ?? false)
+        {
+            <div class="sidenav-topicons">
+                <a href="#"
+                   class="topicon"
+                   title="Hızlı Sepet"
+                   data-bs-toggle="modal"
+                   data-bs-target="#quickCartModal">
+                    <i class="bi bi-cart3"></i>
+                </a>
+                <a href="#"
+                   class="topicon"
+                   title="Ürün Ara"
+                   data-bs-toggle="modal"
+                   data-bs-target="#searchModal">
+                    <i class="bi bi-search"></i>
+                </a>
+            </div>
+        }
+    </div>
+
+    <!-- current store -->
+    <div>
+        <div class="store-current-title">Şu anda bakılan dükkan:</div>
+        @if (selected != null)
+        {
+            <div class="store-current-name">
+                @selected.StoreName
+            </div>
+        }
+        else
+        {
+            <div class="store-current-name"><span class="muted">Seçilmedi</span></div>
+        }
+        <a class="btn-change"
+           asp-controller="Home"
+           asp-action="Welcome">
+            Değiştir
+        </a>
+    </div>
+
+    <!-- nav -->
+    <nav class="store-nav">
+        <nav class="store-nav">
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="store-nav-item @(isProductsPage ? "active" : "")">
+                <span>Ürünler</span> <span class="chev">›</span>
+            </a>
+
+            <a asp-controller="Home"
+               asp-action="SpecialOffers"
+               class="store-nav-item @(isSpecialOffersPage ? "active" : "")">
+                <span>Kampanyalar</span><span class="chev">›</span>
+            </a>
+
+            <a asp-controller="Home"
+               asp-action="About"
+               class="store-nav-item @(isAboutPage ? "active" : "")">
+                <span>Hakkında</span><span class="chev">›</span>
+            </a>
+
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                string? panelText = null;
+                string? panelController = null;
+                string panelAction = "Dashboard";
+
+                if (isManagerOfCurrentStore)
+                {
+                    panelText = "Yönetici Paneli";
+                    panelController = "Manager";
+                }
+                else if (isOwnerOfCurrentStore)
+                {
+                    panelText = "Sahip Paneli";
+                    panelController = "Owner";
+                }
+                else if (isPersonnelOfCurrentStore)
+                {
+                    panelText = "Personel Paneli";
+                    panelController = "Personnel";
+                }
+
+                if (!string.IsNullOrEmpty(panelController))
+                {
+                    <a class="store-nav-item"
+                       asp-controller="@panelController"
+                       asp-action="@panelAction">
+                        <span>@panelText</span> <span class="chev">›</span>
+                    </a>
+                }
+            }
+        </nav>
+    </nav>
+
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <div class="welcome-box">
+            <div class="welcome-title">Hoşgeldiniz</div>
+            <div class="welcome-name">@User.Identity!.Name</div>
+        </div>
+
+        <a asp-controller="Profile"
+           asp-action="Index"
+           class="profile-circle"
+           title="Profilim">
+            <i class="bi bi-person"></i>
+        </a>
+        <form method="post" asp-controller="Auth" asp-action="Logout" class="logout-row">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn-pill light w-100">Çıkış Yap</button>
+        </form>
+    }
+    else
+    {
+        <div class="store-auth">
+            <button class="btn-pill light" data-bs-toggle="modal" data-bs-target="#loginModal">Giriş Yap</button>
+            <button class="btn-pill" data-bs-toggle="modal" data-bs-target="#registerModal">Kayıt Ol</button>
+        </div>
+    }
+</aside>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Giriş Yap</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                @if (TempData["OpenModal"]?.ToString() == "login" && TempData["AuthError"] is string le && !string.IsNullOrEmpty(le))
+                {
+                    <div class="alert alert-danger">@Html.Raw(le)</div>
+                }
+
+                <form method="post" asp-controller="Auth" asp-action="Login">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="ReturnUrl" value="@effectiveReturnUrl" />
+
+                    <div class="mb-3">
+                        <label class="form-label">E-Mail Adresi</label>
+                        <input type="email" name="Email" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Şifre</label>
+                        <input type="password" name="Password" class="form-control" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <small>Kaydınız yok mu? <a href="#" data-bs-target="#registerModal" data-bs-toggle="modal" data-bs-dismiss="modal">Kayıt Ol</a></small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- REGISTER MODAL -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Kayıt Ol</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                @if (TempData["OpenModal"]?.ToString() == "register" && TempData["AuthError"] is string re && !string.IsNullOrEmpty(re))
+                {
+                    <div class="alert alert-danger">@Html.Raw(re)</div>
+                }
+
+                <form method="post" asp-controller="Auth" asp-action="Register">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="ReturnUrl" value="@effectiveReturnUrl" />
+
+                    <div class="mb-3">
+                        <label class="form-label">E-Mail Adresi</label>
+                        <input type="email" name="Email" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Kullanıcı Adı</label>
+                        <input type="text" name="UserName" class="form-control" maxlength="40" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Yeni Şifre</label>
+                        <input type="password" name="Password" class="form-control" minlength="6" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Yeni Şifre Tekrarı</label>
+                        <input type="password" name="ConfirmPassword" class="form-control" minlength="6" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Kayıt Ol</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <small>Zaten hesabınız var mı? <a href="#" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Giriş Yap</a></small>
+                </div>
+
+                <div class="text-center mt-2">
+                    <small>
+                        Bir personelseniz lütfen
+                        <a href="#"
+                           data-bs-target="#employeeRegisterModal"
+                           data-bs-toggle="modal"
+                           data-bs-dismiss="modal">
+                            buraya basarak kaydınızı yapınız.
+                        </a>
+                    </small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- EMPLOYEE REGISTER MODAL -->
+<div class="modal fade" id="employeeRegisterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Personel Kayıt</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                @if (TempData["OpenModal"]?.ToString() == "employee" &&
+                                TempData["AuthError"] is string ee && !string.IsNullOrEmpty(ee))
+                {
+                    <div class="alert alert-danger">@Html.Raw(ee)</div>
+                }
+
+                <form method="post" asp-controller="Auth" asp-action="EmployeeRegister">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="ReturnUrl" value="@effectiveReturnUrl" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Personel Numarası</label>
+                        <input type="text" name="EmployeeNumber" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Kullanıcı Adı</label>
+                        <input type="text" name="UserName" class="form-control" maxlength="100" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">E-Mail Adresi</label>
+                        <input type="email" name="Email" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Şifre</label>
+                        <input type="password" name="Password" class="form-control" minlength="6" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Şifre Tekrarı</label>
+                        <input type="password" name="ConfirmPassword" class="form-control" minlength="6" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Personel Kaydını Tamamla
+                    </button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <small>
+                        Normal kullanıcı kaydı için
+                        <a href="#"
+                           data-bs-target="#registerModal"
+                           data-bs-toggle="modal"
+                           data-bs-dismiss="modal">buraya tıklayın</a>.
+                    </small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <!-- COMPLAINT MODAL -->
+    <div class="modal fade" id="complaintModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Şikayet Oluştur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form asp-controller="Complaint" asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="ItemID" />
+                    <input type="hidden" name="CommentID" />
+                    <input type="hidden" name="ReturnUrl"
+                           value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+
+                    <div class="modal-body">
+                        @if (TempData["ComplaintError"] is string cerr && !string.IsNullOrEmpty(cerr))
+                        {
+                            <div class="alert alert-danger">@Html.Raw(cerr)</div>
+                        }
+                        @if (TempData["ComplaintSuccess"] is string csuccess && !string.IsNullOrEmpty(csuccess))
+                        {
+                            <div class="alert alert-success">@Html.Raw(csuccess)</div>
+                        }
+
+                        <div class="mb-3">
+                            <label class="form-label">Ürün / Yorum</label>
+                            <input type="text" id="complaintTargetName" class="form-control" readonly />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Şikayet Türü</label>
+                            <select name="ComplaintTypeID" class="form-select" required>
+                                <option value="">-- Seçiniz --</option>
+                                <option value="1">Ürün Hakkında</option>
+                                <option value="2">Yorum Hakkında</option>
+                                <option value="3">Diğer</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Açıklama</label>
+                            <textarea name="Description" rows="4"
+                                  class="form-control" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- QUICK CART MODAL -->
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <div class="modal fade" id="quickCartModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Hızlı Sepet</h5>
+                    <form asp-controller="Cart" asp-action="Clear" method="post" class="me-2">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="returnUrl" value="@currentUrl" />
+                        <input type="hidden" name="fromQuickCart" value="true" />
+                        <button type="submit" class="btn btn-link text-danger p-0" title="Sepeti Temizle">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    @if (!quickCartItems.Any())
+                    {
+                        <div class="text-muted text-center py-4">
+                            Sepetinizde ürün yok.
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var ci in quickCartItems)
+                        {
+                            var originalPrice = ci.Item.ItemPrice;
+                            decimal effectivePrice = originalPrice;
+
+                            if (quickDiscounts.TryGetValue(ci.ItemID, out var disc) && disc < originalPrice)
+                            {
+                                effectivePrice = disc;
+                            }
+
+                            bool hasDiscount = effectivePrice < originalPrice;
+
+                            <div class="d-flex align-items-center mb-2 border rounded p-2">
+                                <div style="width:70px;height:70px;"
+                                     class="me-3 d-flex align-items-center justify-content-center bg-light rounded">
+                                    <img src="@(string.IsNullOrWhiteSpace(ci.Item.PictureLink) ? "/img/placeholder.png" : ci.Item.PictureLink)"
+                                         alt="@ci.Item.ItemName"
+                                         style="max-width:100%;max-height:100%;object-fit:cover;"
+                                         onerror="this.src='/img/placeholder.png';" />
+                                </div>
+
+                                <div class="flex-grow-1">
+                                    <div class="fw-semibold">@ci.Item.ItemName</div>
+                                    <div class="small text-muted">
+                                        Ürünün Eklenme Tarihi: @ci.AddedToCartAt.ToLocalTime().ToString("g")
+                                    </div>
+
+                                    <div class="small">
+                                        Ürün Fiyatı:
+                                        @if (hasDiscount)
+                                        {
+                                            <span class="text-muted text-decoration-line-through me-1">
+                                                @originalPrice.ToString("C")
+                                            </span>
+                                            <span class="text-success fw-bold">
+                                                @effectivePrice.ToString("C")
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            @effectivePrice.ToString("C")
+                                        }
+
+                                        <span class="ms-1">
+                                            x @ci.Qty =
+                                            <strong>@((effectivePrice * ci.Qty).ToString("C"))</strong>
+                                        </span>
+                                    </div>
+
+                                    <form asp-controller="Cart"
+                                          asp-action="UpdateQuantity"
+                                          method="post"
+                                          class="d-flex align-items-center mt-1">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="cartItemId" value="@ci.CartItemID" />
+                                        <input type="hidden" name="returnUrl" value="@currentUrl" />
+                                        <input type="hidden" name="fromQuickCart" value="true" />
+
+                                        <button type="submit"
+                                                name="change"
+                                                value="-1"
+                                                class="btn btn-outline-secondary btn-sm px-2">
+                                            -
+                                        </button>
+
+                                        <span class="mx-2 fw-semibold">@ci.Qty</span>
+
+                                        <button type="submit"
+                                                name="change"
+                                                value="1"
+                                                class="btn btn-outline-secondary btn-sm px-2">
+                                            +
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <div class="d-flex flex-column ms-2">
+                                    <a asp-controller="Product"
+                                       asp-action="Details"
+                                       asp-route-id="@ci.ItemID"
+                                       class="btn btn-primary btn-sm mb-1">
+                                        Ürüne Git
+                                    </a>
+
+                                    <form asp-controller="Cart" asp-action="RemoveItem" method="post" class="mb-0">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="cartItemId" value="@ci.CartItemID" />
+                                        <input type="hidden" name="returnUrl" value="@currentUrl" />
+                                        <input type="hidden" name="fromQuickCart" value="true" />
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                            Ürünü Sil
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <div class="modal-footer">
+                    <a asp-controller="Cart" asp-action="Index" class="btn btn-primary">
+                        Detaylı Sepete Git
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- SEARCH MODAL -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ürün Ara</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Aramak istediğiniz ürünü yazınız</label>
+                    <input type="text"
+                           id="globalSearchInput"
+                           class="form-control"
+                           placeholder="Ürün adı yazın..."
+                           autocomplete="off" />
+                </div>
+
+                <div id="searchResultsContainer" class="mt-2">
+                    <div class="text-muted small">
+                        Bir ürün adı yazarak arama yapın.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // existing modal re-open logic ...
+            const open = "@(TempData["OpenModal"] ?? "")";
+            if (open === "login")    new bootstrap.Modal('#loginModal').show();
+            if (open === "register") new bootstrap.Modal('#registerModal').show();
+            if (open === "employee") new bootstrap.Modal('#employeeRegisterModal').show();
+
+            const openComplaint = "@(TempData["OpenComplaintModal"] ?? "")";
+            if (openComplaint === "1") {
+                const cm = document.getElementById('complaintModal');
+                if (cm) new bootstrap.Modal(cm).show();
+            }
+
+            const openQuick = "@(TempData["OpenQuickCart"] ?? "")";
+            if (openQuick === "1") {
+                const qc = document.getElementById('quickCartModal');
+                if (qc) new bootstrap.Modal(qc).show();
+            }
+        });
+    </script>
+}
+
+

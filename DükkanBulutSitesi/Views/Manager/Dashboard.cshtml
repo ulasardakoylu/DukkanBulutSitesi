@@ -1,0 +1,193 @@
+﻿@model DükkanBulutSitesi.Models.Manager.ManagerDashboardVm
+@{
+    ViewData["Title"] = "Gösterge Paneli";
+}
+
+<div class="mgr-page">
+
+    <!-- TOP BAR -->
+    <div class="mgr-topbar">
+        <div class="mgr-top-title">
+            Gösterge Paneli
+        </div>
+        <div class="mgr-top-right">
+            <span id="mgr-clock"></span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <div class="mgr-header">
+        <div class="mgr-avatar">
+            <i class="bi bi-person"></i>
+        </div>
+        <div class="mgr-header-text">
+            <div class="mgr-welcome">Hoşgeldin</div>
+            <div class="mgr-name">@Model.ManagerName</div>
+        </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="mgr-grid">
+
+        <!-- Complaints -->
+        <section class="mgr-card mgr-card-tall">
+            <header class="mgr-card-header">Şikayet Listesi</header>
+            <div class="mgr-card-body mgr-list">
+                @if (Model.Complaints.Any())
+                {
+                    @foreach (var c in Model.Complaints)
+                    {
+                        <div class="mgr-list-row d-flex justify-content-between align-items-center">
+                            <span>@c.Title</span>
+                            <a asp-action="Complaints"
+                               asp-controller="Manager"
+                               asp-route-id="@c.ComplaintID"
+                               class="btn btn-sm btn-outline-primary">
+                                Detaya Git
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="mgr-list-row text-muted">
+                        Aktif şikayet bulunmuyor.
+                    </div>
+                }
+            </div>
+        </section>
+
+        <!-- Incomplete personnel -->
+        <section class="mgr-card mgr-card-tall mgr-card-wide">
+            <header class="mgr-card-header">Bilgileri Eksik Personeller</header>
+            <div class="mgr-card-body">
+                @if (Model.IncompletePersonnel.Any())
+                {
+                    <table class="mgr-task-table">
+                        <thead>
+                            <tr>
+                                <th>Personel</th>
+                                <th>Eksik Bilgiler</th>
+                                <th class="text-end"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.IncompletePersonnel)
+                            {
+                                <tr>
+                                    <td>@p.DisplayName</td>
+                                    <td>@p.MissingSummary</td>
+                                    <td class="text-end">
+                                        <a asp-action="Personnel"
+                                           asp-controller="Manager"
+                                           asp-route-id="@p.PersonelID"
+                                           class="btn btn-sm btn-primary">
+                                            Düzenle
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="text-muted">
+                        Tüm personellerin temel bilgileri tamamlanmış görünüyor.
+                    </div>
+                }
+            </div>
+        </section>
+
+        <!-- Recent conversations -->
+        <section class="mgr-card mgr-card-wide mgr-card-bottom">
+            <header class="mgr-card-header">En Son Yapılan Konuşmalar</header>
+            <div class="mgr-card-body mgr-list">
+                @if (Model.RecentConversations.Any())
+                {
+                    @foreach (var m in Model.RecentConversations)
+                    {
+                        <div class="mgr-list-row d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="mgr-conv-from">@m.From</div>
+                                <div class="mgr-conv-preview">@m.Preview</div>
+                            </div>
+                            <a asp-action="Conversations"
+                               asp-controller="Manager"
+                               asp-route-id="@m.ConversationID"
+                               class="btn btn-sm btn-outline-primary">
+                                Konuşmaya Git
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="mgr-list-row text-muted">
+                        Görüntülenecek aktif konuşma yok.
+                    </div>
+                }
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        
+       // Makes the clock in the header work
+        function mgrUpdateClock() {
+            const el = document.getElementById('mgr-clock');
+            if (!el) return;
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            el.textContent = h + ":" + m;
+        }
+        mgrUpdateClock();
+        setInterval(mgrUpdateClock, 30000);
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

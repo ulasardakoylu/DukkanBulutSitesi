@@ -1,0 +1,72 @@
+24-12-2025 15:34:23	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+24-12-2025 15:49:24	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+24-12-2025 15:49:28	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+24-12-2025 15:49:32	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=2, ItemName="Ekmek"
+24-12-2025 15:56:59	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+24-12-2025 15:57:03	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+24-12-2025 17:07:38	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+24-12-2025 17:07:41	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+24-12-2025 17:07:46	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=2, ItemName="Ekmek"
+24-12-2025 17:07:56	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=10, ItemName="Kağıt"
+24-12-2025 17:08:00	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=10, ItemName="Kağıt"
+24-12-2025 17:08:02	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=3, ItemName="Yumurta 10lu"
+24-12-2025 17:08:09	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=12, ItemName="Kaşar Peyniri"
+24-12-2025 17:08:12	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=4, ItemName="Makarna 500g"
+24-12-2025 17:08:16	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=2, ItemName="Ekmek"
+24-12-2025 17:08:18	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=14, ItemName="DVD"
+24-12-2025 17:08:20	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=14, ItemName="DVD"
+24-12-2025 17:08:27	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=14, ItemName="DVD"
+24-12-2025 17:08:34	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+24-12-2025 17:08:37	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+24-12-2025 18:43:18	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+24-12-2025 19:53:42	User=Admin123	UserId=2	IP=127.0.0.1	Failed login attempt (wrong password). UserID=2, Email=admin@school.local
+24-12-2025 19:53:56	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+24-12-2025 19:54:30	User=Admin123	UserId=2	IP=127.0.0.1	Time off added. PersonelID=6, TimeOffID=15, Range=2025-12-22..2025-12-28
+24-12-2025 19:54:33	User=Admin123	UserId=2	IP=127.0.0.1	Time off deleted. PersonelID=6, TimeOffID=9
+24-12-2025 19:57:40	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=3, ItemName="Yumurta 10lu"
+24-12-2025 19:59:43	User=Admin123	UserId=2	IP=127.0.0.1	Item picture set. ItemID=3, New=/img/products/fc3f64f2-8c7e-4847-a001-ab25de654a45.jpg
+24-12-2025 19:59:43	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=3, ItemName="Yumurta 10lu"
+24-12-2025 20:00:12	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=5, ItemName="Su 1.5L"
+24-12-2025 20:00:15	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=5, ItemName="Su 1.5L"
+24-12-2025 20:00:16	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=4, ItemName="Makarna 500g"
+24-12-2025 20:00:19	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=4, ItemName="Makarna 500g"
+24-12-2025 20:00:21	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=12, ItemName="Kaşar Peyniri"
+24-12-2025 20:00:24	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=12, ItemName="Kaşar Peyniri"
+24-12-2025 20:00:26	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=13, ItemName="Kaset"
+24-12-2025 20:00:37	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=13, ItemName="Kaset"
+24-12-2025 20:00:38	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=10, ItemName="Kağıt"
+24-12-2025 20:00:42	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=10, ItemName="Kağıt"
+24-12-2025 20:00:44	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=2, ItemName="Ekmek"
+24-12-2025 20:00:46	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=2, ItemName="Ekmek"
+24-12-2025 20:00:47	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=14, ItemName="DVD"
+24-12-2025 20:00:48	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=14, ItemName="DVD"
+24-12-2025 20:00:49	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=14, ItemName="DVD"
+24-12-2025 20:00:53	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=14, ItemName="DVD"
+24-12-2025 20:01:01	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+24-12-2025 20:01:05	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+24-12-2025 20:02:01	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+24-12-2025 20:02:14	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+24-12-2025 20:02:44	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+24-12-2025 20:02:52	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+24-12-2025 20:02:55	User=Admin123	UserId=2	IP=127.0.0.1	EditItem GET, ItemID=2, ItemName="Ekmek"
+24-12-2025 20:02:58	User=Admin123	UserId=2	IP=127.0.0.1	EditItem POST, ItemID=2, ItemName="Ekmek"
+24-12-2025 20:03:00	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+24-12-2025 20:03:03	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+24-12-2025 20:03:11	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+24-12-2025 20:03:19	User=Anonymous	UserId=-	IP=127.0.0.1	Failed login attempt. Email=ownertest@gmail.com
+24-12-2025 20:03:32	User=Anonymous	UserId=-	IP=127.0.0.1	Failed login attempt. Email=owner@gmail.com
+24-12-2025 20:03:58	User=OwnerTest	UserId=9	IP=127.0.0.1	Failed login attempt (wrong password). UserID=9, Email=owner@test.com
+24-12-2025 20:04:09	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+24-12-2025 20:14:41	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+24-12-2025 20:14:43	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+24-12-2025 20:14:50	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+24-12-2025 20:14:56	User=Ayşe222	UserId=8	IP=127.0.0.1	Failed login attempt (wrong password). UserID=8, Email=ayseemre@gmail.com
+24-12-2025 20:15:02	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+24-12-2025 20:17:17	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+24-12-2025 20:17:20	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+24-12-2025 20:27:22	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+24-12-2025 20:27:25	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+24-12-2025 20:28:51	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+24-12-2025 20:28:57	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+24-12-2025 22:42:26	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+24-12-2025 22:42:30	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com

@@ -1,0 +1,16 @@
+27-11-2025 16:53:29	User=Admin123	UserId=2	IP=::1	User logged in. UserID=2, Email=admin@school.local
+27-11-2025 16:54:11	User=Admin123	UserId=2	IP=::1	Personnel updated. PersonelID=3, Name=Emre Ali
+27-11-2025 16:54:22	User=Admin123	UserId=2	IP=::1	Work history deleted. PersonelID=3, HistoryID=4, Title=Test
+27-11-2025 16:54:32	User=Admin123	UserId=2	IP=::1	Work history created. PersonelID=3, HistoryID=5, Title=adawsd
+27-11-2025 16:54:51	User=Admin123	UserId=2	IP=::1	Warning created. PersonelID=3, WarningID=8, Level=warning
+27-11-2025 16:55:19	User=Admin123	UserId=2	IP=::1	Personnel number generated. RoleID=5, Code=02960973
+27-11-2025 16:55:41	User=Admin123	UserId=2	IP=::1	Item picture changed. ItemID=2, Old=/img/products/8a5f70b7-d157-4eb9-917a-299cfcf78e8f.png, New=/img/products/97a8a23d-5905-41fc-817a-aa33476d8e4b.gif
+27-11-2025 16:55:41	User=Admin123	UserId=2	IP=::1	Item updated. ItemID=2, Name=Ekmek
+27-11-2025 16:56:02	User=Admin123	UserId=2	IP=::1	Item picture changed. ItemID=2, Old=/img/products/97a8a23d-5905-41fc-817a-aa33476d8e4b.gif, New=/img/products/9b8f844d-c7e9-4b76-a1f0-596c55c399ad.png
+27-11-2025 16:56:02	User=Admin123	UserId=2	IP=::1	Item updated. ItemID=2, Name=Ekmek
+27-11-2025 16:56:18	User=Admin123	UserId=2	IP=::1	Conversation started or reused. ConversationID=4, TargetPersonelID=3, FirstMessageLength=2
+27-11-2025 19:50:58	User=Admin123	UserId=2	IP=::1	User logged out.
+27-11-2025 19:51:38	User=Ayşe222	UserId=8	IP=::1	Employee registered. UserID=8, PersonelID=4, Email=ayseemre@gmail.com, PersonnelNumber=87307076
+27-11-2025 19:51:38	User=Ayşe222	UserId=8	IP=::1	Employee logged in after registration. UserID=8, PersonelID=4
+27-11-2025 19:51:53	User=Ayşe222	UserId=8	IP=::1	User logged out.
+27-11-2025 19:52:02	User=Admin123	UserId=2	IP=::1	User logged in. UserID=2, Email=admin@school.local

@@ -1,0 +1,783 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\storesettings.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\storesettings.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\models\\ownerdashboardvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\models\\ownerdashboardvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\editstore.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\editstore.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8042D41D-7227-426C-BE47-5F926FB03618}|Entity\\Entity.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\entity\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8042D41D-7227-426C-BE47-5F926FB03618}|Entity\\Entity.csproj|solutionrelative:entity\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\controllers\\ownercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\controllers\\ownercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\storecommentmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\storecommentmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\home\\welcome.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\home\\welcome.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\profile\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\profile\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\controllers\\personnelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\controllers\\personnelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\personnel\\stockcontrol.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\personnel\\stockcontrol.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\manager\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\manager\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\controllers\\managercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\controllers\\managercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\manager\\specialoffers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\manager\\specialoffers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\storespecialoffers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\storespecialoffers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\infrastructure\\activepersonnelrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\infrastructure\\activepersonnelrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\infrastructure\\activepersonnelhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\infrastructure\\activepersonnelhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\shared\\_sidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\shared\\_sidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\_storelayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\_storelayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\shared\\_managerlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\shared\\_managerlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\shared\\_storefrontlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\shared\\_storefrontlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\manager\\shiftspersonweek.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\manager\\shiftspersonweek.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\storeshiftspersonweek.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\storeshiftspersonweek.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\personnel\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\personnel\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\personnel\\securityworkpanel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\personnel\\securityworkpanel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\manager\\conversations.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\manager\\conversations.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\manager\\personnel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\manager\\personnel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\personnel\\conversations.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\personnel\\conversations.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\models\\personnelconversationpagevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\models\\personnelconversationpagevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\storepersonnel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\storepersonnel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\manager\\edititem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\manager\\edititem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\edititem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\edititem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\models\\itemadminvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\models\\itemadminvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\storeitems.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\storeitems.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\controllers\\complaintcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\controllers\\complaintcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\shared\\_personnellayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\shared\\_personnellayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\product\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\product\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\personnel\\quickworkpanel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\personnel\\quickworkpanel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\personnel\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\personnel\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\storeshiftsday.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\storeshiftsday.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|c:\\users\\ulasa\\downloads\\241613023_ula\u015Fardak\u00F6yl\u00FC 1\\241613023_ula\u015Fardak\u00F6yl\u00FC\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\d\u00FCkkanbulutsitesi\\views\\owner\\storeshifts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7253413F-A2AC-412A-BCC3-24BBBB4D8892}|D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi.csproj|solutionrelative:d\u00FCkkanbulutsitesi\\views\\owner\\storeshifts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 317,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OwnerController.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\OwnerController.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Controllers\\OwnerController.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\OwnerController.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Controllers\\OwnerController.cs",
+              "ViewState": "AgIAANIAAAAAAAAAAAAuwKYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T20:14:55.842Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StoreSettings.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreSettings.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreSettings.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreSettings.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreSettings.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:10:13.424Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Welcome.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Home\\Welcome.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Home\\Welcome.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Home\\Welcome.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Home\\Welcome.cshtml",
+              "ViewState": "AgIAANAAAAAAAAAAAAAuwN4AAAByAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-16T01:23:10.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAALcBAAAAAAAAAAAwwAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T21:12:02.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\appsettings.json",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\appsettings.json",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\appsettings.json",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-24T16:51:53.938Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Manager\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\Dashboard.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Manager\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:02:09.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SpecialOffers.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\SpecialOffers.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Manager\\SpecialOffers.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\SpecialOffers.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Manager\\SpecialOffers.cshtml",
+              "ViewState": "AgIAAF8BAAAAAAAAAAAqwHUBAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-19T16:32:11.464Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "StockControl.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\StockControl.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\StockControl.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\StockControl.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\StockControl.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:13:29.083Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Controllers\\ProfileController.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Controllers\\ProfileController.cs",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAqwLQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T22:14:58.273Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Profile\\Index.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Profile\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Profile\\Index.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Profile\\Index.cshtml",
+              "ViewState": "AgIAAAMCAAAAAAAAAAAIwBECAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:14:36.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ManagerController.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\ManagerController.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Controllers\\ManagerController.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\ManagerController.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Controllers\\ManagerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T13:35:48.159Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OwnerDashboardVm.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Models\\OwnerDashboardVm.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Models\\OwnerDashboardVm.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Models\\OwnerDashboardVm.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Models\\OwnerDashboardVm.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAkwDkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T17:18:26.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StoreCommentManagement.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreCommentManagement.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreCommentManagement.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreCommentManagement.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreCommentManagement.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAqwMkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:05:41.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Models.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Entity\\Models.cs",
+              "RelativeDocumentMoniker": "Entity\\Models.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Entity\\Models.cs",
+              "RelativeToolTip": "Entity\\Models.cs",
+              "ViewState": "AgIAAH4EAAAAAAAAAAAswLQEAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-16T01:32:47.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EditStore.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\EditStore.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\EditStore.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\EditStore.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\EditStore.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:05:32.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PersonnelController.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\PersonnelController.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Controllers\\PersonnelController.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\PersonnelController.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Controllers\\PersonnelController.cs",
+              "ViewState": "AgIAALEEAAAAAAAAAAAqwLsEAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T12:50:48.002Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\CartController.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Controllers\\CartController.cs",
+              "ViewState": "AgIAALQCAAAAAAAAAAAqwMMCAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T21:00:43.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "StoreSpecialOffers.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreSpecialOffers.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreSpecialOffers.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreSpecialOffers.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreSpecialOffers.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-19T16:25:25.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAqwGgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T20:48:41.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ActivePersonnelRequirement.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Infrastructure\\ActivePersonnelRequirement.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Infrastructure\\ActivePersonnelRequirement.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Infrastructure\\ActivePersonnelRequirement.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Infrastructure\\ActivePersonnelRequirement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:28:27.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ActivePersonnelHandler.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Infrastructure\\ActivePersonnelHandler.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Infrastructure\\ActivePersonnelHandler.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Infrastructure\\ActivePersonnelHandler.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Infrastructure\\ActivePersonnelHandler.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAmwCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:28:54.409Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "_Sidebar.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Shared\\_Sidebar.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Shared\\_Sidebar.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Shared\\_Sidebar.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Shared\\_Sidebar.cshtml",
+              "ViewState": "AgIAAB0BAAAAAAAAAAAAACsBAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:33:06.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "_StoreLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\_StoreLayout.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\_StoreLayout.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\_StoreLayout.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\_StoreLayout.cshtml",
+              "ViewState": "AgIAACYBAAAAAAAAAAAqwDMBAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-20T11:30:08.093Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "_ManagerLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Shared\\_ManagerLayout.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Shared\\_ManagerLayout.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Shared\\_ManagerLayout.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Shared\\_ManagerLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:32:29.52Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "_StorefrontLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Shared\\_StorefrontLayout.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Shared\\_StorefrontLayout.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Shared\\_StorefrontLayout.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Shared\\_StorefrontLayout.cshtml",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAqwFkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:33:22.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ShiftsPersonWeek.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\ShiftsPersonWeek.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Manager\\ShiftsPersonWeek.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\ShiftsPersonWeek.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Manager\\ShiftsPersonWeek.cshtml",
+              "ViewState": "AgIAAC8BAAAAAAAAAAAIwEMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:04:26.553Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "StoreShiftsPersonWeek.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShiftsPersonWeek.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShiftsPersonWeek.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShiftsPersonWeek.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShiftsPersonWeek.cshtml",
+              "ViewState": "AgIAADYBAAAAAAAAAAAIwDkBAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:10:46.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\Dashboard.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\Dashboard.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAwCYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-20T11:11:47.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAAMwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T12:50:59.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "SecurityWorkPanel.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\SecurityWorkPanel.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\SecurityWorkPanel.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\SecurityWorkPanel.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\SecurityWorkPanel.cshtml",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAuwAoBAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:13:12.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Conversations.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\Conversations.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Manager\\Conversations.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\Conversations.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Manager\\Conversations.cshtml",
+              "ViewState": "AgIAAJkCAAAAAAAAAAAqwLQCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-22T19:52:00.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Personnel.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\Personnel.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Manager\\Personnel.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\Personnel.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Manager\\Personnel.cshtml",
+              "ViewState": "AgIAANACAAAAAAAAAAAqwNkCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-22T12:55:53.629Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Conversations.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\Conversations.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\Conversations.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\Conversations.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\Conversations.cshtml",
+              "ViewState": "AgIAAEkBAAAAAAAAAAAuwFkBAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:11:48.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "StorePersonnel.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StorePersonnel.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StorePersonnel.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StorePersonnel.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StorePersonnel.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-16T16:46:49.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "PersonnelConversationPageVm.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Models\\PersonnelConversationPageVm.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Models\\PersonnelConversationPageVm.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Models\\PersonnelConversationPageVm.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Models\\PersonnelConversationPageVm.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAA/wBsAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T12:15:55.684Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "ItemAdminVm.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Models\\ItemAdminVm.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Models\\ItemAdminVm.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Models\\ItemAdminVm.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Models\\ItemAdminVm.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAYwBUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T16:08:30.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "EditItem.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\EditItem.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\EditItem.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\EditItem.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\EditItem.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:05:25.273Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "EditItem.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\EditItem.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Manager\\EditItem.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Manager\\EditItem.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Manager\\EditItem.cshtml",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAowJUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T17:15:24.883Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "StoreItems.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreItems.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreItems.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreItems.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreItems.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:07:33.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "ComplaintController.cs",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\ComplaintController.cs",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Controllers\\ComplaintController.cs",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Controllers\\ComplaintController.cs",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Controllers\\ComplaintController.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAIwBgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T21:09:39.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "About.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Home\\About.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Home\\About.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Home\\About.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Home\\About.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAGUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T12:50:36.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "_PersonnelLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Shared\\_PersonnelLayout.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Shared\\_PersonnelLayout.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Shared\\_PersonnelLayout.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Shared\\_PersonnelLayout.cshtml",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAqwB8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-20T11:09:47.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Product\\Details.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Product\\Details.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Product\\Details.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Product\\Details.cshtml",
+              "ViewState": "AgIAAIUCAAAAAAAAAAAqwKACAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:13:40.182Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "About.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\About.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\About.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\About.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\About.cshtml",
+              "ViewState": "AgIAACwBAAAAAAAAAAAqwEcBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:11:35.626Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "QuickWorkPanel.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\QuickWorkPanel.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\QuickWorkPanel.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Personnel\\QuickWorkPanel.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Personnel\\QuickWorkPanel.cshtml",
+              "ViewState": "AgIAAGgBAAAAAAAAAAAqwFICAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-19T18:40:30.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "StoreShiftsDay.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShiftsDay.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShiftsDay.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShiftsDay.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShiftsDay.cshtml",
+              "ViewState": "AgIAAF4BAAAAAAAAAAAqwI4BAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:10:34.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "StoreShifts.cshtml",
+              "DocumentMoniker": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShifts.cshtml",
+              "RelativeDocumentMoniker": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShifts.cshtml",
+              "ToolTip": "C:\\Users\\ulasa\\Downloads\\241613023_Ula\u015FArdaK\u00F6yl\u00FC 1\\241613023_Ula\u015FArdaK\u00F6yl\u00FC\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShifts.cshtml",
+              "RelativeToolTip": "D\u00FCkkanBulutSitesi\\Views\\Owner\\StoreShifts.cshtml",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAqwLIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:10:25.872Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 83,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

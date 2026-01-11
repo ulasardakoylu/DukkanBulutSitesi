@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DükkanBulutSitesi", "DükkanBulutSitesi\DükkanBulutSitesi.csproj", "{7253413F-A2AC-412A-BCC3-24BBBB4D8892}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{8042D41D-7227-426C-BE47-5F926FB03618}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7253413F-A2AC-412A-BCC3-24BBBB4D8892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7253413F-A2AC-412A-BCC3-24BBBB4D8892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7253413F-A2AC-412A-BCC3-24BBBB4D8892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7253413F-A2AC-412A-BCC3-24BBBB4D8892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8042D41D-7227-426C-BE47-5F926FB03618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8042D41D-7227-426C-BE47-5F926FB03618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8042D41D-7227-426C-BE47-5F926FB03618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8042D41D-7227-426C-BE47-5F926FB03618}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82C1DF75-5D7A-4231-939F-958E8C5BE751}
+	EndGlobalSection
+EndGlobal

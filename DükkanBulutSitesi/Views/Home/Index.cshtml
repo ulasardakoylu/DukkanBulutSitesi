@@ -1,0 +1,244 @@
+﻿@model HomeIndexVm
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "_StorefrontLayout";
+}
+
+<link rel="stylesheet" href="~/css/store.css" />
+
+@{
+    var pageSize = Model.PageSize > 0 ? Model.PageSize : 12;
+    var totalPages = Math.Max(1, (int)Math.Ceiling((double)Model.TotalCount / pageSize));
+    var sort = Context.Request.Query["sort"].ToString();
+    var category = Model.SelectedCategory;
+
+    var prevPage = Math.Max(1, Model.Page - 1);
+    var nextPage = Math.Min(totalPages, Model.Page + 1);
+
+    var showPrev = Model.Page > 1;
+    var showNext = Model.Page < totalPages;
+
+    var currentUrl = Context.Request.Path + Context.Request.QueryString.Value;
+}
+
+<style>
+    .product-card form {
+        padding: 0 14px 12px;
+    }
+
+    .btn-buy {
+        background: #1d66ff;
+        color: #fff;
+        border: 0;
+        border-radius: 8px;
+        padding: 10px;
+        font-weight: 700;
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    .pill.active {
+        background: #0B56C6 !important;
+        color: #fff !important;
+        border-color: #0B56C6 !important;
+    }
+
+</style>
+
+<div class="store-shell">
+    <!-- LEFT SIDEBAR -->
+    @await Html.PartialAsync("_Sidebar")
+    <!-- MAIN CONTENT -->
+    <main class="store-main">
+        <header class="store-filters">
+            <div class="filter-pills">
+                <a class="pill @(sort == "best" ? "active" : "")"
+                   href="@Url.Action("Index", new { sort = "best", page = 1, category = Model.SelectedCategory })">
+                    En Çok Satanlar
+                </a>
+                <a class="pill @(sort == "view" ? "active" : "")"
+                   href="@Url.Action("Index", new { sort = "view", page = 1, category = Model.SelectedCategory })">
+                    En Çok Bakılanlar
+                </a>
+                <a class="pill @((string.IsNullOrEmpty(sort) || sort == "new") ? "active" : "")"
+                   href="@Url.Action("Index", new { sort = "new", page = 1, category = Model.SelectedCategory })">
+                    Yeni Eklenenler
+                </a>
+
+                <div class="dropdown">
+                    <button class="pill dropdown-toggle" data-bs-toggle="dropdown" type="button">
+                        @(string.IsNullOrEmpty(Model.SelectedCategory) ? "Kategori" : Model.SelectedCategory)
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item @(string.IsNullOrEmpty(Model.SelectedCategory) ? "active" : "")"
+                               href="@Url.Action("Index", new { sort = sort, page = 1, category = (string)null })">
+                                Tümü
+                            </a>
+                        </li>
+                        @foreach (var catName in Model.Categories)
+                        {
+                            <li>
+                                <a class="dropdown-item @(Model.SelectedCategory == catName ? "active" : "")"
+                                   href="@Url.Action("Index", new { sort = sort, page = 1, category = catName })">
+                                    @catName
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <a class="carousel-arrow left @(showPrev ? "" : "disabled")"
+           href="@(showPrev? Url.Action("Index", new { page = prevPage, sort, category = Model.SelectedCategory }) : "#")"
+           aria-label="Önceki sayfa" aria-disabled="@(!showPrev)">‹</a>
+
+        <a class="carousel-arrow right @(showNext ? "" : "disabled")"
+           href="@(showNext? Url.Action("Index", new { page = nextPage, sort, category = Model.SelectedCategory }) : "#")"
+           aria-label="Sonraki sayfa" aria-disabled="@(!showNext)">›</a>
+
+        <section class="product-grid">
+            @if (Model.PagedProducts?.Any() == true)
+            {
+                foreach (var p in Model.PagedProducts)
+                {
+                    <article class="product-card">
+
+                        <!-- Product Image -->
+                        <a asp-controller="Product"
+                           asp-action="Details"
+                           asp-route-id="@p.ItemID"
+                           class="product-link">
+                            @if (!string.IsNullOrWhiteSpace(p.PictureLink))
+                            {
+                                <img class="product-img" src="@p.PictureLink" alt="@p.ItemName"
+                                     onerror="this.src='/img/placeholder.png';" />
+                            }
+                            else
+                            {
+                                <img class="product-img" src="/img/placeholder.png" alt="@p.ItemName" />
+                            }
+                        </a>
+
+                        <div class="product-body">
+                            <!-- Product Name -->
+                            <a asp-controller="Product"
+                               asp-action="Details"
+                               asp-route-id="@p.ItemID"
+                               class="product-title link-unstyled">
+                                @p.ItemName
+                            </a>
+                            <div class="product-price">
+                                @if (p.HasCampaignPrice)
+                                {
+                                    <span class="text-muted text-decoration-line-through me-1">
+                                        @p.OriginalPrice.ToString("C")
+                                    </span>
+                                    <span class="fw-bold text-success">
+                                        @p.Price.ToString("C")
+                                    </span>
+                                }
+                                else
+                                {
+                                    @p.Price.ToString("C")
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Add-to-cart form -->
+                        <form asp-controller="Cart" asp-action="Add" method="post" class="mt-2">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="itemId" value="@p.ItemID" />
+                            <input type="hidden" name="qty" value="1" />
+                            <input type="hidden" name="returnUrl" value="@currentUrl" />
+                            <button type="submit" class="btn-buy w-100">Sepete Ekle</button>
+                        </form>
+                    </article>
+                }
+            }
+            else
+            {
+                @for (int i = 0; i < 8; i++)
+                {
+                    <article class="product-card">
+                        <div class="product-img"></div>
+                        <div class="product-body">
+                            <div class="product-title">Text</div>
+                            <div class="product-price">$0</div>
+                        </div>
+                        <button class="btn-buy" type="button">Sepete Ekle</button>
+                    </article>
+                }
+            }
+        </section>
+
+        @{
+            var pages = Math.Max(1, (int)Math.Ceiling((double)Model.TotalCount / Math.Max(1, Model.PageSize)));
+        }
+        <nav class="store-pager" aria-label="Sayfalama">
+            <ul>
+                @for (int i = 1; i <= pages; i++)
+                {
+                    <li>
+                        <a class="page-dot @(i == Model.Page ? "active" : "")"
+                           href="@Url.Action("Index", new { page = i, sort, category = Model.SelectedCategory })">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </main>
+</div>
+
+<!-- Store select modal -->
+<div class="modal fade" id="storeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dükkan Seç</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="Store" asp-action="Select">
+                    <input type="hidden" name="returnUrl" value="@(Context.Request.Path + Context.Request.QueryString.Value)" />
+
+                    <div class="list-group">
+                        @foreach (var s in Model.Stores)
+                        {
+                            <label class="list-group-item d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="storeId" value="@s.StoreID"
+                                       @(s.StoreID == Model.SelectedStoreId ? "checked" : "") />
+                                @s.StoreName
+                            </label>
+                        }
+                    </div>
+                    <div class="mt-3 text-end">
+                        <button type="submit" class="btn btn-primary">Seçimi Onayla</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const open = "@(TempData["OpenModal"] ?? "")";
+            if (open === "login")    new bootstrap.Modal('#loginModal').show();
+            if (open === "register") new bootstrap.Modal('#registerModal').show();
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var shouldOpen = @Model.ShouldShowStoreModal.ToString().ToLower();
+            if (shouldOpen) {
+                var modal = new bootstrap.Modal(document.getElementById('storeModal'));
+                modal.show();
+            }
+        });
+    </script>
+}

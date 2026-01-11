@@ -1,0 +1,329 @@
+﻿@model DükkanBulutSitesi.Models.Personnel.PersonnelAboutVm
+@{
+    ViewData["Title"] = "Hakkında";
+    Layout = "~/Views/Shared/_PersonnelLayout.cshtml";
+
+    var imgSrc = string.IsNullOrWhiteSpace(Model.ProfilePictureLink)
+        ? Url.Content("~/img/placeholder.png")
+        : Model.ProfilePictureLink;
+}
+
+<div class="personnel-shell">
+    <div class="personnel-topbar d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <div class="text-uppercase small text-muted">PERSONEL PANELİ</div>
+            <h3 class="mb-0">Hakkında</h3>
+        </div>
+    </div>
+
+    @if (TempData["AboutSaved"] is string ok && !string.IsNullOrWhiteSpace(ok))
+    {
+        <div class="alert alert-success">@ok</div>
+    }
+    @if (TempData["AboutError"] is string err && !string.IsNullOrWhiteSpace(err))
+    {
+        <div class="alert alert-danger">@err</div>
+    }
+
+    <!-- PROFILE / BASIC INFO -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3 d-flex flex-column align-items-center">
+                    <img src="@imgSrc"
+                         class="rounded-circle mb-2"
+                         style="width:120px;height:120px;object-fit:cover;"
+                         alt="Profil" />
+
+                    <div class="text-muted mb-1">Hoşgeldin @Model.DisplayName</div>
+                    <div class="small text-muted">
+                        Rol: <span class="fw-semibold">@Model.RoleName</span>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <label class="form-label">Adı ve Soyadı</label>
+                            <input class="form-control" value="@Model.DisplayName" readonly />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Personel Numarası</label>
+                            <input class="form-control" value="@Model.PersonelNumber" readonly />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">T.C. Kimlik Numarası</label>
+                            <input class="form-control" value="@Model.TcKimlikNo" readonly />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">E-posta</label>
+                            <input class="form-control" value="@Model.UserEmail" readonly />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Maaş</label>
+                            <input class="form-control"
+                                   value="@(Model.Salary.HasValue? Model.Salary.Value.ToString("0.00") : "")"
+                                   readonly />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Doğum Tarihi</label>
+                            <input class="form-control"
+                                   value="@(Model.BirthDate.HasValue? Model.BirthDate.Value.ToString("dd.MM.yyyy") : "")"
+                                   readonly />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">İşe Girdiği Tarih</label>
+                            <input class="form-control"
+                                   value="@(Model.HireDate.HasValue? Model.HireDate.Value.ToString("dd.MM.yyyy") : "")"
+                                   readonly />
+                        </div>
+                    </div>
+
+                    <hr class="my-3" />
+
+                    <!-- PASSWORD CHANGE -->
+                    <form asp-action="ChangePassword" asp-controller="Personnel" method="post" class="row g-3">
+                        @Html.AntiForgeryToken()
+
+                        <div class="col-md-6">
+                            <label class="form-label">Yeni Şifre</label>
+                            <input class="form-control"
+                                   type="password"
+                                   name="NewPassword"
+                                   autocomplete="new-password" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Yeni Şifre (Tekrar)</label>
+                            <input class="form-control"
+                                   type="password"
+                                   name="NewPasswordAgain"
+                                   autocomplete="new-password" />
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Şifreyi Güncelle</button>
+                        </div>
+                    </form>
+
+                    <div class="small text-muted mt-2">
+                        Diğer bilgiler yönetici tarafından güncellenir.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WORK HISTORY -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="mb-2">İş Geçmişi</h5>
+
+            @if (Model.Histories != null && Model.Histories.Any())
+            {
+                <div class="list-group">
+                    @foreach (var h in Model.Histories.OrderByDescending(x => x.Start))
+                    {
+                        <div class="list-group-item">
+                            <div class="fw-semibold">
+                                @(string.IsNullOrWhiteSpace(h.Title) ? "İş Kaydı" : h.Title)
+                            </div>
+
+                            <div class="small text-muted">
+                                @h.Start.ToString("dd.MM.yyyy")
+                                @if (h.End.HasValue)
+                                {
+                                    <span> - @h.End.Value.ToString("dd.MM.yyyy")</span>
+                                }
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(h.Description))
+                            {
+                                <div class="small text-muted">@h.Description</div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-light border small mb-0">Kayıtlı iş geçmişi yok.</div>
+            }
+        </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="mb-2">Eğitim Geçmişi</h5>
+
+            @if (Model.Educations != null && Model.Educations.Any())
+            {
+                <div class="list-group">
+                    @foreach (var e in Model.Educations.OrderByDescending(x => x.Start))
+                    {
+                        <div class="list-group-item">
+                            <div class="fw-semibold">@e.School</div>
+
+                            <div class="small text-muted">
+                                @e.Start.ToString("dd.MM.yyyy")
+                                @if (e.End.HasValue)
+                                {
+                                    <span> - @e.End.Value.ToString("dd.MM.yyyy")</span>
+                                }
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(e.Description))
+                            {
+                                <div class="small text-muted">@e.Description</div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-light border small mb-0">Kayıtlı eğitim yok.</div>
+            }
+        </div>
+    </div>
+
+    <!-- CERTIFICATES -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="mb-2">Sahip Olduğu Sertifikalar</h5>
+
+            @if (Model.Certificates != null && Model.Certificates.Any())
+            {
+                <div class="list-group">
+                    @foreach (var c in Model.Certificates.OrderByDescending(x => x.Start))
+                    {
+                        <div class="list-group-item">
+                            <div class="fw-semibold">@c.CertificateName</div>
+
+                            <div class="small text-muted">
+                                @c.Start.ToString("dd.MM.yyyy")
+                                @if (c.End.HasValue)
+                                {
+                                    <span> - @c.End.Value.ToString("dd.MM.yyyy")</span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(c.Place))
+                                {
+                                    <span> • @c.Place</span>
+                                }
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(c.Description))
+                            {
+                                <div class="small text-muted">@c.Description</div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-light border small mb-0">Kayıtlı sertifika yok.</div>
+            }
+        </div>
+    </div>
+
+    <!-- WARNINGS -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="mb-1">Uyarılar</h5>
+            <p class="small text-muted mb-2">Size ait @(Model.Warnings?.Count ?? 0) uyarı var.</p>
+
+            <button type="button"
+                    class="btn btn-outline-warning btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#warningModal">
+                Uyarı Listesi
+            </button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="warningModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Uyarı Listesi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    @if (Model.Warnings != null && Model.Warnings.Any())
+                    {
+                        <div class="list-group">
+                            @foreach (var w in Model.Warnings.OrderByDescending(x => x.Date))
+                            {
+                                var iconClass = w.Level == "danger"
+                                ? "bi-exclamation-octagon-fill text-danger"
+                                : "bi-exclamation-triangle-fill text-warning";
+
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <div class="fw-semibold">@w.Date.ToString("dd.MM.yyyy")</div>
+                                            <div class="small text-muted">@w.WarningText</div>
+                                            <div class="small text-muted">Kim Tarafından: @w.GivenBy</div>
+                                        </div>
+                                        <span class="ms-3"><i class="bi @iconClass"></i></span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-light border mb-0">Kayıtlı uyarı yok.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

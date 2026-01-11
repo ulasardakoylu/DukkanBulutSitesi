@@ -1,0 +1,596 @@
+﻿@model DükkanBulutSitesi.Models.QuickWorkPanelVm
+@{
+    ViewData["Title"] = "Hızlı İş Paneli";
+    Layout = "~/Views/Shared/_PersonnelLayout.cshtml";
+
+    // noteId=0 means "new note"
+    var isNewNote = (Context.Request.Query["noteId"] == "0");
+}
+
+<div class="personnel-shell">
+
+    <div class="personnel-topbar d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <div class="text-uppercase small text-muted">PERSONEL PANELİ</div>
+            <h3 class="mb-0">Hızlı İş Paneli</h3>
+        </div>
+    </div>
+
+    <!-- one global antiforgery token for fetch() posts -->
+    <form id="antiForgeryForm" style="display:none;">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <div class="row g-3">
+        <!-- LEFT SIDE -->
+        <div class="col-lg-8">
+
+            <!-- Kampanya Detayları -->
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Kampanya Detayları</span>
+                    @if (!string.IsNullOrWhiteSpace(Model.CampaignName))
+                    {
+                        <span class="badge bg-success">Aktif</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Aktif Kampanya Yok</span>
+                    }
+                </div>
+
+                <div class="card-body">
+                    @if (string.IsNullOrWhiteSpace(Model.CampaignName))
+                    {
+                        <div class="text-muted">Şu anda aktif kampanya bulunmuyor.</div>
+                    }
+                    else
+                    {
+                        <div class="mb-2">
+                            <div class="small text-muted">Aktif Olan Kampanya</div>
+                            <div class="fw-semibold">@Model.CampaignName</div>
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.CampaignDescription))
+                        {
+                            <div class="mb-3">
+                                <div class="small text-muted">Kampanya Detayı</div>
+                                <div class="text-muted">@Model.CampaignDescription</div>
+                            </div>
+                        }
+
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <div class="small text-muted">Kampanya Başlangıç Tarihi</div>
+                                <div class="fw-semibold">
+                                    @(Model.CampaignStart.HasValue? Model.CampaignStart.Value.ToString("dd.MM.yyyy") : "--")
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="small text-muted">Kampanya Bitiş Tarihi</div>
+                                <div class="fw-semibold">
+                                    @(Model.CampaignEnd.HasValue? Model.CampaignEnd.Value.ToString("dd.MM.yyyy") : "--")
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="fw-semibold">Etkilenen Ürünler</div>
+                            <span class="text-muted small">@Model.CampaignItems.Count adet</span>
+                        </div>
+
+                        @if (Model.CampaignItems.Any())
+                        {
+                            <div class="mt-2">
+                                <div class="row g-3">
+                                    @foreach (var it in Model.CampaignItems)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <div class="border rounded mb-2 d-flex align-items-center justify-content-center"
+                                                         style="height:160px; overflow:hidden;">
+                                                        @if (!string.IsNullOrWhiteSpace(it.PictureLink))
+                                                        {
+                                                            <img src="@it.PictureLink" alt="" style="max-width:100%; max-height:100%;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="text-muted">No image</div>
+                                                        }
+                                                    </div>
+                                                    <div class="fw-semibold">@it.ItemName</div>
+                                                    <div class="text-muted small">
+                                                        Yeni Fiyat:
+                                                        <span class="fw-semibold">@it.NewPrice.ToString("0.00") ₺</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-muted mt-2">Kampanyaya bağlı ürün bulunmuyor.</div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <!-- Checklist -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Checklist</span>
+                    <span class="text-muted small">@Model.Day.ToString("dd.MM.yyyy")</span>
+                </div>
+
+                <div class="card-body">
+                    @if (!Model.Checklist.Any())
+                    {
+                        <div class="text-muted">Checklist bulunamadı.</div>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (var task in Model.Checklist)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="fw-semibold">@task.Text</div>
+
+                                    <div class="d-flex gap-2">
+                                        <button type="button"
+                                                class="btn btn-sm @(task.Done ? "btn-success" : "btn-outline-success")"
+                                                onclick="setChecklist('@task.Key', true)">
+                                            <i class="bi bi-check2"></i>
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-sm @(!task.Done ? "btn-danger" : "btn-outline-danger")"
+                                                onclick="setChecklist('@task.Key', false)">
+                                            <i class="bi bi-x-lg"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="text-muted small mt-2">
+                            * Checklist günlük yenilenir (gün değişince sıfırlanır).
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-lg-4">
+
+            <!-- Notes -->
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Notlar</span>
+
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-sm btn-outline-primary"
+                           href="@Url.Action("QuickWorkPanel", "Personnel", new { noteId = 0 })">
+                            Yeni Not
+                        </a>
+
+                        <button type="button"
+                                class="btn btn-sm btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#notesHistoryModal">
+                            Not Geçmişi
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="SaveQuickNote" asp-controller="Personnel" method="post">
+                        @Html.AntiForgeryToken()
+
+                        @if (!isNewNote && Model.SelectedNoteId.HasValue)
+                        {
+                            <input type="hidden" name="noteId" value="@Model.SelectedNoteId" />
+                        }
+
+                        <div class="mb-2">
+                            <label class="form-label">Not Başlığı</label>
+                            <input class="form-control" name="title" maxlength="200" value="@Model.NoteTitle" required />
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label">Not Alanı</label>
+                            <textarea class="form-control" name="body" rows="4" maxlength="4000" required>@Model.NoteBody</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Kaydet</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Stock chart + Quick search -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Hızlı Stok</span>
+                    <button type="button"
+                            class="btn btn-sm btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#quickStockModal">
+                        Hızlı Stok Ara
+                    </button>
+                </div>
+
+                <div class="card-body">
+                    <div class="text-muted small mb-2">
+                        Ürün:
+                        <span class="fw-semibold">
+                            @(Model.SelectedChartItemName ?? "Seçilmedi")
+                        </span>
+                    </div>
+
+                    <div style="height:240px;">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- NOTES HISTORY MODAL -->
+<div class="modal fade" id="notesHistoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Not Geçmişi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="list-group" id="notesList" style="max-height: 60vh; overflow:auto;">
+                            <div class="text-muted">Notlar yükleniyor...</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="col-md-8">
+                            <div class="border rounded p-3" style="min-height: 60vh;">
+                                <div class="small text-muted">Seçili Notun Başlığı:</div>
+                                <div class="fw-semibold">@Model.NoteTitle</div>
+
+                                <div class="small text-muted mt-2">Seçili Notun Oluşturulma Tarihi:</div>
+                                <div>
+                                    @(Model.NoteCreatedAt.HasValue? Model.NoteCreatedAt.Value.ToString("dd.MM.yyyy HH:mm") : "")
+                                </div>
+
+                                <hr />
+
+                                <div class="small text-muted">Not İçeriği:</div>
+
+                                @if (!string.IsNullOrWhiteSpace(Model.NoteBody))
+                                {
+                                    <div class="border rounded p-3 mt-2" style="white-space:pre-wrap; min-height: 45vh;">
+                                        @Model.NoteBody
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="text-muted mt-2">Bu notun içeriği boş.</div>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QUICK STOCK SEARCH MODAL -->
+<div class="modal fade" id="quickStockModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Aradığınız Ürünü Giriniz</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <input id="stockSearchInput" class="form-control" placeholder="..." />
+                </div>
+
+                <div class="fw-semibold mb-2">Sonuçlar</div>
+
+                <div class="d-flex align-items-center justify-content-between gap-3">
+                    <button type="button" class="btn btn-outline-secondary" onclick="stockPrev()">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+
+                    <div class="flex-fill">
+                        <div id="stockResultsRow" class="row g-3"></div>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-secondary" onclick="stockNext()">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="text-muted small mt-3" id="stockPagerInfo"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        function getAntiForgeryToken() {
+            return document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"]')?.value;
+        }
+
+        // =========================
+        // CHECKLIST POST (FIXED)
+        // Controller action: ToggleDailyChecklist(string taskKey, bool done)
+        // =========================
+        async function setChecklist(taskKey, done) {
+            try {
+                const token = getAntiForgeryToken();
+
+                const body = new URLSearchParams();
+                body.set('taskKey', taskKey);
+                body.set('done', done ? 'true' : 'false');
+
+                const res = await fetch('@Url.Action("ToggleDailyChecklist", "Personnel")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                        'RequestVerificationToken': token
+                    },
+                    body: body.toString()
+                });
+
+                if (!res.ok) throw new Error('Request failed');
+                location.reload();
+            } catch (e) {
+                alert('Checklist güncellenemedi.');
+            }
+        }
+
+        // =========================
+        // NOTES HISTORY (FIXED)
+        // Controller action: GetQuickNoteHistory()
+        // Selecting a note => reload QuickWorkPanel?noteId=...#notes
+        // =========================
+        let selectedNoteId = @(Model.SelectedNoteId ?? 0);
+
+        async function loadNotesList() {
+            try {
+                const res = await fetch('@Url.Action("GetQuickNoteHistory", "Personnel")');
+                if (!res.ok) throw new Error('failed');
+
+                const notes = await res.json(); // [{ id,title,createdAt,updatedAt }]
+
+                const list = document.getElementById('notesList');
+                list.innerHTML = '';
+
+                if (!notes || notes.length === 0) {
+                    list.innerHTML = '<div class="text-muted">Henüz not yok.</div>';
+                    return;
+                }
+
+                notes.forEach(n => {
+                    const updated = n.updatedAt ? new Date(n.updatedAt).toLocaleString('tr-TR') : '';
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'list-group-item list-group-item-action' + (n.id === selectedNoteId ? ' active' : '');
+                    btn.innerHTML = `
+                        <div class="d-flex justify-content-between">
+                            <div class="fw-semibold text-truncate" style="max-width:220px;">${n.title || ''}</div>
+                            <div class="small">${updated}</div>
+                        </div>
+                    `;
+                    btn.onclick = () => {
+                        // reload page with noteId, and reopen modal via #notes hash
+                        location.href = '@Url.Action("QuickWorkPanel", "Personnel")' + '?noteId=' + encodeURIComponent(n.id) + '#notes';
+                    };
+                    list.appendChild(btn);
+                });
+
+            } catch {
+                const list = document.getElementById('notesList');
+                list.innerHTML = '<div class="text-muted">Notlar yüklenemedi.</div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const modalEl = document.getElementById('notesHistoryModal');
+            if (!modalEl) return;
+
+            modalEl.addEventListener('shown.bs.modal', loadNotesList);
+
+            // If we navigated with #notes, auto-open modal
+            if (location.hash === '#notes') {
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            }
+        });
+
+        // =========================
+        // STOCK CHART (Chart.js)
+        // =========================
+        const initialLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.StockPoints.Select(x => x.Label)));
+        const initialValues = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.StockPoints.Select(x => x.Value)));
+
+        const ctx = document.getElementById('stockChart');
+        let stockChart = null;
+
+        function buildChart(labels, values) {
+            if (!ctx) return;
+
+            if (stockChart) {
+                stockChart.data.labels = labels;
+                stockChart.data.datasets[0].data = values;
+                stockChart.update();
+                return;
+            }
+
+            stockChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Stok',
+                        data: values,
+                        tension: 0.25
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+        buildChart(initialLabels, initialValues);
+
+        function selectChartItem(itemId) {
+            // Controller expects chartItemId (NOT selectedItemId)
+            location.href = '@Url.Action("QuickWorkPanel", "Personnel")' + '?chartItemId=' + encodeURIComponent(itemId);
+        }
+
+        // =========================
+        // STOCK SEARCH MODAL (FIXED JSON KEYS)
+        // Controller returns: { itemId, name, picture, onHand }
+        // =========================
+        let stockAll = [];
+        let stockPage = 0;
+        const pageSize = 2;
+
+        function renderStockPage() {
+            const row = document.getElementById('stockResultsRow');
+            const info = document.getElementById('stockPagerInfo');
+            if (!row) return;
+
+            row.innerHTML = '';
+            const start = stockPage * pageSize;
+            const slice = stockAll.slice(start, start + pageSize);
+
+            slice.forEach(it => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6';
+
+                col.innerHTML = `
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="border rounded mb-2 d-flex align-items-center justify-content-center" style="height:220px; overflow:hidden;">
+                                ${it.picture ? `<img src="${it.picture}" alt="" style="max-width:100%; max-height:100%;">` : `<div class="text-muted">No image</div>`}
+                            </div>
+                            <div class="fw-semibold">${it.name ?? ''}</div>
+                            <div class="text-muted small">Stok: <span class="fw-semibold">${it.onHand ?? 0}</span></div>
+                            <button type="button" class="btn btn-primary w-100 mt-2" onclick="selectChartItem(${it.itemId})">
+                                Seç
+                            </button>
+                        </div>
+                    </div>
+                `;
+                row.appendChild(col);
+            });
+
+            const totalPages = Math.max(1, Math.ceil(stockAll.length / pageSize));
+            if (info) info.textContent = `Sayfa ${Math.min(stockPage + 1, totalPages)} / ${totalPages}`;
+        }
+
+        function stockPrev() {
+            if (stockPage > 0) { stockPage--; renderStockPage(); }
+        }
+        function stockNext() {
+            const totalPages = Math.ceil(stockAll.length / pageSize);
+            if (stockPage + 1 < totalPages) { stockPage++; renderStockPage(); }
+        }
+
+        let stockSearchTimer = null;
+
+        async function doStockSearch(q) {
+            try {
+                const res = await fetch('@Url.Action("SearchQuickStockItems", "Personnel")' + '?q=' + encodeURIComponent(q || ''));
+                if (!res.ok) throw new Error('failed');
+                stockAll = await res.json();
+                stockPage = 0;
+                renderStockPage();
+            } catch {
+                stockAll = [];
+                stockPage = 0;
+                renderStockPage();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('stockSearchInput');
+            if (input) {
+                input.addEventListener('input', function () {
+                    clearTimeout(stockSearchTimer);
+                    stockSearchTimer = setTimeout(() => doStockSearch(input.value), 250);
+                });
+            }
+
+            const modal = document.getElementById('quickStockModal');
+            if (modal) {
+                modal.addEventListener('shown.bs.modal', () => doStockSearch(document.getElementById('stockSearchInput')?.value || ''));
+            }
+        });
+    </script>
+
+    <script>
+        (function () {
+
+            const handledTypes = new Set([
+                'text',
+                'password',
+                'number',
+                'email',
+                'search',
+                'tel',
+                'url'
+            ]);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+
+                const el = e.target;
+
+                // Only INPUTs inside a form
+                if (!el || el.tagName !== 'INPUT') return;
+                if (!el.form) return;
+
+                if (el.readOnly || el.disabled) return;
+
+                if (el.type === 'file') return;
+
+                const type = (el.type || '').toLowerCase();
+                if (!handledTypes.has(type)) return;
+
+                if (e.shiftKey) {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                el.form.submit();
+            });
+
+        })();
+    </script>
+}

@@ -1,0 +1,54 @@
+01-12-2025 10:53:22	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+01-12-2025 10:53:47	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+01-12-2025 10:53:55	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+01-12-2025 11:22:25	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+01-12-2025 11:26:13	User=Admin123	UserId=2	IP=127.0.0.1	Personnel picture changed. UserID=7, Old=/img/personnel/e0b476a0-dfea-47f0-b7d8-c5a69aead7ec.gif, New=/img/personnel/f5b36561-b909-4132-9900-3c76c61d7193.jpg
+01-12-2025 11:26:14	User=Admin123	UserId=2	IP=127.0.0.1	Personnel updated. PersonelID=3, Name=Emre Ali
+01-12-2025 11:29:31	User=Admin123	UserId=2	IP=127.0.0.1	Work history created. PersonelID=3, HistoryID=7, Title=tEST
+01-12-2025 11:30:07	User=Admin123	UserId=2	IP=127.0.0.1	Warning created. PersonelID=3, WarningID=10, Level=danger
+01-12-2025 11:30:18	User=Admin123	UserId=2	IP=127.0.0.1	Warning deleted. PersonelID=3, WarningID=10, Level=danger
+01-12-2025 11:32:15	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=2, PersonelID=2, Length=4
+01-12-2025 11:32:22	User=Admin123	UserId=2	IP=127.0.0.1	Conversation message sent. ConversationID=6, PersonelID=0, Length=5
+01-12-2025 11:32:33	User=Admin123	UserId=2	IP=127.0.0.1	Conversation deleted. ConversationID=4
+01-12-2025 11:35:06	User=Admin123	UserId=2	IP=127.0.0.1	Item updated. ItemID=2, Name=Ekmek
+01-12-2025 11:35:51	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+01-12-2025 11:35:59	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+01-12-2025 11:36:34	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+01-12-2025 11:36:39	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+01-12-2025 11:40:29	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+01-12-2025 15:17:47	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+01-12-2025 15:39:44	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+01-12-2025 15:39:49	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+01-12-2025 16:05:25	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Role created. RoleID=7, StoreID=6, Name=Kasiyer
+01-12-2025 16:05:32	User=OwnerTest	UserId=9	IP=127.0.0.1	[Owner] Personnel number generated. RoleID=7, StoreID=6, Code=52490206
+01-12-2025 16:05:47	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+01-12-2025 16:05:59	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+01-12-2025 16:06:24	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+01-12-2025 16:06:28	User=Seraph2	UserId=6	IP=127.0.0.1	User logged in. UserID=6, Email=testseraph2@gmail.com
+01-12-2025 16:06:36	User=Seraph2	UserId=6	IP=127.0.0.1	User logged out.
+01-12-2025 16:06:41	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+01-12-2025 16:10:08	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+01-12-2025 16:10:15	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+01-12-2025 18:14:54	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged in. UserID=9, Email=owner@test.com
+01-12-2025 18:15:13	User=OwnerTest	UserId=9	IP=127.0.0.1	User logged out.
+01-12-2025 18:15:16	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+01-12-2025 18:33:02	User=Admin123	UserId=2	IP=127.0.0.1	Conversation soft-deleted for user. ConversationID=5, UserID=2
+01-12-2025 18:33:10	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+01-12-2025 18:33:58	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
+01-12-2025 18:42:55	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged out.
+01-12-2025 18:42:59	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+01-12-2025 18:43:09	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused. ConversationID=5, TargetPersonelID=4, FirstMessageLength=7
+01-12-2025 18:43:20	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused. ConversationID=8, TargetPersonelID=3, FirstMessageLength=3
+01-12-2025 18:43:29	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused. ConversationID=5, TargetPersonelID=4, FirstMessageLength=3
+01-12-2025 18:44:39	User=Admin123	UserId=2	IP=127.0.0.1	Conversation soft-deleted by user. ConversationID=8, UserID=2
+01-12-2025 18:44:51	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+01-12-2025 18:44:59	User=Emre	UserId=7	IP=127.0.0.1	User logged in. UserID=7, Email=emreali@gmail.com
+01-12-2025 18:50:26	User=Emre	UserId=7	IP=127.0.0.1	User logged out.
+01-12-2025 18:50:30	User=Admin123	UserId=2	IP=127.0.0.1	User logged in. UserID=2, Email=admin@school.local
+01-12-2025 18:50:41	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused. ConversationID=5, TargetPersonelID=4, FirstMessageLength=2
+01-12-2025 18:50:56	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused. ConversationID=8, TargetPersonelID=3, FirstMessageLength=3
+01-12-2025 19:23:04	User=Admin123	UserId=2	IP=127.0.0.1	Conversation soft-deleted by user. ConversationID=8, UserID=2
+01-12-2025 19:23:09	User=Admin123	UserId=2	IP=127.0.0.1	Conversation soft-deleted by user. ConversationID=5, UserID=2
+01-12-2025 19:23:15	User=Admin123	UserId=2	IP=127.0.0.1	Conversation started or reused (active only). ConversationID=9, TargetPersonelID=4, FirstMessageLength=5
+01-12-2025 19:23:20	User=Admin123	UserId=2	IP=127.0.0.1	User logged out.
+01-12-2025 19:23:28	User=Ayşe222	UserId=8	IP=127.0.0.1	User logged in. UserID=8, Email=ayseemre@gmail.com
